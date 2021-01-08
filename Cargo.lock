@@ -138,6 +138,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e0dcbc35f504eb6fc275a6d20e4ebcda18cf50d40ba6fabff8c711fa16cb3b16"
 
 [[package]]
+name = "bytes"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ad1f8e949d755f9d79112b5bb46938e0ef9d3804a0b16dfab13aafcaa5f0fa72"
+
+[[package]]
 name = "cc"
 version = "1.0.66"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1178,7 +1184,7 @@ dependencies = [
  "pretty_env_logger",
  "rust-web-game-skeleton-common",
  "structopt",
- "tokio",
+ "tokio 1.0.1",
  "tokio-tungstenite",
  "tungstenite",
 ]
@@ -1478,7 +1484,20 @@ checksum = "720ba21c25078711bf456d607987d95bce90f7c3bea5abe1db587862e7a1e87c"
 dependencies = [
  "autocfg",
  "bytes 0.6.0",
- "futures-core",
+ "libc",
+ "memchr",
+ "mio",
+ "pin-project-lite",
+]
+
+[[package]]
+name = "tokio"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d258221f566b6c803c7b4714abadc080172b272090cdc5e244a6d4dd13c3a6bd"
+dependencies = [
+ "autocfg",
+ "bytes 1.0.0",
  "libc",
  "memchr",
  "mio",
@@ -1487,16 +1506,15 @@ dependencies = [
  "parking_lot",
  "pin-project-lite",
  "signal-hook-registry",
- "slab",
  "tokio-macros",
  "winapi",
 ]
 
 [[package]]
 name = "tokio-macros"
-version = "0.3.2"
+version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "46dfffa59fc3c8aad216ed61bdc2c263d2b9d87a9c8ac9de0c11a813e51b6db7"
+checksum = "42517d2975ca3114b22a16192634e8241dc5cc1f130be194645970cc1c371494"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1512,7 +1530,7 @@ dependencies = [
  "futures-util",
  "log",
  "pin-project",
- "tokio",
+ "tokio 0.3.6",
  "tungstenite",
 ]
 
