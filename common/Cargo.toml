@@ -1,0 +1,16 @@
+[package]
+name = "rust-web-game-skeleton-common"
+authors = ["SOFe <sofe2038@gmail.com>"]
+version = "0.2.0"
+edition = "2018"
+repository = "https://github.com/SOF3/rust-web-game-skeleton"
+homepage = "https://github.com/SOF3/rust-web-game-skeleton"
+license = "AGPL-3.0"
+
+[lib]
+name = "common"
+
+[dependencies]
+rust-web-game-skeleton-codegen = {version = "0.2.0", path = "../codegen"}
+specs = "0.16.1"
+yew = {version = "0.17.4", optional = true}

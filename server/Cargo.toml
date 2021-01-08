@@ -1,0 +1,21 @@
+[package]
+name = "rust-web-game-skeleton-server"
+authors = ["SOFe <sofe2038@gmail.com>"]
+version = "0.2.0"
+edition = "2018"
+repository = "https://github.com/SOF3/rust-web-game-skeleton"
+homepage = "https://github.com/SOF3/rust-web-game-skeleton"
+license = "AGPL-3.0"
+
+[dependencies]
+anyhow = "1.0.37"
+async-trait = "0.1.42"
+futures = "0.3.8"
+getset = "0.1.1"
+log = "0.4.11"
+pretty_env_logger = "0.4.0"
+structopt = "0.3.21"
+tokio = {version = "0.3.6", features = ["full"]}
+tokio-tungstenite = "0.12.0"
+rust-web-game-skeleton-common = {version = "0.2.0", path = "../common"}
+tungstenite = "0.11.1"
