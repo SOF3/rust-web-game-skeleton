@@ -4,7 +4,7 @@ use std::rc::Rc;
 
 use sha2::Digest;
 use yew::prelude::*;
-use yew::services::websocket::{WebSocketService, WebSocketStatus, WebSocketTask};
+use yew::services::websocket::{WebSocketService, WebSocketStatus};
 
 use super::WebSocket;
 use common::proto::{handshake, BinRead, BinWrite, Packet};

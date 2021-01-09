@@ -1,9 +1,9 @@
 use std::collections::VecDeque;
 use std::fmt;
-use std::future::Future;
+
 use std::net::SocketAddr;
-use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
-use std::sync::Arc;
+use std::sync::atomic::{AtomicUsize, Ordering};
+
 use std::time::Duration;
 use std::time::Instant;
 

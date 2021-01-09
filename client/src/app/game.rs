@@ -1,4 +1,4 @@
-use std::rc::Rc;
+
 
 use web_sys::WebGlRenderingContext;
 use yew::prelude::*;
@@ -75,7 +75,7 @@ impl Component for Game {
         }
     }
 
-    fn change(&mut self, props: Self::Properties) -> ShouldRender {
+    fn change(&mut self, _props: Self::Properties) -> ShouldRender {
         unreachable!()
     }
 

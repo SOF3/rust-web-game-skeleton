@@ -25,16 +25,12 @@
     )
 )]
 
-use std::collections::BTreeMap;
-use std::sync::Arc;
-
 use anyhow::Result;
 use futures::channel::mpsc;
 use futures::future::FutureExt;
 use futures::stream::StreamExt;
 use structopt::StructOpt;
 use tokio::net;
-use tokio::sync::RwLock;
 
 mod cli;
 mod session;
@@ -74,10 +70,10 @@ async fn main() -> Result<()> {
                 }
             },
             update = updates_recv.next() => {
-                use session::Update;
+
 
             match update.expect("All update senders died") {
-                session::Update::NewSession { id, name, identity } => {
+                session::Update::NewSession { id, name, identity: _ } => {
                     log::info!("Session {} ({}) joined the server", id, name);
                 }
                 session::Update::CloseSession { id} => {
