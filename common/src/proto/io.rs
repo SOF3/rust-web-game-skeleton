@@ -37,6 +37,7 @@ pub trait BinWrite: ProtoType {
     /// Writes a value with binary encoding
     fn write(&self, buf: &mut Vec<u8>);
 
+    /// Returns the binary encoding of the value in a new Vec.
     fn write_to_vec(&self) -> Vec<u8> {
         let mut vec = Vec::new();
         self.write(&mut vec);

@@ -18,7 +18,6 @@
 #![cfg_attr(
     not(debug_assertions),
     deny(
-        missing_docs,
         clippy::cast_possible_truncation,
         clippy::cast_precision_loss,
         clippy::dbg_macro,
