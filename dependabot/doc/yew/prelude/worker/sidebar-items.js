@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AgentLink","Link to agent's scope for creating callbacks."],["Context","Create a single instance in the current thread."],["Job","Create an instance in the current thread."],["Private","Create a new instance for every bridge."],["Public","Create a single instance in a tab."]]});

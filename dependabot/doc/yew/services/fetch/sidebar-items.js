@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Referrer","Type to set referrer for fetch."]],"struct":[["FetchOptions","Init options for `fetch()` function call. https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch"],["FetchService","A service to fetch resources."],["FetchTask","A handle to control sent requests."]]});

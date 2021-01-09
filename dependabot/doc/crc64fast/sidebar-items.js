@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Digest","Represents an in-progress CRC-64 computation."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ConsoleTimer","A console time measurement."]]});

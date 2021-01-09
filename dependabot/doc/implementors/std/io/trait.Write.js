@@ -1,0 +1,5 @@
+(function() {var implementors = {};
+implementors["bytes"] = [{"text":"impl&lt;B:&nbsp;BufMut + Sized&gt; Write for Writer&lt;B&gt;","synthetic":false,"types":[]}];
+implementors["futures_util"] = [{"text":"impl&lt;T&gt; Write for AllowStdIo&lt;T&gt; <span class=\"where fmt-newline\">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: Write,&nbsp;</span>","synthetic":false,"types":[]}];
+implementors["sha2"] = [{"text":"impl Write for Sha224","synthetic":false,"types":[]},{"text":"impl Write for Sha256","synthetic":false,"types":[]},{"text":"impl Write for Sha384","synthetic":false,"types":[]},{"text":"impl Write for Sha512","synthetic":false,"types":[]},{"text":"impl Write for Sha512Trunc224","synthetic":false,"types":[]},{"text":"impl Write for Sha512Trunc256","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

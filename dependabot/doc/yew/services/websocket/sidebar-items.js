@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["WebSocketStatus","A status of a websocket connection. Used for status notification."]],"struct":[["WebSocketService","A websocket service attached to a user context."],["WebSocketTask","A handle to control current websocket connection. Implements `Task` and could be canceled."]]});

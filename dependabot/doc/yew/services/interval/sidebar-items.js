@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["IntervalService","A service to send messages on every elapsed interval."],["IntervalTask","A handle which helps to cancel interval. Uses clearInterval."]]});

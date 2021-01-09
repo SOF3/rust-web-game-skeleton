@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["FileChunk","Struct that represents a chunk of a file."]],"struct":[["FileData","Struct that represents data of a file."],["ReaderService","A reader service attached to a user context."],["ReaderTask","A handle to control reading."]]});
