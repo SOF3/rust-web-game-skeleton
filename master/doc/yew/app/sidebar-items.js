@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["App","An instance of an application."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ResizeService","A service which fires events when the browser window is resized."],["ResizeTask","A handle for the event listener listening for resize events."],["WindowDimensions","Dimensions of the window."]]});

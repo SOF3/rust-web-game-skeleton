@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["ChangeData","A type representing change of value(s) of an element after committed by user (onchange event)."]],"struct":[["InputData","A type representing data from `oninput` event."]]});

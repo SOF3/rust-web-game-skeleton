@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["DEFAULT_PORT","The common port"],["DEFAULT_PORT_STR","A string representation of the common port."]],"fn":[["is_valid_name","Checks whether the client name is valid."]],"mod":[["proto","Protocol-related types"]]});

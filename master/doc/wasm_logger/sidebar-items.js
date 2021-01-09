@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["MessageLocation","Specify where the message will be logged."]],"fn":[["init","Initialize the logger which the given config. If failed, it will log a message to the the browser console."]],"struct":[["Config","Specify what to be logged"]]});

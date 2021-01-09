@@ -1,0 +1,6 @@
+(function() {var implementors = {};
+implementors["http"] = [{"text":"impl FromStr for HeaderName","synthetic":false,"types":[]},{"text":"impl FromStr for HeaderValue","synthetic":false,"types":[]},{"text":"impl FromStr for Method","synthetic":false,"types":[]},{"text":"impl FromStr for StatusCode","synthetic":false,"types":[]},{"text":"impl FromStr for Authority","synthetic":false,"types":[]},{"text":"impl FromStr for PathAndQuery","synthetic":false,"types":[]},{"text":"impl FromStr for Scheme","synthetic":false,"types":[]},{"text":"impl FromStr for Uri","synthetic":false,"types":[]}];
+implementors["log"] = [{"text":"impl FromStr for Level","synthetic":false,"types":[]},{"text":"impl FromStr for LevelFilter","synthetic":false,"types":[]}];
+implementors["proc_macro2"] = [{"text":"impl FromStr for TokenStream","synthetic":false,"types":[]}];
+implementors["serde_json"] = [{"text":"impl FromStr for Number","synthetic":false,"types":[]},{"text":"impl FromStr for Value","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

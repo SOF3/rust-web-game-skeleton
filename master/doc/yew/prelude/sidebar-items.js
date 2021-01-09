@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["worker","Prelude module for creating worker."]],"trait":[["Dispatched","This trait allows the creation of a dispatcher to an existing agent that will not send replies when messages are sent."],["Threaded","Implements rules to register a worker in a separate thread."]]});

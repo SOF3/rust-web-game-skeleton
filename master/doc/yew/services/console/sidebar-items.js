@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ConsoleService","A service to use methods of a Console."]]});

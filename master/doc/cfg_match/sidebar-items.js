@@ -1,0 +1,1 @@
+initSidebarItems({"macro":[["cfg_match","`cfg_match!` provides a more ergonomic approach to chaining conditionals, like the similar cfg-if crate. In addition to items, `cfg_match!` can also be used for expressions (though a block will require parenthesis wrapping like `=> ({ ... })`). Compile-time conditionals"]]});
