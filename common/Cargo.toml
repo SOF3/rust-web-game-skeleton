@@ -12,5 +12,4 @@ name = "common"
 
 [dependencies]
 rust-web-game-skeleton-codegen = {version = "0.2.0", path = "../codegen"}
-# specs = "0.16.1"
 yew = {version = "0.17.4", optional = true}
