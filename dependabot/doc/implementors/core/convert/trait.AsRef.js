@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors["anyhow"] = [{"text":"impl AsRef&lt;dyn Error + 'static + Sync + Send&gt; for Error","synthetic":false,"types":[]},{"text":"impl AsRef&lt;dyn Error + 'static&gt; for Error","synthetic":false,"types":[]}];
+implementors["anyhow"] = [{"text":"impl AsRef&lt;dyn Error + 'static + Send + Sync&gt; for Error","synthetic":false,"types":[]},{"text":"impl AsRef&lt;dyn Error + 'static&gt; for Error","synthetic":false,"types":[]}];
 implementors["anymap"] = [{"text":"impl&lt;A:&nbsp;?Sized + UncheckedAnyExt&gt; AsRef&lt;RawMap&lt;A&gt;&gt; for Map&lt;A&gt;","synthetic":false,"types":[]}];
 implementors["bytes"] = [{"text":"impl AsRef&lt;[u8]&gt; for Bytes","synthetic":false,"types":[]},{"text":"impl AsRef&lt;[u8]&gt; for BytesMut","synthetic":false,"types":[]}];
 implementors["futures_util"] = [{"text":"impl&lt;T:&nbsp;AsRef&lt;[u8]&gt;&gt; AsRef&lt;[u8]&gt; for Window&lt;T&gt;","synthetic":false,"types":[]}];

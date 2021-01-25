@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/src/app/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings"></script><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../rust_web_game_skeleton_client/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+<link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../rust_web_game_skeleton_client/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
                 <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
@@ -164,19 +164,6 @@
 <span id="161">161</span>
 <span id="162">162</span>
 <span id="163">163</span>
-<span id="164">164</span>
-<span id="165">165</span>
-<span id="166">166</span>
-<span id="167">167</span>
-<span id="168">168</span>
-<span id="169">169</span>
-<span id="170">170</span>
-<span id="171">171</span>
-<span id="172">172</span>
-<span id="173">173</span>
-<span id="174">174</span>
-<span id="175">175</span>
-<span id="176">176</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">unwrap_used</span>)]</span>
 
@@ -189,7 +176,18 @@
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">services</span>::<span class="ident">storage</span>::{<span class="ident">Area</span>, <span class="ident">StorageService</span>};
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">services</span>::<span class="ident">websocket</span>::<span class="ident">WebSocketTask</span>;
 
-<span class="kw">mod</span> <span class="ident">connect</span>;
+<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">css</span> {
+    ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">key</span>:<span class="ident">literal</span> : <span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>:<span class="ident">expr</span>);<span class="op">*</span> $(;)<span class="question-mark">?</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="macro">format</span><span class="macro">!</span>(
+            <span class="macro">concat</span><span class="macro">!</span>(
+                $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">key</span>, <span class="string">&quot;: {}; &quot;</span>,)<span class="op">*</span>
+            ),
+            $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>,)<span class="op">*</span>
+        )
+    }
+}
+
+<span class="kw">mod</span> <span class="ident">chat</span>;
 <span class="kw">mod</span> <span class="ident">game</span>;
 <span class="kw">mod</span> <span class="ident">menu</span>;
 
@@ -213,31 +211,19 @@
     <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="ident">Message</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShouldRender</span> {
         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span> {
             <span class="ident">State</span>::<span class="ident">Menu</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">msg</span> {
-                <span class="ident">Message</span>::<span class="ident">StartConnect</span>(<span class="ident">args</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Message</span>::<span class="ident">StartGame</span>(<span class="ident">args</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">addr</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">addr</span>.<span class="ident">clone</span>();
                     <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">port</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">port</span>;
                     <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">allow_insecure</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">allow_insecure</span>;
                     <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">name</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">name</span>.<span class="ident">clone</span>();
                     <span class="ident">write_menu_config</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">config</span>);
-                    <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State</span>::<span class="ident">Connect</span> { <span class="ident">args</span> };
+                    <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State</span>::<span class="ident">Game</span> { <span class="ident">args</span> };
                     <span class="bool-val">true</span>
                 }
                 <span class="ident">Message</span>::<span class="ident">GameError</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State</span>::<span class="ident">Menu</span> { <span class="ident">err</span> };
                     <span class="bool-val">true</span>
                 }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
-            },
-            <span class="ident">State</span>::<span class="ident">Connect</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">msg</span> {
-                <span class="ident">Message</span>::<span class="ident">StartGame</span>(<span class="ident">game_args</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State</span>::<span class="ident">Game</span> { <span class="ident">args</span>: <span class="ident">game_args</span> };
-                    <span class="bool-val">true</span>
-                }
-                <span class="ident">Message</span>::<span class="ident">GameError</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State</span>::<span class="ident">Menu</span> { <span class="ident">err</span> };
-                    <span class="bool-val">true</span>
-                }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
             },
             <span class="ident">State</span>::<span class="ident">Game</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">msg</span> {
                 <span class="ident">Message</span>::<span class="ident">GameError</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> {
@@ -262,20 +248,14 @@
                     <span class="ident">allow_insecure</span><span class="op">=</span><span class="self">self</span>.<span class="ident">config</span>.<span class="ident">allow_insecure</span>
                     <span class="ident">name</span><span class="op">=</span><span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">config</span>.<span class="ident">name</span>
                     <span class="ident">err</span><span class="op">=</span><span class="ident">err</span>
-                    <span class="ident">connect_hook</span><span class="op">=</span><span class="self">self</span>.<span class="ident">link</span>.<span class="ident">callback</span>(<span class="ident">Message</span>::<span class="ident">StartConnect</span>) <span class="op">/</span><span class="op">&gt;</span>
-            },
-            <span class="ident">State</span>::<span class="ident">Connect</span> { <span class="ident">args</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="macro">html</span><span class="macro">!</span> {
-                <span class="op">&lt;</span><span class="ident">connect</span>::<span class="ident">Connect</span>
-                    <span class="ident">addr</span><span class="op">=</span><span class="kw-2">&amp;</span><span class="ident">args</span>.<span class="ident">addr</span> <span class="ident">port</span><span class="op">=</span><span class="ident">args</span>.<span class="ident">port</span> <span class="ident">allow_insecure</span><span class="op">=</span><span class="ident">args</span>.<span class="ident">allow_insecure</span>
-                    <span class="ident">name</span><span class="op">=</span><span class="kw-2">&amp;</span><span class="ident">args</span>.<span class="ident">name</span>
-                    <span class="ident">identity</span><span class="op">=</span><span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">config</span>.<span class="ident">identity</span>
-                    <span class="ident">ready_hook</span><span class="op">=</span><span class="self">self</span>.<span class="ident">link</span>.<span class="ident">callback</span>(<span class="ident">Message</span>::<span class="ident">StartGame</span>)
-                    <span class="ident">error_hook</span><span class="op">=</span><span class="self">self</span>.<span class="ident">link</span>.<span class="ident">callback</span>(<span class="ident">Message</span>::<span class="ident">GameError</span>)
-                    <span class="op">/</span><span class="op">&gt;</span>
+                    <span class="ident">connect_hook</span><span class="op">=</span><span class="self">self</span>.<span class="ident">link</span>.<span class="ident">callback</span>(<span class="ident">Message</span>::<span class="ident">StartGame</span>) <span class="op">/</span><span class="op">&gt;</span>
             },
             <span class="ident">State</span>::<span class="ident">Game</span> { <span class="ident">args</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="macro">html</span><span class="macro">!</span> {
                 <span class="op">&lt;</span><span class="ident">game</span>::<span class="ident">Game</span>
-                    <span class="ident">ws</span><span class="op">=</span><span class="ident">Rc</span>::<span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>.<span class="ident">ws</span>)
+                    <span class="ident">addr</span><span class="op">=</span><span class="kw-2">&amp;</span><span class="ident">args</span>.<span class="ident">addr</span> <span class="ident">port</span><span class="op">=</span><span class="ident">args</span>.<span class="ident">port</span> <span class="ident">allow_insecure</span><span class="op">=</span><span class="ident">args</span>.<span class="ident">allow_insecure</span>
+                    <span class="ident">name</span><span class="op">=</span><span class="kw-2">&amp;</span><span class="ident">args</span>.<span class="ident">name</span>
+                    <span class="ident">identity</span><span class="op">=</span><span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">config</span>.<span class="ident">identity</span>
+                    <span class="ident">error_hook</span><span class="op">=</span><span class="self">self</span>.<span class="ident">link</span>.<span class="ident">callback</span>(<span class="ident">Message</span>::<span class="ident">GameError</span>)
                     <span class="op">/</span><span class="op">&gt;</span>
             },
         }
@@ -284,26 +264,20 @@
 
 <span class="kw">enum</span> <span class="ident">State</span> {
     <span class="ident">Menu</span> { <span class="ident">err</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> },
-    <span class="ident">Connect</span> { <span class="ident">args</span>: <span class="ident">ClientArgs</span> },
     <span class="ident">Game</span> { <span class="ident">args</span>: <span class="ident">GameArgs</span> },
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ClientArgs</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ClientArgs</span> {}
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GameArgs</span> {
     <span class="ident">addr</span>: <span class="ident">String</span>,
     <span class="ident">port</span>: <span class="ident">u16</span>,
     <span class="ident">allow_insecure</span>: <span class="ident">bool</span>,
     <span class="ident">name</span>: <span class="ident">String</span>,
 }
 
-<span class="kw">type</span> <span class="ident">WebSocket</span> <span class="op">=</span> <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">RefCell</span><span class="op">&lt;</span><span class="ident">WebSocketTask</span><span class="op">&gt;</span><span class="op">&gt;</span>;
-
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GameArgs</span> {
-    <span class="ident">ws</span>: <span class="ident">WebSocket</span>,
-}
-
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Message</span> {
-    <span class="ident">StartConnect</span>(<span class="ident">ClientArgs</span>),
     <span class="ident">StartGame</span>(<span class="ident">GameArgs</span>),
     <span class="ident">GameError</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>),
 }
@@ -355,4 +329,5 @@
     <span class="ident">storage</span>.<span class="ident">store</span>(<span class="ident">MENU_CONFIG_STORAGE_KEY</span>, <span class="ident">Json</span>(<span class="kw-2">&amp;</span><span class="ident">config</span>));
 }
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "rust_web_game_skeleton_client";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rust_web_game_skeleton_client"></div>
+    <script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
