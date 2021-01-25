@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors["anyhow"] = [{"text":"impl&lt;'_&gt; Default for Chain&lt;'_&gt;","synthetic":false,"types":[]}];
+implementors["anyhow"] = [{"text":"impl Default for Chain&lt;'_&gt;","synthetic":false,"types":[]}];
 implementors["anymap"] = [{"text":"impl&lt;A:&nbsp;?Sized + UncheckedAnyExt&gt; Default for RawMap&lt;A&gt;","synthetic":false,"types":[]}];
 implementors["bincode"] = [{"text":"impl Default for DefaultOptions","synthetic":false,"types":[]}];
 implementors["block_buffer"] = [{"text":"impl&lt;BlockSize:&nbsp;Default + ArrayLength&lt;u8&gt;&gt; Default for BlockBuffer&lt;BlockSize&gt;","synthetic":false,"types":[]}];
