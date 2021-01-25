@@ -25,6 +25,7 @@
         clippy::indexing_slicing,
     )
 )]
+#![feature(bool_to_option)]
 
 use wasm_bindgen::prelude::*;
 use yew::prelude::*;

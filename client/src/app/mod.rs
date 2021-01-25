@@ -9,7 +9,18 @@ use yew::prelude::*;
 use yew::services::storage::{Area, StorageService};
 use yew::services::websocket::WebSocketTask;
 
-mod connect;
+macro_rules! css {
+    ($($key:literal : $value:expr);* $(;)?) => {
+        format!(
+            concat!(
+                $($key, ": {}; ",)*
+            ),
+            $($value,)*
+        )
+    }
+}
+
+mod chat;
 mod game;
 mod menu;
 
@@ -33,31 +44,19 @@ impl Component for Lifecycle {
     fn update(&mut self, msg: Message) -> ShouldRender {
         match &self.state {
             State::Menu { .. } => match msg {
-                Message::StartConnect(args) => {
+                Message::StartGame(args) => {
                     self.config.addr = args.addr.clone();
                     self.config.port = args.port;
                     self.config.allow_insecure = args.allow_insecure;
                     self.config.name = args.name.clone();
                     write_menu_config(&self.config);
-                    self.state = State::Connect { args };
+                    self.state = State::Game { args };
                     true
                 }
                 Message::GameError(err) => {
                     self.state = State::Menu { err };
                     true
                 }
-                _ => unreachable!(),
-            },
-            State::Connect { .. } => match msg {
-                Message::StartGame(game_args) => {
-                    self.state = State::Game { args: game_args };
-                    true
-                }
-                Message::GameError(err) => {
-                    self.state = State::Menu { err };
-                    true
-                }
-                _ => unreachable!(),
             },
             State::Game { .. } => match msg {
                 Message::GameError(err) => {
@@ -82,20 +81,14 @@ impl Component for Lifecycle {
                     allow_insecure=self.config.allow_insecure
                     name=&self.config.name
                     err=err
-                    connect_hook=self.link.callback(Message::StartConnect) />
-            },
-            State::Connect { args } => html! {
-                <connect::Connect
-                    addr=&args.addr port=args.port allow_insecure=args.allow_insecure
-                    name=&args.name
-                    identity=&self.config.identity
-                    ready_hook=self.link.callback(Message::StartGame)
-                    error_hook=self.link.callback(Message::GameError)
-                    />
+                    connect_hook=self.link.callback(Message::StartGame) />
             },
             State::Game { args } => html! {
                 <game::Game
-                    ws=Rc::clone(&args.ws)
+                    addr=&args.addr port=args.port allow_insecure=args.allow_insecure
+                    name=&args.name
+                    identity=&self.config.identity
+                    error_hook=self.link.callback(Message::GameError)
                     />
             },
         }
@@ -104,26 +97,20 @@ impl Component for Lifecycle {
 
 enum State {
     Menu { err: Option<String> },
-    Connect { args: ClientArgs },
     Game { args: GameArgs },
 }
 
-pub struct ClientArgs {
+pub struct ClientArgs {}
+
+#[derive(Debug, Clone)]
+pub struct GameArgs {
     addr: String,
     port: u16,
     allow_insecure: bool,
     name: String,
 }
 
-type WebSocket = Rc<RefCell<WebSocketTask>>;
-
-#[derive(Debug, Clone)]
-pub struct GameArgs {
-    ws: WebSocket,
-}
-
 pub enum Message {
-    StartConnect(ClientArgs),
     StartGame(GameArgs),
     GameError(Option<String>),
 }
