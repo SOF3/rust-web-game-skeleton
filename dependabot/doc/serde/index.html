@@ -13,9 +13,9 @@ structure to be serialized and deserialized using any supported data format.</p>
 usage examples.</p>
 <h2 id="design" class="section-header"><a href="#design">Design</a></h2>
 <p>Where many other languages rely on runtime reflection for serializing data,
-Serde is instead built on Rust's powerful trait system. A data structure
+Serde is instead built on Rust’s powerful trait system. A data structure
 that knows how to serialize and deserialize itself is one that implements
-Serde's <code>Serialize</code> and <code>Deserialize</code> traits (or uses Serde's derive
+Serde’s <code>Serialize</code> and <code>Deserialize</code> traits (or uses Serde’s derive
 attribute to automatically generate implementations at compile time). This
 avoids any overhead of reflection or runtime type information. In fact in
 many situations the interaction between data structure and data format can
@@ -31,7 +31,7 @@ for Serde by the community.</p>
 used for IPC within the Servo rendering engine.</li>
 <li><a href="https://github.com/pyfisch/cbor">CBOR</a>, a Concise Binary Object Representation designed for small message
 size without the need for version negotiation.</li>
-<li><a href="https://github.com/dtolnay/serde-yaml">YAML</a>, a self-proclaimed human-friendly configuration language that ain't
+<li><a href="https://github.com/dtolnay/serde-yaml">YAML</a>, a self-proclaimed human-friendly configuration language that ain’t
 markup language.</li>
 <li><a href="https://github.com/3Hren/msgpack-rust">MessagePack</a>, an efficient binary format that resembles a compact JSON.</li>
 <li><a href="https://github.com/alexcrichton/toml-rs">TOML</a>, a minimal configuration format used by <a href="http://doc.crates.io/manifest.html">Cargo</a>.</li>
@@ -49,8 +49,8 @@ definition.</li>
 Rust structs. <em>(deserialization only)</em></li>
 <li><a href="https://github.com/rotty/lexpr-rs">S-expressions</a>, the textual representation of code and data used by the
 Lisp language family.</li>
-<li><a href="https://docs.rs/zvariant">D-Bus</a>'s binary wire format.</li>
-<li><a href="https://github.com/google/flatbuffers/tree/master/rust/flexbuffers">FlexBuffers</a>, the schemaless cousin of Google's FlatBuffers zero-copy serialization format.</li>
+<li><a href="https://docs.rs/zvariant">D-Bus</a>’s binary wire format.</li>
+<li><a href="https://github.com/google/flatbuffers/tree/master/rust/flexbuffers">FlexBuffers</a>, the schemaless cousin of Google’s FlatBuffers zero-copy serialization format.</li>
 <li><a href="https://docs.rs/serde_dynamo">DynamoDB Items</a>, the format used by <a href="https://docs.rs/rusoto_dynamodb">rusoto_dynamodb</a> to transfer data to
 and from DynamoDB.</li>
 </ul>

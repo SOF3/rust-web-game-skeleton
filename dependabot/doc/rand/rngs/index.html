@@ -4,20 +4,20 @@
 <p>Computers cannot produce random numbers from nowhere. We classify
 random number generators as follows:</p>
 <ul>
-<li>&quot;True&quot; random number generators (TRNGs) use hard-to-predict data sources
+<li>“True” random number generators (TRNGs) use hard-to-predict data sources
 (e.g. the high-resolution parts of event timings and sensor jitter) to
 harvest random bit-sequences, apply algorithms to remove bias and
 estimate available entropy, then combine these bits into a byte-sequence
 or an entropy pool. This job is usually done by the operating system or
 a hardware generator (HRNG).</li>
-<li>&quot;Pseudo&quot;-random number generators (PRNGs) use algorithms to transform a
+<li>“Pseudo”-random number generators (PRNGs) use algorithms to transform a
 seed into a sequence of pseudo-random numbers. These generators can be
 fast and produce well-distributed unpredictable random numbers (or not).
 They are usually deterministic: given algorithm and seed, the output
 sequence can be reproduced. They have finite period and eventually loop;
 with many algorithms this period is fixed and can be proven sufficiently
 long, while others are chaotic and the period depends on the seed.</li>
-<li>&quot;Cryptographically secure&quot; pseudo-random number generators (CSPRNGs)
+<li>“Cryptographically secure” pseudo-random number generators (CSPRNGs)
 are the sub-set of PRNGs which are secure. Security of the generator
 relies both on hiding the internal state and using a strong algorithm.</li>
 </ul>
@@ -37,7 +37,7 @@ additionally implement the <a href="../../rand/trait.CryptoRng.html"><code>Crypt
 <h2 id="our-generators" class="section-header"><a href="#our-generators">Our generators</a></h2>
 <p>This crate provides several random number generators:</p>
 <ul>
-<li><a href="../../rand/rngs/struct.OsRng.html" title="OsRng"><code>OsRng</code></a> is an interface to the operating system's random number
+<li><a href="../../rand/rngs/struct.OsRng.html" title="OsRng"><code>OsRng</code></a> is an interface to the operating system’s random number
 source. Typically the operating system uses a CSPRNG with entropy
 provided by a TRNG and some type of on-going re-seeding.</li>
 <li><a href="../../rand/rngs/struct.ThreadRng.html" title="ThreadRng"><code>ThreadRng</code></a>, provided by the <a href="../../rand/fn.thread_rng.html"><code>thread_rng</code></a> function, is a handle to a

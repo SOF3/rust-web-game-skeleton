@@ -4,7 +4,7 @@
                 <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Crate <a class="mod" href="">gloo_file</a></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/gloo_file/lib.rs.html#1-19" title="goto source code">[src]</a></span></h1><div class="docblock"><p>Provides wrappers for working with <code>Blob</code>s and <code>File</code>s from JavaScript.</p>
 <p>A <code>File</code> is just a <code>Blob</code> with some extra data: a name and a last modified time.</p>
 <p>In the File API, <code>Blob</code>s are opaque objects that lazily fetch their contained data when
-asked. This allows a <code>Blob</code> to represent some resource that isn't completely available, for
+asked. This allows a <code>Blob</code> to represent some resource that isn’t completely available, for
 example a WebSocket message that is being received or a file that needs to be read from disk.</p>
 <p>You can asynchronously access the contents of the <code>Blob</code> through callbacks,
 but that is rather inconvenient, so this crate provides some functions which

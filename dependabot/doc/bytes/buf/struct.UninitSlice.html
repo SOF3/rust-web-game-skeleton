@@ -53,7 +53,7 @@ by the caller representing a byte slice for the duration of <code>'a</code>.</p>
 <span class="ident">slice</span>.<span class="ident">copy_from_slice</span>(<span class="string">b&quot;bar&quot;</span>);
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="string">b&quot;bar&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">data</span>[..]);</pre></div>
-</div><h4 id="method.as_mut_ptr" class="method"><code>pub fn <a href="#method.as_mut_ptr" class="fnname">as_mut_ptr</a>(&amp;mut self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code><a class="srclink" href="../../src/bytes/buf/uninit_slice.rs.html#119-121" title="goto source code">[src]</a></h4><div class="docblock"><p>Return a raw pointer to the slice's buffer.</p>
+</div><h4 id="method.as_mut_ptr" class="method"><code>pub fn <a href="#method.as_mut_ptr" class="fnname">as_mut_ptr</a>(&amp;mut self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code><a class="srclink" href="../../src/bytes/buf/uninit_slice.rs.html#119-121" title="goto source code">[src]</a></h4><div class="docblock"><p>Return a raw pointer to the slice’s buffer.</p>
 <h1 id="safety-1" class="section-header"><a href="#safety-1">Safety</a></h1>
 <p>The caller <strong>must not</strong> read from the referenced memory and <strong>must not</strong>
 write <strong>uninitialized</strong> bytes to the slice either.</p>

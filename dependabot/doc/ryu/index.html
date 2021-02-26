@@ -5,10 +5,10 @@
 <br>
 <p>Pure Rust implementation of Ryū, an algorithm to quickly convert floating
 point numbers to decimal strings.</p>
-<p>The PLDI'18 paper <a href="https://dl.acm.org/citation.cfm?id=3192369"><em>Ryū: fast float-to-string conversion</em></a> by Ulf
+<p>The PLDI’18 paper <a href="https://dl.acm.org/citation.cfm?id=3192369"><em>Ryū: fast float-to-string conversion</em></a> by Ulf
 Adams includes a complete correctness proof of the algorithm. The paper is
 available under the creative commons CC-BY-SA license.</p>
-<p>This Rust implementation is a line-by-line port of Ulf Adams' implementation
+<p>This Rust implementation is a line-by-line port of Ulf Adams’ implementation
 in C, <a href="https://github.com/ulfjack/ryu">https://github.com/ulfjack/ryu</a>.</p>
 <h1 id="example" class="section-header"><a href="#example">Example</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -18,7 +18,7 @@ in C, <a href="https://github.com/ulfjack/ryu">https://github.com/ulfjack/ryu</a
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">printed</span>, <span class="string">&quot;1.234&quot;</span>);
 }</pre></div>
 <h2 id="performance" class="section-header"><a href="#performance">Performance</a></h2>
-<p>You can run upstream's benchmarks with:</p>
+<p>You can run upstream’s benchmarks with:</p>
 <pre><code class="language-console">$ git clone https://github.com/ulfjack/ryu c-ryu
 $ cd c-ryu
 $ bazel run -c opt //ryu/benchmark
@@ -51,7 +51,7 @@ iteration; smaller is better.</p>
 </tbody></table>
 <h2 id="formatting" class="section-header"><a href="#formatting">Formatting</a></h2>
 <p>This library tends to produce more human-readable output than the standard
-library's to_string, which never uses scientific notation. Here are two
+library’s to_string, which never uses scientific notation. Here are two
 examples:</p>
 <ul>
 <li><em>ryu:</em> 1.23e40, <em>std:</em> 12300000000000000000000000000000000000000</li>

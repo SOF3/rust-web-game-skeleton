@@ -14,7 +14,7 @@ string, or a format string with arguments. It also can take any custom type
 which implements <code>Debug</code> and <code>Display</code>.</p>
 <p>If called with a single argument whose type implements <code>std::error::Error</code>
 (in addition to <code>Debug</code> and <code>Display</code>, which are always required), then that
-Error impl's <code>source</code> is preserved as the <code>source</code> of the resulting
+Error impl’s <code>source</code> is preserved as the <code>source</code> of the resulting
 <code>anyhow::Error</code>.</p>
 <h1 id="example" class="section-header"><a href="#example">Example</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">

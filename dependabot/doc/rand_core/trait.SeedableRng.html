@@ -14,7 +14,7 @@ arrays (we recommend <code>[u8; N]</code> for some <code>N</code>).</p>
 <p>It is recommended to seed PRNGs with a seed of at least circa 100 bits,
 which means an array of <code>[u8; 12]</code> or greater to avoid picking RNGs with
 partially overlapping periods.</p>
-<p>For cryptographic RNG's a seed of 256 bits is recommended, <code>[u8; 32]</code>.</p>
+<p>For cryptographic RNG’s a seed of 256 bits is recommended, <code>[u8; 32]</code>.</p>
 <h1 id="implementing-seedablerng-for-rngs-with-large-seeds" class="section-header"><a href="#implementing-seedablerng-for-rngs-with-large-seeds">Implementing <code>SeedableRng</code> for RNGs with large seeds</a></h1>
 <p>Note that the required traits <code>core::default::Default</code> and
 <code>core::convert::AsMut&lt;u8&gt;</code> are not implemented for large arrays
@@ -58,7 +58,7 @@ if this is not adhered to. If you wish to seed from simple numbers, use
 <p>All PRNG implementations should be reproducible unless otherwise noted:
 given a fixed <code>seed</code>, the same sequence of output should be produced
 on all runs, library versions and architectures (e.g. check endianness).
-Any &quot;value-breaking&quot; changes to the generator should require bumping at
+Any “value-breaking” changes to the generator should require bumping at
 least the minor version and documentation of the change.</p>
 <p>It is not required that this function yield the same state as a
 reference implementation of the PRNG given equivalent seed; if necessary
@@ -67,8 +67,8 @@ implementation can be added.</p>
 <p>PRNG implementations should make sure <code>from_seed</code> never panics. In the
 case that some special values (like an all zero seed) are not viable
 seeds it is preferable to map these to alternative constant value(s),
-for example <code>0xBAD5EEDu32</code> or <code>0x0DDB1A5E5BAD5EEDu64</code> (&quot;odd biases? bad
-seed&quot;). This is assuming only a small number of values must be rejected.</p>
+for example <code>0xBAD5EEDu32</code> or <code>0x0DDB1A5E5BAD5EEDu64</code> (“odd biases? bad
+seed”). This is assuming only a small number of values must be rejected.</p>
 </div></div><span class="loading-content">Loading content...</span><h2 id="provided-methods" class="small-section-header">Provided methods<a href="#provided-methods" class="anchor"></a></h2><div class="methods"><h3 id="method.seed_from_u64" class="method"><code>fn <a href="#method.seed_from_u64" class="fnname">seed_from_u64</a>(state: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>) -&gt; Self</code><a class="srclink" href="../src/rand_core/lib.rs.html#301-330" title="goto source code">[src]</a></h3><div class="docblock"><p>Create a new PRNG using a <code>u64</code> seed.</p>
 <p>This is a convenience-wrapper around <code>from_seed</code> to allow construction
 of any <code>SeedableRng</code> from a simple <code>u64</code> value. It is designed such that

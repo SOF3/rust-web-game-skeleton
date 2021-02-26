@@ -25,8 +25,8 @@ the <code>std::error::Error</code> trait.</p>
 </li>
 <li>
 <p>Attach context to help the person troubleshooting the error understand
-where things went wrong. A low-level error like &quot;No such file or
-directory&quot; can be annoying to debug without more context about what higher
+where things went wrong. A low-level error like “No such file or
+directory” can be annoying to debug without more context about what higher
 level step the application was in the middle of.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -107,7 +107,7 @@ supports string interpolation and produces an <code>anyhow::Error</code>.</p>
 <br>
 <h1 id="no-std-support" class="section-header"><a href="#no-std-support">No-std support</a></h1>
 <p>In no_std mode, the same API is almost all available and works the same way.
-To depend on Anyhow in no_std mode, disable our default enabled &quot;std&quot;
+To depend on Anyhow in no_std mode, disable our default enabled “std”
 feature in Cargo.toml. A global allocator is required.</p>
 <pre><code class="language-toml">[dependencies]
 anyhow = { version = &quot;1.0&quot;, default-features = false }
@@ -115,7 +115,7 @@ anyhow = { version = &quot;1.0&quot;, default-features = false }
 <p>Since the <code>?</code>-based error conversions would normally rely on the
 <code>std::error::Error</code> trait which is only available through std, no_std mode
 will require an explicit <code>.map_err(Error::msg)</code> when working with a
-non-Anyhow error type inside a function that returns Anyhow's error type.</p>
+non-Anyhow error type inside a function that returns Anyhow’s error type.</p>
 </div><h2 id="reexports" class="section-header"><a href="#reexports">Re-exports</a></h2>
 <table><tr><td><code>pub use <a class="macro" href="../anyhow/macro.anyhow.html" title="macro anyhow::anyhow">anyhow</a> as format_err;</code></td></tr></table><h2 id="macros" class="section-header"><a href="#macros">Macros</a></h2>
 <table><tr class="module-item"><td><a class="macro" href="macro.anyhow.html" title="anyhow::anyhow macro">anyhow</a></td><td class="docblock-short"><p>Construct an ad-hoc error from a string or existing non-<code>anyhow</code> error

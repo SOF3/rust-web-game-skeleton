@@ -11,7 +11,7 @@ correctly formatted but unspecified numerical value.</p>
 check <a href="https://doc.rust-lang.org/std/primitive.f64.html#method.is_nan"><code>is_nan</code></a> and <a href="https://doc.rust-lang.org/std/primitive.f64.html#method.is_infinite"><code>is_infinite</code></a> and handle those cases yourself.</p>
 <h2 id="safety" class="section-header"><a href="#safety">Safety</a></h2>
 <p>The <code>result</code> pointer argument must point to sufficiently many writable bytes
-to hold Ryū's representation of <code>f</code>.</p>
+to hold Ryū’s representation of <code>f</code>.</p>
 <h2 id="example" class="section-header"><a href="#example">Example</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">mem</span>::<span class="ident">MaybeUninit</span>, <span class="ident">slice</span>, <span class="ident">str</span>};

@@ -3,11 +3,11 @@
 implementation is supposed to be cryptographically secure.</p>
 <p><em>Cryptographically secure generators</em>, also known as <em>CSPRNGs</em>, should
 satisfy an additional properties over other generators: given the first
-<em>k</em> bits of an algorithm's output
+<em>k</em> bits of an algorithm’s output
 sequence, it should not be possible using polynomial-time algorithms to
 predict the next bit with probability significantly greater than 50%.</p>
 <p>Some generators may satisfy an additional property, however this is not
-required by this trait: if the CSPRNG's state is revealed, it should not be
+required by this trait: if the CSPRNG’s state is revealed, it should not be
 computationally-feasible to reconstruct output prior to this. Some other
 generators allow backwards-computation and are consided <em>reversible</em>.</p>
 <p>Note that this trait is provided for guidance only and cannot guarantee

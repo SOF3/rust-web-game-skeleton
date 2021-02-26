@@ -9,11 +9,11 @@ background and cannot contain any stack references.</p>
 <p>The returned <code>Promise</code> will be resolved or rejected when the future completes,
 depending on whether it finishes with <code>Ok</code> or <code>Err</code>.</p>
 <h1 id="panics" class="section-header"><a href="#panics">Panics</a></h1>
-<p>Note that in wasm panics are currently translated to aborts, but &quot;abort&quot; in
+<p>Note that in wasm panics are currently translated to aborts, but “abort” in
 this case means that a JavaScript exception is thrown. The wasm module is
 still usable (likely erroneously) after Rust panics.</p>
 <p>If the <code>future</code> provided panics then the returned <code>Promise</code> <strong>will not
 resolve</strong>. Instead it will be a leaked promise. This is an unfortunate
-limitation of wasm currently that's hoped to be fixed one day!</p>
+limitation of wasm currently that’s hoped to be fixed one day!</p>
 </div></section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="wasm_bindgen_futures"></div>
     <script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

@@ -9,7 +9,7 @@
 }</pre></div>
 </div><div class="docblock"><p>Return early with an error.</p>
 <p>This macro is equivalent to <code>return Err(</code><a href="../anyhow/macro.anyhow.html" title="anyhow!"><code>anyhow!($args...)</code></a><code>)</code>.</p>
-<p>The surrounding function's or closure's return value is required to be
+<p>The surrounding function’s or closure’s return value is required to be
 <code>Result&lt;_,</code><a href="../anyhow/struct.Error.html" title="crate::Error"><code>anyhow::Error</code></a><code>&gt;</code>.</p>
 <h1 id="example" class="section-header"><a href="#example">Example</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">

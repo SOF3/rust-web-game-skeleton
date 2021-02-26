@@ -11,7 +11,7 @@
 <p>Bump allocation is a fast, but limited approach to allocation. We have a chunk
 of memory, and we maintain a pointer within that memory. Whenever we allocate an
 object, we do a quick test that we have enough capacity left in our chunk to
-allocate the object and then update the pointer by the object's size. <em>That's
+allocate the object and then update the pointer by the object’s size. <em>That’s
 it!</em></p>
 <p>The disadvantage of bump allocation is that there is no general way to
 deallocate individual objects or reclaim the memory region for a
@@ -21,12 +21,12 @@ allocations. That is, a group of objects that will all be allocated during the
 same program phase, used, and then can all be deallocated together as a group.</p>
 <h2 id="deallocation-en-masse-but-no-drop" class="section-header"><a href="#deallocation-en-masse-but-no-drop">Deallocation en Masse, but No <code>Drop</code></a></h2>
 <p>To deallocate all the objects in the arena at once, we can simply reset the bump
-pointer back to the start of the arena's memory chunk. This makes mass
-deallocation <em>extremely</em> fast, but allocated objects' <code>Drop</code> implementations are
+pointer back to the start of the arena’s memory chunk. This makes mass
+deallocation <em>extremely</em> fast, but allocated objects’ <code>Drop</code> implementations are
 not invoked.</p>
 <blockquote>
 <p><strong>However:</strong> [<code>bumpalo::boxed::Box&lt;T&gt;</code>][crate::boxed::Box] can be used to wrap
-<code>T</code> values allocated in the <code>Bump</code> arena, and calls <code>T</code>'s <code>Drop</code>
+<code>T</code> values allocated in the <code>Bump</code> arena, and calls <code>T</code>’s <code>Drop</code>
 implementation when the <code>Box&lt;T&gt;</code> wrapper goes out of scope. This is similar to
 how <a href="https://doc.rust-lang.org/std/boxed/struct.Box.html"><code>std::boxed::Box</code></a> works, except without deallocating its backing memory.</p>
 </blockquote>
@@ -57,7 +57,7 @@ and then start bump allocating into this new memory chunk.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">scooter</span>.<span class="ident">scritches_required</span>);</pre></div>
 <h2 id="collections" class="section-header"><a href="#collections">Collections</a></h2>
 <p>When the <code>&quot;collections&quot;</code> cargo feature is enabled, a fork of some of the <code>std</code>
-library's collections are available in the <code>collections</code> module. These
+library’s collections are available in the <code>collections</code> module. These
 collection types are modified to allocate their space inside <code>bumpalo::Bump</code>
 arenas.</p>
 
@@ -83,7 +83,7 @@ this <code>collections</code> module and use the <code>std</code> versions.</p>
 <p>When the <code>&quot;boxed&quot;</code> cargo feature is enabled, a fork of <code>std::boxed::Box</code> library
 is available in the <code>boxed</code> module. This <code>Box</code> type is modified to allocate its
 space inside <code>bumpalo::Bump</code> arenas.</p>
-<p><strong>A <code>Box&lt;T&gt;</code> runs <code>T</code>'s drop implementation when the <code>Box&lt;T&gt;</code> is dropped.</strong> You
+<p><strong>A <code>Box&lt;T&gt;</code> runs <code>T</code>’s drop implementation when the <code>Box&lt;T&gt;</code> is dropped.</strong> You
 can use this to work around the fact that <code>Bump</code> does not drop values allocated
 in its space itself.</p>
 

@@ -42,7 +42,7 @@ Caused by:
 <h1 id="effect-on-downcasting" class="section-header"><a href="#effect-on-downcasting">Effect on downcasting</a></h1>
 <p>After attaching context of type <code>C</code> onto an error of type <code>E</code>, the resulting
 <code>anyhow::Error</code> may be downcast to <code>C</code> <strong>or</strong> to <code>E</code>.</p>
-<p>That is, in codebases that rely on downcasting, Anyhow's context supports
+<p>That is, in codebases that rely on downcasting, Anyhow’s context supports
 both of the following use cases:</p>
 <ul>
 <li>

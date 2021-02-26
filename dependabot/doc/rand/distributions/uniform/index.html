@@ -29,7 +29,7 @@ need to be used directly (unless implementing a derived back-end).</p>
 <h1 id="extending-uniform-to-support-a-custom-type" class="section-header"><a href="#extending-uniform-to-support-a-custom-type">Extending <code>Uniform</code> to support a custom type</a></h1>
 <p>To extend <a href="../../../rand/distributions/struct.Uniform.html" title="Uniform"><code>Uniform</code></a> to support your own types, write a back-end which
 implements the <a href="../../../rand/distributions/uniform/trait.UniformSampler.html"><code>UniformSampler</code></a> trait, then implement the <a href="../../../rand/distributions/uniform/trait.SampleUniform.html"><code>SampleUniform</code></a>
-helper trait to &quot;register&quot; your back-end. See the <code>MyF32</code> example below.</p>
+helper trait to “register” your back-end. See the <code>MyF32</code> example below.</p>
 <p>At a minimum, the back-end needs to store any parameters needed for sampling
 (e.g. the target range) and implement <code>new</code>, <code>new_inclusive</code> and <code>sample</code>.
 Those methods should include an assert to check the range is valid (i.e.

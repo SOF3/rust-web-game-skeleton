@@ -28,8 +28,8 @@ attaching to this type.)</p>
 <p>On first deref, <code>EXPR</code> gets evaluated and stored internally, such that all further derefs
 can return a reference to the same object. Note that this can lead to deadlocks
 if you have multiple lazy statics that depend on each other in their initialization.</p>
-<p>Apart from the lazy initialization, the resulting &quot;static ref&quot; variables
-have generally the same properties as regular &quot;static&quot; variables:</p>
+<p>Apart from the lazy initialization, the resulting “static ref” variables
+have generally the same properties as regular “static” variables:</p>
 <ul>
 <li>Any type in them needs to fulfill the <code>Sync</code> trait.</li>
 <li>If the type has a destructor, then it will not run when the process exits.</li>

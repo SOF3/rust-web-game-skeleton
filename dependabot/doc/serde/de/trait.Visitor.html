@@ -93,8 +93,8 @@ deserializer lifetimes</a> for a more detailed explanation of these lifetimes.</
 </div><h2 id="associated-types" class="small-section-header">Associated Types<a href="#associated-types" class="anchor"></a></h2><div class="methods"><h3 id="associatedtype.Value" class="method"><code>type <a href="#associatedtype.Value" class="type">Value</a></code><a class="srclink" href="../../src/serde/de/mod.rs.html#1265" title="goto source code">[src]</a></h3><div class="docblock"><p>The value produced by this visitor.</p>
 </div></div><span class="loading-content">Loading content...</span><h2 id="required-methods" class="small-section-header">Required methods<a href="#required-methods" class="anchor"></a></h2><div class="methods"><h3 id="tymethod.expecting" class="method"><code>fn <a href="#tymethod.expecting" class="fnname">expecting</a>(&amp;self, formatter: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>&lt;'_&gt;) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code><a class="srclink" href="../../src/serde/de/mod.rs.html#1289" title="goto source code">[src]</a></h3><div class="docblock"><p>Format a message stating what data this Visitor expects to receive.</p>
 <p>This is used in error messages. The message should complete the sentence
-&quot;This Visitor expects to receive ...&quot;, for example the message could be
-&quot;an integer between 0 and 64&quot;. The message should not be capitalized and
+“This Visitor expects to receive …”, for example the message could be
+“an integer between 0 and 64”. The message should not be capitalized and
 should not end with a period.</p>
 
 <div class='information'><div class='tooltip edition' data-edition="2018">ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered edition">

@@ -6,7 +6,7 @@
 traits, <a href="../../futures/io/trait.AsyncRead.html" title="AsyncRead"><code>AsyncRead</code></a>, <a href="../../futures/io/trait.AsyncWrite.html" title="AsyncWrite"><code>AsyncWrite</code></a>, <a href="../../futures/io/trait.AsyncSeek.html" title="AsyncSeek"><code>AsyncSeek</code></a>, and <a href="../../futures/io/trait.AsyncBufRead.html" title="AsyncBufRead"><code>AsyncBufRead</code></a>,
 which mirror the <code>Read</code>, <code>Write</code>, <code>Seek</code>, and <code>BufRead</code> traits of the
 standard library. However, these traits integrate with the asynchronous
-task system, so that if an I/O object isn't ready for reading (or writing),
+task system, so that if an I/O object isn’t ready for reading (or writing),
 the thread is not blocked, and instead the current task is queued to be
 woken when I/O is ready.</p>
 <p>In addition, the <a href="../../futures/io/trait.AsyncReadExt.html" title="AsyncReadExt"><code>AsyncReadExt</code></a>, <a href="../../futures/io/trait.AsyncWriteExt.html" title="AsyncWriteExt"><code>AsyncWriteExt</code></a>, <a href="../../futures/io/trait.AsyncSeekExt.html" title="AsyncSeekExt"><code>AsyncSeekExt</code></a>, and

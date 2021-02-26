@@ -31,7 +31,7 @@ this method can offer <code>O(1)</code> performance. Where no size hint is
 available, complexity is <code>O(n)</code> where <code>n</code> is the iterator length.
 Partial hints (where <code>lower &gt; 0</code>) also improve performance.</p>
 <p>Note that the output values and the number of RNG samples used
-depends on size hints. In particular, <code>Iterator</code> combinators that don't
+depends on size hints. In particular, <code>Iterator</code> combinators that don’t
 change the values yielded but change the size hints may result in
 <code>choose</code> returning different elements. If you want consistent results
 and RNG usage consider using <a href="../../rand/seq/trait.IteratorRandom.html#method.choose_stable" title="IteratorRandom::choose_stable"><code>IteratorRandom::choose_stable</code></a>.</p>

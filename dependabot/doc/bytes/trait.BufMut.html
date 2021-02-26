@@ -76,7 +76,7 @@ by <code>chunk_mut()</code>.</p>
 <h1 id="implementer-notes" class="section-header"><a href="#implementer-notes">Implementer notes</a></h1>
 <p>Implementations of <code>remaining_mut</code> should ensure that the return value
 does not change unless a call is made to <code>advance_mut</code> or any other
-function that is documented to change the <code>BufMut</code>'s current position.</p>
+function that is documented to change the <code>BufMut</code>’s current position.</p>
 </div><h3 id="tymethod.advance_mut" class="method"><code>unsafe fn <a href="#tymethod.advance_mut" class="fnname">advance_mut</a>(&amp;mut self, cnt: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>)</code><a class="srclink" href="../src/bytes/buf/buf_mut.rs.html#96" title="goto source code">[src]</a></h3><div class="docblock"><p>Advance the internal cursor of the BufMut</p>
 <p>The next call to <code>chunk_mut</code> will return a slice starting <code>cnt</code> bytes
 further into the underlying buffer.</p>

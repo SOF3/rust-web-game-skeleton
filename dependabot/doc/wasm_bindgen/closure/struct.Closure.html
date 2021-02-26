@@ -5,10 +5,10 @@
 the Rust closure.</p>
 <p>A <code>Closure</code> is the primary way that a <code>'static</code> lifetime closure is
 transferred from Rust to JS. <code>Closure</code> currently requires that the closures
-it's created with have the <code>'static</code> lifetime in Rust for soundness reasons.</p>
-<p>This type is a &quot;handle&quot; in the sense that whenever it is dropped it will
+it’s created with have the <code>'static</code> lifetime in Rust for soundness reasons.</p>
+<p>This type is a “handle” in the sense that whenever it is dropped it will
 invalidate the JS closure that it refers to. Any usage of the closure in JS
-after the <code>Closure</code> has been dropped will raise an exception. It's then up
+after the <code>Closure</code> has been dropped will raise an exception. It’s then up
 to you to arrange for <code>Closure</code> to be properly deallocate at an appropriate
 location in your program.</p>
 <p>The type parameter on <code>Closure</code> is the type of closure that this represents.
@@ -161,8 +161,8 @@ writing bindings to <code>setInterval</code> and other Web APIs.</p>
     }
 }</pre></div>
 <h2 id="converting-fnonces-directly-into-javascript-functions-with-closureonce_into_js" class="section-header"><a href="#converting-fnonces-directly-into-javascript-functions-with-closureonce_into_js">Converting <code>FnOnce</code>s directly into JavaScript Functions with <code>Closure::once_into_js</code></a></h2>
-<p>If we don't want to allow a <code>FnOnce</code> to be eagerly dropped (maybe because we
-just want it to drop after it is called and don't care about cancellation)
+<p>If we don’t want to allow a <code>FnOnce</code> to be eagerly dropped (maybe because we
+just want it to drop after it is called and don’t care about cancellation)
 then we can use the <code>Closure::once_into_js</code> function.</p>
 <p>This is the same <code>requestAnimationFrame</code> example as above, but without
 supporting early cancellation.</p>
@@ -231,7 +231,7 @@ etc.)</p>
 </ul>
 </div><h4 id="method.into_js_value" class="method"><code>pub fn <a href="#method.into_js_value" class="fnname">into_js_value</a>(self) -&gt; <a class="struct" href="../../wasm_bindgen/struct.JsValue.html" title="struct wasm_bindgen::JsValue">JsValue</a></code><a class="srclink" href="../../src/wasm_bindgen/closure.rs.html#377-381" title="goto source code">[src]</a></h4><div class="docblock"><p>Release memory management of this closure from Rust to the JS GC.</p>
 <p>When a <code>Closure</code> is dropped it will release the Rust memory and
-invalidate the associated JS closure, but this isn't always desired.
+invalidate the associated JS closure, but this isn’t always desired.
 Some callbacks are alive for the entire duration of the program or for a
 lifetime dynamically managed by the JS GC. This function can be used
 to drop this <code>Closure</code> while keeping the associated JS function still
@@ -241,10 +241,10 @@ function is called many times in an application because the memory leak
 will overwhelm the page quickly and crash the wasm.</p>
 <p>If the browser, however, supports weak references, then this function
 will not leak memory. Instead the Rust memory will be reclaimed when the
-JS closure is GC'd. Weak references are not enabled by default since
-they're still a proposal for the JS standard. They can be enabled with
+JS closure is GC’d. Weak references are not enabled by default since
+they’re still a proposal for the JS standard. They can be enabled with
 <code>WASM_BINDGEN_WEAKREF=1</code> when running <code>wasm-bindgen</code>, however.</p>
-</div><h4 id="method.forget" class="method"><code>pub fn <a href="#method.forget" class="fnname">forget</a>(self)</code><a class="srclink" href="../../src/wasm_bindgen/closure.rs.html#384-386" title="goto source code">[src]</a></h4><div class="docblock"><p>Same as <code>into_js_value</code>, but doesn't return a value.</p>
+</div><h4 id="method.forget" class="method"><code>pub fn <a href="#method.forget" class="fnname">forget</a>(self)</code><a class="srclink" href="../../src/wasm_bindgen/closure.rs.html#384-386" title="goto source code">[src]</a></h4><div class="docblock"><p>Same as <code>into_js_value</code>, but doesn’t return a value.</p>
 </div></div><h3 id="impl-1" class="impl"><code class="in-band">impl <a class="struct" href="../../wasm_bindgen/closure/struct.Closure.html" title="struct wasm_bindgen::closure::Closure">Closure</a>&lt;dyn <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html" title="trait core::ops::function::FnOnce">FnOnce</a>()&gt;</code><a href="#impl-1" class="anchor"></a><a class="srclink" href="../../src/wasm_bindgen/closure.rs.html#392-454" title="goto source code">[src]</a></h3><div class="impl-items"><h4 id="method.once" class="method"><code>pub fn <a href="#method.once" class="fnname">once</a>&lt;F, A, R&gt;(fn_once: F) -&gt; <a class="struct" href="../../wasm_bindgen/closure/struct.Closure.html" title="struct wasm_bindgen::closure::Closure">Closure</a>&lt;F::FnMut&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: 'static + WasmClosureFnOnce&lt;A, R&gt;,&nbsp;</span></code><a class="srclink" href="../../src/wasm_bindgen/closure.rs.html#420-425" title="goto source code">[src]</a></h4><div class="docblock"><p>Create a <code>Closure</code> from a function that can only be called once.</p>
 <p>Since we have no way of enforcing that JS cannot attempt to call this
 <code>FnOne(A...) -&gt; R</code> more than once, this produces a <code>Closure&lt;dyn FnMut(A...) -&gt; R&gt;</code> that will dynamically throw a JavaScript error if called more

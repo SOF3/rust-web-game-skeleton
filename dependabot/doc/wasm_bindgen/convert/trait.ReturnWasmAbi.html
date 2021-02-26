@@ -9,7 +9,7 @@ the wasm ABI.</p>
 <p>This is very similar to the <code>IntoWasmAbi</code> trait and in fact has a blanket
 implementation for all implementors of the <code>IntoWasmAbi</code>. The primary use
 case of this trait is to enable functions to return <code>Result</code>, interpreting
-an error as &quot;rethrow this to JS&quot;</p>
+an error as “rethrow this to JS”</p>
 </div><h2 id="associated-types" class="small-section-header">Associated Types<a href="#associated-types" class="anchor"></a></h2><div class="methods"><h3 id="associatedtype.Abi" class="method"><code>type <a href="#associatedtype.Abi" class="type">Abi</a>: <a class="trait" href="../../wasm_bindgen/convert/trait.WasmAbi.html" title="trait wasm_bindgen::convert::WasmAbi">WasmAbi</a></code><a class="srclink" href="../../src/wasm_bindgen/convert/traits.rs.html#115" title="goto source code">[src]</a></h3><div class="docblock"><p>Same as <code>IntoWasmAbi::Abi</code></p>
 </div></div><span class="loading-content">Loading content...</span><h2 id="required-methods" class="small-section-header">Required methods<a href="#required-methods" class="anchor"></a></h2><div class="methods"><h3 id="tymethod.return_abi" class="method"><code>fn <a href="#tymethod.return_abi" class="fnname">return_abi</a>(self) -&gt; Self::<a class="type" href="../../wasm_bindgen/convert/trait.ReturnWasmAbi.html#associatedtype.Abi" title="type wasm_bindgen::convert::ReturnWasmAbi::Abi">Abi</a></code><a class="srclink" href="../../src/wasm_bindgen/convert/traits.rs.html#119" title="goto source code">[src]</a></h3><div class="docblock"><p>Same as <code>IntoWasmAbi::into_abi</code>, except that it may throw and never
 return in the case of <code>Err</code>.</p>

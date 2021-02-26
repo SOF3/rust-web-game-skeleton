@@ -17,7 +17,7 @@ Components can be dynamic and interactive by declaring messages that are
 triggered and handled asynchronously. This async update mechanism is inspired by
 Elm and the actor model used in the Actix framework.</p>
 </div><h2 id="associated-types" class="small-section-header">Associated Types<a href="#associated-types" class="anchor"></a></h2><div class="methods"><h3 id="associatedtype.Message" class="method"><code>type <a href="#associatedtype.Message" class="type">Message</a>: 'static</code><a class="srclink" href="../../src/yew/html/mod.rs.html#42" title="goto source code">[src]</a></h3><div class="docblock"><p>Messages are used to make Components dynamic and interactive. Simple
-Component's can declare their Message type to be <code>()</code>. Complex Component's
+Component’s can declare their Message type to be <code>()</code>. Complex Component’s
 commonly use an enum to declare multiple Message types.</p>
 </div><h3 id="associatedtype.Properties" class="method"><code>type <a href="#associatedtype.Properties" class="type">Properties</a>: <a class="trait" href="../../yew/html/trait.Properties.html" title="trait yew::html::Properties">Properties</a></code><a class="srclink" href="../../src/yew/html/mod.rs.html#64" title="goto source code">[src]</a></h3><div class="docblock"><p>Properties are the inputs to a Component and should not mutated within a
 Component. They are passed to a Component using a JSX-style syntax.</p>
@@ -31,9 +31,9 @@ can be used to send messages and create callbacks for triggering updates.</p>
 </div><h3 id="tymethod.update" class="method"><code>fn <a href="#tymethod.update" class="fnname">update</a>(&amp;mut self, msg: Self::<a class="type" href="../../yew/html/trait.Component.html#associatedtype.Message" title="type yew::html::Component::Message">Message</a>) -&gt; <a class="type" href="../../yew/html/type.ShouldRender.html" title="type yew::html::ShouldRender">ShouldRender</a></code><a class="srclink" href="../../src/yew/html/mod.rs.html#72" title="goto source code">[src]</a></h3><div class="docblock"><p>Components handle messages in their <code>update</code> method and commonly use this method
 to update their state and (optionally) re-render themselves.</p>
 </div><h3 id="tymethod.change" class="method"><code>fn <a href="#tymethod.change" class="fnname">change</a>(&amp;mut self, _props: Self::<a class="type" href="../../yew/html/trait.Component.html#associatedtype.Properties" title="type yew::html::Component::Properties">Properties</a>) -&gt; <a class="type" href="../../yew/html/type.ShouldRender.html" title="type yew::html::ShouldRender">ShouldRender</a></code><a class="srclink" href="../../src/yew/html/mod.rs.html#98" title="goto source code">[src]</a></h3><div class="docblock"><p>When the parent of a Component is re-rendered, it will either be re-created or
-receive new properties in the <code>change</code> lifecycle method. Component's can choose
+receive new properties in the <code>change</code> lifecycle method. Component’s can choose
 to re-render if the new properties are different than the previously
-received properties. Most Component's will use props with a <code>PartialEq</code>
+received properties. Most Component’s will use props with a <code>PartialEq</code>
 impl and will be implemented like this:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -45,9 +45,9 @@ impl and will be implemented like this:</p>
         <span class="bool-val">false</span>
     }
 }</pre></div>
-<p>Components which don't have properties should always return false.</p>
+<p>Components which don’t have properties should always return false.</p>
 </div><h3 id="tymethod.view" class="method"><code>fn <a href="#tymethod.view" class="fnname">view</a>(&amp;self) -&gt; <a class="type" href="../../yew/html/type.Html.html" title="type yew::html::Html">Html</a></code><a class="srclink" href="../../src/yew/html/mod.rs.html#103" title="goto source code">[src]</a></h3><div class="docblock"><p>Components define their visual layout using a JSX-style syntax through the use of the
-<code>html!</code> procedural macro. The full guide to using the macro can be found in <a href="https://yew.rs/docs/concepts/html">Yew's
+<code>html!</code> procedural macro. The full guide to using the macro can be found in <a href="https://yew.rs/docs/concepts/html">Yew’s
 documentation</a>.</p>
 </div></div><span class="loading-content">Loading content...</span><h2 id="provided-methods" class="small-section-header">Provided methods<a href="#provided-methods" class="anchor"></a></h2><div class="methods"><h3 id="method.rendered" class="method"><code>fn <a href="#method.rendered" class="fnname">rendered</a>(&amp;mut self, _first_render: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>)</code><a class="srclink" href="../../src/yew/html/mod.rs.html#124" title="goto source code">[src]</a></h3><div class="docblock"><p>The <code>rendered</code> method is called after each time a Component is rendered but
 before the browser updates the page.</p>

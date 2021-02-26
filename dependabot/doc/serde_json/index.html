@@ -29,7 +29,7 @@ knowing the structure of what it contains. Or you want to do very basic
 manipulations like insert a key in a particular spot.</li>
 <li><strong>As a strongly typed Rust data structure.</strong> When you expect all or most
 of your data to conform to a particular structure and want to get real
-work done without JSON's loosey-goosey nature tripping you up.</li>
+work done without JSON’s loosey-goosey nature tripping you up.</li>
 </ul>
 <p>Serde JSON provides efficient, flexible, safe ways of converting data
 between each of these representations.</p>
@@ -135,7 +135,7 @@ assign the return value to a variable of type <code>Person</code> so Serde will
 automatically interpret the input data as a <code>Person</code> and produce informative
 error messages if the layout does not conform to what a <code>Person</code> is expected
 to look like.</p>
-<p>Any type that implements Serde's <code>Deserialize</code> trait can be deserialized
+<p>Any type that implements Serde’s <code>Deserialize</code> trait can be deserialized
 this way. This includes built-in Rust standard library types like <code>Vec&lt;T&gt;</code>
 and <code>HashMap&lt;K, V&gt;</code>, as well as any structs or enums annotated with
 <code>#[derive(Deserialize)]</code>.</p>
@@ -223,14 +223,14 @@ such as a File or a TCP stream.</p>
 
     <span class="prelude-val">Ok</span>(())
 }</pre></div>
-<p>Any type that implements Serde's <code>Serialize</code> trait can be serialized this
+<p>Any type that implements Serde’s <code>Serialize</code> trait can be serialized this
 way. This includes built-in Rust standard library types like <code>Vec&lt;T&gt;</code> and
 <code>HashMap&lt;K, V&gt;</code>, as well as any structs or enums annotated with
 <code>#[derive(Serialize)]</code>.</p>
 <h1 id="no-std-support" class="section-header"><a href="#no-std-support">No-std support</a></h1>
 <p>As long as there is a memory allocator, it is possible to use serde_json
 without the rest of the Rust standard library. This is supported on Rust
-1.36+. Disable the default &quot;std&quot; feature and enable the &quot;alloc&quot; feature:</p>
+1.36+. Disable the default “std” feature and enable the “alloc” feature:</p>
 <pre><code class="language-toml">[dependencies]
 serde_json = { version = &quot;1.0&quot;, default-features = false, features = [&quot;alloc&quot;] }
 </code></pre>

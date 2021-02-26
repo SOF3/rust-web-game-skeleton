@@ -14,9 +14,9 @@ As such, this macro should be paired with the text_format macro
 where such an encoding works (e.g., JSON), or with the
 text_format_is_an_error macro for binary-only formats (e.g.,
 MsgPack).</p>
-<h1 id="rely-on-serdes-to_vec-and-from_vec" class="section-header"><a href="#rely-on-serdes-to_vec-and-from_vec">Rely on serde's <code>to_vec</code> and <code>from_vec</code></a></h1>
-<p>The simplest form of this macro relegates all the work to serde's
-<code>to_vec</code> function for serialization and serde's <code>from_vec</code> for
+<h1 id="rely-on-serdes-to_vec-and-from_vec" class="section-header"><a href="#rely-on-serdes-to_vec-and-from_vec">Rely on serde’s <code>to_vec</code> and <code>from_vec</code></a></h1>
+<p>The simplest form of this macro relegates all the work to serde’s
+<code>to_vec</code> function for serialization and serde’s <code>from_vec</code> for
 deseriaization.</p>
 <h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2><h3 id="binary-that-is-also-text" class="section-header"><a href="#binary-that-is-also-text">Binary that is also Text</a></h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -36,9 +36,9 @@ deseriaization.</p>
   <span class="macro">binary_format</span><span class="macro">!</span>(<span class="ident">MsgPack</span> <span class="ident">based</span> <span class="ident">on</span> <span class="ident">rmp_serde</span>);
   <span class="macro">text_format_is_an_error</span><span class="macro">!</span>(<span class="ident">MsgPack</span>);</pre></div>
 <h1 id="supply-serialization-and-deserialization-functions" class="section-header"><a href="#supply-serialization-and-deserialization-functions">Supply serialization and deserialization functions</a></h1>
-<p>In addition to the &quot;based on&quot; form of this macro demonstrated above,
+<p>In addition to the “based on” form of this macro demonstrated above,
 you can use the three parameter second form to supply
-non-standard (i.e., alternatives to serde's <code>to_vec</code> and/or <code>from_slice</code>)
+non-standard (i.e., alternatives to serde’s <code>to_vec</code> and/or <code>from_slice</code>)
 helpers as the second and third parameters.</p>
 <h2 id="example" class="section-header"><a href="#example">Example</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
