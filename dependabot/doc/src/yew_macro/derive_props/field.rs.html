@@ -214,16 +214,16 @@
 <span id="211">211</span>
 <span id="212">212</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">generics</span>::<span class="ident">GenericArguments</span>;
+<span class="kw">use</span> <span class="kw">super</span><span class="ident">::generics::GenericArguments</span>;
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Ident</span>, <span class="ident">Span</span>};
 <span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">quote</span>, <span class="ident">quote_spanned</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cmp</span>::{<span class="ident">Ord</span>, <span class="ident">Ordering</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">TryFrom</span>;
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">parse</span>::<span class="prelude-ty">Result</span>;
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">spanned</span>::<span class="ident">Spanned</span>;
+<span class="kw">use</span> <span class="ident">std::cmp</span>::{<span class="ident">Ord</span>, <span class="ident">Ordering</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>};
+<span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
+<span class="kw">use</span> <span class="ident">syn::parse::Result</span>;
+<span class="kw">use</span> <span class="ident">syn::spanned::Spanned</span>;
 <span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">Error</span>, <span class="ident">Expr</span>, <span class="ident">Field</span>, <span class="ident">Type</span>, <span class="ident">Visibility</span>};
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">large_enum_variant</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::large_enum_variant</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">enum</span> <span class="ident">PropAttr</span> {
     <span class="ident">Required</span> { <span class="ident">wrapped_name</span>: <span class="ident">Ident</span> },
@@ -243,30 +243,30 @@
     <span class="doccomment">/// All required property fields are wrapped in an `Option`</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_required</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">attr</span> {
-            <span class="ident">PropAttr</span>::<span class="ident">Required</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
+            <span class="ident">PropAttr::Required</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
         }
     }
 
     <span class="doccomment">/// This step name is descriptive to help a developer realize they missed a required prop</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_step_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">props_name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
-        <span class="ident">Ident</span>::<span class="ident">new</span>(
-            <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}_missing_required_prop_{}&quot;</span>, <span class="ident">props_name</span>, <span class="self">self</span>.<span class="ident">name</span>),
-            <span class="ident">Span</span>::<span class="ident">call_site</span>(),
+        <span class="ident">Ident::new</span>(
+            <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;{}_missing_required_prop_{}&quot;</span>, <span class="ident">props_name</span>, <span class="self">self</span>.<span class="ident">name</span>),
+            <span class="ident">Span::call_site</span>(),
         )
     }
 
     <span class="doccomment">/// Used to transform the `PropWrapper` struct into `Properties`</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_field_setter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_field_setter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">proc_macro2::TokenStream</span> {
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>;
         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">attr</span> {
-            <span class="ident">PropAttr</span>::<span class="ident">Required</span> { <span class="ident">wrapped_name</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">quote</span><span class="macro">!</span> {
+            <span class="ident">PropAttr::Required</span> { <span class="ident">wrapped_name</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="macro">quote!</span> {
                     #<span class="ident">name</span>: <span class="self">self</span>.<span class="ident">wrapped</span>.#<span class="ident">wrapped_name</span>.<span class="ident">unwrap</span>(),
                 }
             }
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">quote</span><span class="macro">!</span> {
+                <span class="macro">quote!</span> {
                     #<span class="ident">name</span>: <span class="self">self</span>.<span class="ident">wrapped</span>.#<span class="ident">name</span>,
                 }
             }
@@ -274,17 +274,17 @@
     }
 
     <span class="doccomment">/// Wrap all required props in `Option`</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_field_def</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_field_def</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">proc_macro2::TokenStream</span> {
         <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">ty</span>;
         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">attr</span> {
-            <span class="ident">PropAttr</span>::<span class="ident">Required</span> { <span class="ident">wrapped_name</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">quote</span><span class="macro">!</span> {
-                    #<span class="ident">wrapped_name</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span>#<span class="ident">ty</span><span class="op">&gt;</span>,
+            <span class="ident">PropAttr::Required</span> { <span class="ident">wrapped_name</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="macro">quote!</span> {
+                    #<span class="ident">wrapped_name</span>: <span class="ident">::std::option::Option</span><span class="op">&lt;</span>#<span class="ident">ty</span><span class="op">&gt;</span>,
                 }
             }
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>;
-                <span class="macro">quote</span><span class="macro">!</span> {
+                <span class="macro">quote!</span> {
                     #<span class="ident">name</span>: #<span class="ident">ty</span>,
                 }
             }
@@ -292,31 +292,31 @@
     }
 
     <span class="doccomment">/// All optional props must implement the `Default` trait</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_default_setter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_default_setter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">proc_macro2::TokenStream</span> {
         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">attr</span> {
-            <span class="ident">PropAttr</span>::<span class="ident">Required</span> { <span class="ident">wrapped_name</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">quote</span><span class="macro">!</span> {
-                    #<span class="ident">wrapped_name</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span>::<span class="prelude-val">None</span>,
+            <span class="ident">PropAttr::Required</span> { <span class="ident">wrapped_name</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="macro">quote!</span> {
+                    #<span class="ident">wrapped_name</span>: <span class="ident">::std::option::Option::None</span>,
                 }
             }
-            <span class="ident">PropAttr</span>::<span class="ident">PropOr</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">PropAttr::PropOr</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>;
                 <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">span</span>();
-                <span class="macro">quote_spanned</span><span class="macro">!</span> {<span class="ident">span</span><span class="op">=</span><span class="op">&gt;</span>
+                <span class="macro">quote_spanned!</span> {<span class="ident">span</span><span class="op">=</span><span class="op">&gt;</span>
                     #<span class="ident">name</span>: #<span class="ident">value</span>,
                 }
             }
-            <span class="ident">PropAttr</span>::<span class="ident">PropOrElse</span>(<span class="ident">func</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">PropAttr::PropOrElse</span>(<span class="ident">func</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>;
                 <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">func</span>.<span class="ident">span</span>();
-                <span class="macro">quote_spanned</span><span class="macro">!</span> {<span class="ident">span</span><span class="op">=</span><span class="op">&gt;</span>
+                <span class="macro">quote_spanned!</span> {<span class="ident">span</span><span class="op">=</span><span class="op">&gt;</span>
                     #<span class="ident">name</span>: (#<span class="ident">func</span>)(),
                 }
             }
-            <span class="ident">PropAttr</span>::<span class="ident">PropOrDefault</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">PropAttr::PropOrDefault</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>;
-                <span class="macro">quote</span><span class="macro">!</span> {
-                    #<span class="ident">name</span>: ::<span class="ident">std</span>::<span class="ident">default</span>::<span class="ident">Default</span>::<span class="ident">default</span>(),
+                <span class="macro">quote!</span> {
+                    #<span class="ident">name</span>: <span class="ident">::std::default::Default::default</span>(),
                 }
             }
         }
@@ -328,23 +328,23 @@
         <span class="ident">builder_name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>,
         <span class="ident">generic_arguments</span>: <span class="kw-2">&amp;</span><span class="ident">GenericArguments</span>,
         <span class="ident">vis</span>: <span class="kw-2">&amp;</span><span class="ident">Visibility</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">proc_macro2::TokenStream</span> {
         <span class="kw">let</span> <span class="self">Self</span> { <span class="ident">name</span>, <span class="ident">ty</span>, <span class="ident">attr</span> } <span class="op">=</span> <span class="self">self</span>;
         <span class="kw">match</span> <span class="ident">attr</span> {
-            <span class="ident">PropAttr</span>::<span class="ident">Required</span> { <span class="ident">wrapped_name</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">quote</span><span class="macro">!</span> {
+            <span class="ident">PropAttr::Required</span> { <span class="ident">wrapped_name</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="macro">quote!</span> {
                     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
                     #<span class="ident">vis</span> <span class="kw">fn</span> #<span class="ident">name</span>(<span class="kw-2">mut</span> <span class="self">self</span>, #<span class="ident">name</span>: #<span class="ident">ty</span>) <span class="op">-</span><span class="op">&gt;</span> #<span class="ident">builder_name</span><span class="op">&lt;</span>#<span class="ident">generic_arguments</span><span class="op">&gt;</span> {
-                        <span class="self">self</span>.<span class="ident">wrapped</span>.#<span class="ident">wrapped_name</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span>::<span class="prelude-val">Some</span>(#<span class="ident">name</span>);
+                        <span class="self">self</span>.<span class="ident">wrapped</span>.#<span class="ident">wrapped_name</span> <span class="op">=</span> <span class="ident">::std::option::Option::Some</span>(#<span class="ident">name</span>);
                         #<span class="ident">builder_name</span> {
                             <span class="ident">wrapped</span>: <span class="self">self</span>.<span class="ident">wrapped</span>,
-                            <span class="ident">_marker</span>: ::<span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>,
+                            <span class="ident">_marker</span>: <span class="ident">::std::marker::PhantomData</span>,
                         }
                     }
                 }
             }
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">quote</span><span class="macro">!</span> {
+                <span class="macro">quote!</span> {
                     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
                     #<span class="ident">vis</span> <span class="kw">fn</span> #<span class="ident">name</span>(<span class="kw-2">mut</span> <span class="self">self</span>, #<span class="ident">name</span>: #<span class="ident">ty</span>) <span class="op">-</span><span class="op">&gt;</span> #<span class="ident">builder_name</span><span class="op">&lt;</span>#<span class="ident">generic_arguments</span><span class="op">&gt;</span> {
                         <span class="self">self</span>.<span class="ident">wrapped</span>.#<span class="ident">name</span> <span class="op">=</span> #<span class="ident">name</span>;
@@ -365,18 +365,18 @@
 
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">attr</span>) <span class="op">=</span> <span class="ident">attr</span> {
             <span class="kw">if</span> <span class="ident">attr</span>.<span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;prop_or&quot;</span>) {
-                <span class="prelude-val">Ok</span>(<span class="ident">PropAttr</span>::<span class="ident">PropOr</span>(<span class="ident">attr</span>.<span class="ident">parse_args</span>()<span class="question-mark">?</span>))
+                <span class="prelude-val">Ok</span>(<span class="ident">PropAttr::PropOr</span>(<span class="ident">attr</span>.<span class="ident">parse_args</span>()<span class="question-mark">?</span>))
             } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">attr</span>.<span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;prop_or_else&quot;</span>) {
-                <span class="prelude-val">Ok</span>(<span class="ident">PropAttr</span>::<span class="ident">PropOrElse</span>(<span class="ident">attr</span>.<span class="ident">parse_args</span>()<span class="question-mark">?</span>))
+                <span class="prelude-val">Ok</span>(<span class="ident">PropAttr::PropOrElse</span>(<span class="ident">attr</span>.<span class="ident">parse_args</span>()<span class="question-mark">?</span>))
             } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">attr</span>.<span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;prop_or_default&quot;</span>) {
-                <span class="prelude-val">Ok</span>(<span class="ident">PropAttr</span>::<span class="ident">PropOrDefault</span>)
+                <span class="prelude-val">Ok</span>(<span class="ident">PropAttr::PropOrDefault</span>)
             } <span class="kw">else</span> {
-                <span class="macro">unreachable</span><span class="macro">!</span>()
+                <span class="macro">unreachable!</span>()
             }
         } <span class="kw">else</span> {
             <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="ident">named_field</span>.<span class="ident">ident</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>();
-            <span class="kw">let</span> <span class="ident">wrapped_name</span> <span class="op">=</span> <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}_wrapper&quot;</span>, <span class="ident">ident</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>());
-            <span class="prelude-val">Ok</span>(<span class="ident">PropAttr</span>::<span class="ident">Required</span> { <span class="ident">wrapped_name</span> })
+            <span class="kw">let</span> <span class="ident">wrapped_name</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;{}_wrapper&quot;</span>, <span class="ident">ident</span>), <span class="ident">Span::call_site</span>());
+            <span class="prelude-val">Ok</span>(<span class="ident">PropAttr::Required</span> { <span class="ident">wrapped_name</span> })
         }
     }
 }
@@ -386,7 +386,7 @@
 
     <span class="kw">fn</span> <span class="ident">try_from</span>(<span class="ident">field</span>: <span class="ident">Field</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">PropField</span> {
-            <span class="ident">attr</span>: <span class="self">Self</span>::<span class="ident">attribute</span>(<span class="kw-2">&amp;</span><span class="ident">field</span>)<span class="question-mark">?</span>,
+            <span class="ident">attr</span>: <span class="self">Self</span><span class="ident">::attribute</span>(<span class="kw-2">&amp;</span><span class="ident">field</span>)<span class="question-mark">?</span>,
             <span class="ident">ty</span>: <span class="ident">field</span>.<span class="ident">ty</span>,
             <span class="ident">name</span>: <span class="ident">field</span>.<span class="ident">ident</span>.<span class="ident">unwrap</span>(),
         })
@@ -396,11 +396,11 @@
 <span class="kw">impl</span> <span class="ident">PartialOrd</span> <span class="kw">for</span> <span class="ident">PropField</span> {
     <span class="kw">fn</span> <span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">PropField</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Ordering</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">name</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">name</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">Ordering</span>::<span class="ident">Equal</span>)
+            <span class="prelude-val">Some</span>(<span class="ident">Ordering::Equal</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">name</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;children&quot;</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">Ordering</span>::<span class="ident">Greater</span>)
+            <span class="prelude-val">Some</span>(<span class="ident">Ordering::Greater</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">other</span>.<span class="ident">name</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;children&quot;</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">Ordering</span>::<span class="ident">Less</span>)
+            <span class="prelude-val">Some</span>(<span class="ident">Ordering::Less</span>)
         } <span class="kw">else</span> {
             <span class="self">self</span>.<span class="ident">name</span>.<span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">name</span>)
         }
@@ -410,11 +410,11 @@
 <span class="kw">impl</span> <span class="ident">Ord</span> <span class="kw">for</span> <span class="ident">PropField</span> {
     <span class="kw">fn</span> <span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">PropField</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ordering</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">name</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">name</span> {
-            <span class="ident">Ordering</span>::<span class="ident">Equal</span>
+            <span class="ident">Ordering::Equal</span>
         } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">name</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;children&quot;</span> {
-            <span class="ident">Ordering</span>::<span class="ident">Greater</span>
+            <span class="ident">Ordering::Greater</span>
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">other</span>.<span class="ident">name</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;children&quot;</span> {
-            <span class="ident">Ordering</span>::<span class="ident">Less</span>
+            <span class="ident">Ordering::Less</span>
         } <span class="kw">else</span> {
             <span class="self">self</span>.<span class="ident">name</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">name</span>)
         }

@@ -79,27 +79,27 @@
 <span id="76">76</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">impl_action</span> {
+<span class="macro">macro_rules!</span> <span class="ident">impl_action</span> {
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">action</span>:<span class="ident">ident</span>(<span class="ident">event</span>: <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ret</span>:<span class="ident">ty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">convert</span>:<span class="ident">expr</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {$(
-        <span class="macro">impl_action</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">action</span>(<span class="ident">name</span>: <span class="string">&quot;&quot;</span>, <span class="ident">event</span>: <span class="macro-nonterminal">$</span><span class="kw">type</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ret</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">convert</span>);
+        <span class="macro">impl_action!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">action</span>(<span class="ident">name</span>: <span class="string">&quot;&quot;</span>, <span class="ident">event</span>: <span class="macro-nonterminal">$</span><span class="kw">type</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ret</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">convert</span>);
     )<span class="kw-2">*</span>};
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">action</span>:<span class="ident">ident</span>(<span class="ident">name</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">literal</span>, <span class="ident">event</span>: <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ret</span>:<span class="ident">ty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">convert</span>:<span class="ident">expr</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {$(
         <span class="doccomment">/// An abstract implementation of a listener.</span>
         <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
         <span class="kw">pub</span> <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">action</span> {
-            <span class="kw">use</span> <span class="ident">cfg_if</span>::<span class="ident">cfg_if</span>;
-            <span class="kw">use</span> <span class="ident">cfg_match</span>::<span class="ident">cfg_match</span>;
-            <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">callback</span>::<span class="ident">Callback</span>;
+            <span class="kw">use</span> <span class="ident">cfg_if::cfg_if</span>;
+            <span class="kw">use</span> <span class="ident">cfg_match::cfg_match</span>;
+            <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::callback::Callback</span>;
             <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-            <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">html</span>::<span class="ident">listener</span>::<span class="kw-2">*</span>;
-            <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">virtual_dom</span>::<span class="ident">Listener</span>;
-            <span class="macro">cfg_if</span><span class="macro">!</span> {
+            <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::html::listener</span>::<span class="kw-2">*</span>;
+            <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::virtual_dom::Listener</span>;
+            <span class="macro">cfg_if!</span> {
                 <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span> {
-                    <span class="kw">use</span> <span class="ident">stdweb</span>::<span class="ident">web</span>::<span class="ident">event</span>::<span class="macro-nonterminal">$</span><span class="kw">type</span>;
-                    <span class="kw">use</span> <span class="macro-nonterminal">stdweb</span>::<span class="ident">web</span>::{<span class="ident">Element</span>, <span class="ident">IEventTarget</span>};
+                    <span class="kw">use</span> <span class="ident">stdweb::web::event</span>::<span class="macro-nonterminal">$</span><span class="kw">type</span>;
+                    <span class="kw">use</span> <span class="macro-nonterminal">stdweb::web</span>::{<span class="ident">Element</span>, <span class="ident">IEventTarget</span>};
                 } <span class="kw">else</span> <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> {
-                    <span class="kw">use</span> <span class="ident">gloo</span>::<span class="ident">events</span>::{<span class="ident">EventListener</span>, <span class="ident">EventListenerOptions</span>};
-                    <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
+                    <span class="kw">use</span> <span class="ident">gloo::events</span>::{<span class="ident">EventListener</span>, <span class="ident">EventListenerOptions</span>};
+                    <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
                     <span class="kw">use</span> <span class="ident">web_sys</span>::{<span class="macro-nonterminal">$</span><span class="kw">type</span> <span class="kw">as</span> <span class="macro-nonterminal">WebSysType</span>, <span class="ident">Element</span>, <span class="ident">EventTarget</span>};
                 }
             }
@@ -122,7 +122,7 @@
 
             <span class="kw">impl</span> <span class="ident">Listener</span> <span class="kw">for</span> <span class="ident">Wrapper</span> {
                 <span class="kw">fn</span> <span class="ident">kind</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-                    <span class="macro">stringify</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">action</span>)
+                    <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">action</span>)
                 }
 
                 <span class="kw">fn</span> <span class="ident">attach</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">element</span>: <span class="kw-2">&amp;</span><span class="ident">Element</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EventListener</span> {
@@ -130,22 +130,22 @@
                     <span class="kw">let</span> <span class="ident">callback</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">callback</span>.<span class="ident">clone</span>();
                     <span class="kw">let</span> <span class="ident">listener</span> <span class="op">=</span> <span class="kw">move</span> <span class="op">|</span>
                         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span> <span class="ident">event</span>: <span class="macro-nonterminal">$</span><span class="kw">type</span>,
-                        <span class="attribute">#[<span class="macro-nonterminal">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">web_sys</span>::<span class="ident">Event</span>
+                        <span class="attribute">#[<span class="macro-nonterminal">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">web_sys::Event</span>
                     <span class="op">|</span> {
                         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span>
-                        <span class="kw">let</span> <span class="ident">event</span>: <span class="ident">WebSysType</span> <span class="op">=</span> <span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="ident">event</span>).<span class="ident">into</span>();
+                        <span class="kw">let</span> <span class="ident">event</span>: <span class="ident">WebSysType</span> <span class="op">=</span> <span class="ident">JsValue::from</span>(<span class="ident">event</span>).<span class="ident">into</span>();
                         <span class="ident">callback</span>.<span class="ident">emit</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">convert</span>(<span class="kw-2">&amp;</span><span class="ident">this</span>, <span class="ident">event</span>));
                     };
-                    <span class="macro">cfg_match</span><span class="macro">!</span> {
+                    <span class="macro">cfg_match!</span> {
                         <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">EventListener</span>(<span class="prelude-val">Some</span>(<span class="ident">element</span>.<span class="ident">add_event_listener</span>(<span class="ident">listener</span>))),
                         <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> ({
                             <span class="comment">// We should only set passive event listeners for `touchstart` and `touchmove`.</span>
                             <span class="comment">// See here: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Improving_scrolling_performance_with_passive_listeners</span>
                             <span class="kw">if</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;touchstart&quot;</span> <span class="op">|</span><span class="op">|</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;touchmove&quot;</span> {
-                                <span class="ident">EventListener</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="ident">EventTarget</span>::<span class="ident">from</span>(<span class="ident">element</span>.<span class="ident">clone</span>()), <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="ident">listener</span>)
+                                <span class="ident">EventListener::new</span>(<span class="kw-2">&amp;</span><span class="ident">EventTarget::from</span>(<span class="ident">element</span>.<span class="ident">clone</span>()), <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="ident">listener</span>)
                             } <span class="kw">else</span> {
-                                <span class="kw">let</span> <span class="ident">options</span> <span class="op">=</span> <span class="ident">EventListenerOptions</span>::<span class="ident">enable_prevent_default</span>();
-                                <span class="ident">EventListener</span>::<span class="ident">new_with_options</span>(<span class="kw-2">&amp;</span><span class="ident">EventTarget</span>::<span class="ident">from</span>(<span class="ident">element</span>.<span class="ident">clone</span>()), <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="ident">options</span>, <span class="ident">listener</span>)
+                                <span class="kw">let</span> <span class="ident">options</span> <span class="op">=</span> <span class="ident">EventListenerOptions::enable_prevent_default</span>();
+                                <span class="ident">EventListener::new_with_options</span>(<span class="kw-2">&amp;</span><span class="ident">EventTarget::from</span>(<span class="ident">element</span>.<span class="ident">clone</span>()), <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="ident">options</span>, <span class="ident">listener</span>)
                             }
                         }),
                     }

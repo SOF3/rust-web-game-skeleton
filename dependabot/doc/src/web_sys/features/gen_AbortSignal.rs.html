@@ -39,7 +39,7 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
 <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">wasm_bindgen::prelude</span>::<span class="kw-2">*</span>;
 <span class="attribute">#[<span class="ident">wasm_bindgen</span>]</span>
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">extends</span> <span class="op">=</span> <span class="ident">EventTarget</span> , <span class="ident">extends</span> <span class="op">=</span> :: <span class="ident">js_sys</span> :: <span class="ident">Object</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">AbortSignal</span> , <span class="ident">typescript_type</span> <span class="op">=</span> <span class="string">&quot;AbortSignal&quot;</span>)]
@@ -63,14 +63,14 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/onabort)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `AbortSignal`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">onabort</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">AbortSignal</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span><span class="op">&gt;</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">onabort</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">AbortSignal</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">::js_sys::Function</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">structural</span> , <span class="ident">method</span> , <span class="ident">setter</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;AbortSignal&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">onabort</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;Setter for the `onabort` field of this object.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/onabort)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `AbortSignal`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_onabort</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">AbortSignal</span>, <span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span><span class="op">&gt;</span>);
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_onabort</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">AbortSignal</span>, <span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span><span class="op">&gt;</span>);
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="web_sys" data-search-js="../../../search-index.js"></div>

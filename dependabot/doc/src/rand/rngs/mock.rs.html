@@ -149,7 +149,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) {
-        <span class="ident">impls</span>::<span class="ident">fill_bytes_via_next</span>(<span class="self">self</span>, <span class="ident">dest</span>);
+        <span class="ident">impls::fill_bytes_via_next</span>(<span class="self">self</span>, <span class="ident">dest</span>);
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -164,13 +164,13 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde1&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">test_serialization_step_rng</span>() {
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">StepRng</span>;
+        <span class="kw">use</span> <span class="kw">super</span><span class="ident">::StepRng</span>;
 
-        <span class="kw">let</span> <span class="ident">some_rng</span> <span class="op">=</span> <span class="ident">StepRng</span>::<span class="ident">new</span>(<span class="number">42</span>, <span class="number">7</span>);
+        <span class="kw">let</span> <span class="ident">some_rng</span> <span class="op">=</span> <span class="ident">StepRng::new</span>(<span class="number">42</span>, <span class="number">7</span>);
         <span class="kw">let</span> <span class="ident">de_some_rng</span>: <span class="ident">StepRng</span> <span class="op">=</span>
-            <span class="ident">bincode</span>::<span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="ident">bincode</span>::<span class="ident">serialize</span>(<span class="kw-2">&amp;</span><span class="ident">some_rng</span>).<span class="ident">unwrap</span>()).<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">some_rng</span>.<span class="ident">v</span>, <span class="ident">de_some_rng</span>.<span class="ident">v</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">some_rng</span>.<span class="ident">a</span>, <span class="ident">de_some_rng</span>.<span class="ident">a</span>);
+            <span class="ident">bincode::deserialize</span>(<span class="kw-2">&amp;</span><span class="ident">bincode::serialize</span>(<span class="kw-2">&amp;</span><span class="ident">some_rng</span>).<span class="ident">unwrap</span>()).<span class="ident">unwrap</span>();
+        <span class="macro">assert_eq!</span>(<span class="ident">some_rng</span>.<span class="ident">v</span>, <span class="ident">de_some_rng</span>.<span class="ident">v</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">some_rng</span>.<span class="ident">a</span>, <span class="ident">de_some_rng</span>.<span class="ident">a</span>);
 
     }
 }

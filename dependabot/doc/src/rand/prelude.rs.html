@@ -54,16 +54,16 @@
 <span class="doccomment">//! # let _: f32 = r.gen();</span>
 <span class="doccomment">//! ```</span>
 
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>)]</span> <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">distributions</span>::<span class="ident">Distribution</span>;
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>)]</span> <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::distributions::Distribution</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;small_rng&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">rngs</span>::<span class="ident">SmallRng</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::rngs::SmallRng</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_rng&quot;</span>)]</span>
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>)]</span> <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">rngs</span>::<span class="ident">StdRng</span>;
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>)]</span> <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::rngs::StdRng</span>;
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_rng&quot;</span>))]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">rngs</span>::<span class="ident">ThreadRng</span>;
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>)]</span> <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">seq</span>::{<span class="ident">IteratorRandom</span>, <span class="ident">SliceRandom</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::rngs::ThreadRng</span>;
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>)]</span> <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::seq</span>::{<span class="ident">IteratorRandom</span>, <span class="ident">SliceRandom</span>};
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_rng&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">random</span>, <span class="ident">thread_rng</span>};

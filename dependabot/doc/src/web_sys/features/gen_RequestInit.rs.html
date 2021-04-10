@@ -219,7 +219,7 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
 <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">wasm_bindgen::prelude</span>::<span class="kw-2">*</span>;
 <span class="attribute">#[<span class="ident">wasm_bindgen</span>]</span>
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">extends</span> <span class="op">=</span> :: <span class="ident">js_sys</span> :: <span class="ident">Object</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">RequestInit</span>)]
@@ -235,16 +235,16 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `RequestInit`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_mut</span>)]</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ret</span>: <span class="self">Self</span> <span class="op">=</span> ::<span class="ident">wasm_bindgen</span>::<span class="ident">JsCast</span>::<span class="ident">unchecked_into</span>(::<span class="ident">js_sys</span>::<span class="ident">Object</span>::<span class="ident">new</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ret</span>: <span class="self">Self</span> <span class="op">=</span> <span class="ident">::wasm_bindgen::JsCast::unchecked_into</span>(<span class="ident">::js_sys::Object::new</span>());
         <span class="ident">ret</span>
     }
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;Change the `body` field of this object.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `RequestInit`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">body</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> ::<span class="ident">js_sys</span>::<span class="ident">Reflect</span>::<span class="ident">set</span>(<span class="self">self</span>.<span class="ident">as_ref</span>(), <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="string">&quot;body&quot;</span>), <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="ident">val</span>));
-        <span class="macro">debug_assert</span><span class="macro">!</span>(
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">body</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
+        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">::js_sys::Reflect::set</span>(<span class="self">self</span>.<span class="ident">as_ref</span>(), <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="string">&quot;body&quot;</span>), <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="ident">val</span>));
+        <span class="macro">debug_assert!</span>(
             <span class="ident">r</span>.<span class="ident">is_ok</span>(),
             <span class="string">&quot;setting properties should never fail on our dictionary objects&quot;</span>
         );
@@ -256,9 +256,9 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `RequestCache`, `RequestInit`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cache</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="ident">RequestCache</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> ::<span class="ident">js_sys</span>::<span class="ident">Reflect</span>::<span class="ident">set</span>(<span class="self">self</span>.<span class="ident">as_ref</span>(), <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="string">&quot;cache&quot;</span>), <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="ident">val</span>));
-        <span class="macro">debug_assert</span><span class="macro">!</span>(
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
+        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">::js_sys::Reflect::set</span>(<span class="self">self</span>.<span class="ident">as_ref</span>(), <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="string">&quot;cache&quot;</span>), <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="ident">val</span>));
+        <span class="macro">debug_assert!</span>(
             <span class="ident">r</span>.<span class="ident">is_ok</span>(),
             <span class="string">&quot;setting properties should never fail on our dictionary objects&quot;</span>
         );
@@ -270,13 +270,13 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `RequestCredentials`, `RequestInit`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">credentials</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="ident">RequestCredentials</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> ::<span class="ident">js_sys</span>::<span class="ident">Reflect</span>::<span class="ident">set</span>(
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
+        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">::js_sys::Reflect::set</span>(
             <span class="self">self</span>.<span class="ident">as_ref</span>(),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="string">&quot;credentials&quot;</span>),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="ident">val</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="string">&quot;credentials&quot;</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="ident">val</span>),
         );
-        <span class="macro">debug_assert</span><span class="macro">!</span>(
+        <span class="macro">debug_assert!</span>(
             <span class="ident">r</span>.<span class="ident">is_ok</span>(),
             <span class="string">&quot;setting properties should never fail on our dictionary objects&quot;</span>
         );
@@ -286,14 +286,14 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;Change the `headers` field of this object.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `RequestInit`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">headers</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> ::<span class="ident">js_sys</span>::<span class="ident">Reflect</span>::<span class="ident">set</span>(
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">headers</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
+        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">::js_sys::Reflect::set</span>(
             <span class="self">self</span>.<span class="ident">as_ref</span>(),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="string">&quot;headers&quot;</span>),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="ident">val</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="string">&quot;headers&quot;</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="ident">val</span>),
         );
-        <span class="macro">debug_assert</span><span class="macro">!</span>(
+        <span class="macro">debug_assert!</span>(
             <span class="ident">r</span>.<span class="ident">is_ok</span>(),
             <span class="string">&quot;setting properties should never fail on our dictionary objects&quot;</span>
         );
@@ -304,13 +304,13 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `RequestInit`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">integrity</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> ::<span class="ident">js_sys</span>::<span class="ident">Reflect</span>::<span class="ident">set</span>(
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
+        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">::js_sys::Reflect::set</span>(
             <span class="self">self</span>.<span class="ident">as_ref</span>(),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="string">&quot;integrity&quot;</span>),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="ident">val</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="string">&quot;integrity&quot;</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="ident">val</span>),
         );
-        <span class="macro">debug_assert</span><span class="macro">!</span>(
+        <span class="macro">debug_assert!</span>(
             <span class="ident">r</span>.<span class="ident">is_ok</span>(),
             <span class="string">&quot;setting properties should never fail on our dictionary objects&quot;</span>
         );
@@ -321,10 +321,10 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `RequestInit`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">method</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
         <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span>
-            ::<span class="ident">js_sys</span>::<span class="ident">Reflect</span>::<span class="ident">set</span>(<span class="self">self</span>.<span class="ident">as_ref</span>(), <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="string">&quot;method&quot;</span>), <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="ident">val</span>));
-        <span class="macro">debug_assert</span><span class="macro">!</span>(
+            <span class="ident">::js_sys::Reflect::set</span>(<span class="self">self</span>.<span class="ident">as_ref</span>(), <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="string">&quot;method&quot;</span>), <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="ident">val</span>));
+        <span class="macro">debug_assert!</span>(
             <span class="ident">r</span>.<span class="ident">is_ok</span>(),
             <span class="string">&quot;setting properties should never fail on our dictionary objects&quot;</span>
         );
@@ -336,9 +336,9 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `RequestInit`, `RequestMode`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="ident">RequestMode</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> ::<span class="ident">js_sys</span>::<span class="ident">Reflect</span>::<span class="ident">set</span>(<span class="self">self</span>.<span class="ident">as_ref</span>(), <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="string">&quot;mode&quot;</span>), <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="ident">val</span>));
-        <span class="macro">debug_assert</span><span class="macro">!</span>(
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
+        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">::js_sys::Reflect::set</span>(<span class="self">self</span>.<span class="ident">as_ref</span>(), <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="string">&quot;mode&quot;</span>), <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="ident">val</span>));
+        <span class="macro">debug_assert!</span>(
             <span class="ident">r</span>.<span class="ident">is_ok</span>(),
             <span class="string">&quot;setting properties should never fail on our dictionary objects&quot;</span>
         );
@@ -350,13 +350,13 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `ObserverCallback`, `RequestInit`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">observe</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="kw-2">&amp;</span><span class="ident">ObserverCallback</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> ::<span class="ident">js_sys</span>::<span class="ident">Reflect</span>::<span class="ident">set</span>(
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
+        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">::js_sys::Reflect::set</span>(
             <span class="self">self</span>.<span class="ident">as_ref</span>(),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="string">&quot;observe&quot;</span>),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="ident">val</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="string">&quot;observe&quot;</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="ident">val</span>),
         );
-        <span class="macro">debug_assert</span><span class="macro">!</span>(
+        <span class="macro">debug_assert!</span>(
             <span class="ident">r</span>.<span class="ident">is_ok</span>(),
             <span class="string">&quot;setting properties should never fail on our dictionary objects&quot;</span>
         );
@@ -368,13 +368,13 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `RequestInit`, `RequestRedirect`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">redirect</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="ident">RequestRedirect</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> ::<span class="ident">js_sys</span>::<span class="ident">Reflect</span>::<span class="ident">set</span>(
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
+        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">::js_sys::Reflect::set</span>(
             <span class="self">self</span>.<span class="ident">as_ref</span>(),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="string">&quot;redirect&quot;</span>),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="ident">val</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="string">&quot;redirect&quot;</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="ident">val</span>),
         );
-        <span class="macro">debug_assert</span><span class="macro">!</span>(
+        <span class="macro">debug_assert!</span>(
             <span class="ident">r</span>.<span class="ident">is_ok</span>(),
             <span class="string">&quot;setting properties should never fail on our dictionary objects&quot;</span>
         );
@@ -385,13 +385,13 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `RequestInit`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">referrer</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> ::<span class="ident">js_sys</span>::<span class="ident">Reflect</span>::<span class="ident">set</span>(
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
+        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">::js_sys::Reflect::set</span>(
             <span class="self">self</span>.<span class="ident">as_ref</span>(),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="string">&quot;referrer&quot;</span>),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="ident">val</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="string">&quot;referrer&quot;</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="ident">val</span>),
         );
-        <span class="macro">debug_assert</span><span class="macro">!</span>(
+        <span class="macro">debug_assert!</span>(
             <span class="ident">r</span>.<span class="ident">is_ok</span>(),
             <span class="string">&quot;setting properties should never fail on our dictionary objects&quot;</span>
         );
@@ -403,13 +403,13 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `ReferrerPolicy`, `RequestInit`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">referrer_policy</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="ident">ReferrerPolicy</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> ::<span class="ident">js_sys</span>::<span class="ident">Reflect</span>::<span class="ident">set</span>(
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
+        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">::js_sys::Reflect::set</span>(
             <span class="self">self</span>.<span class="ident">as_ref</span>(),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="string">&quot;referrerPolicy&quot;</span>),
-            <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="ident">val</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="string">&quot;referrerPolicy&quot;</span>),
+            <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="ident">val</span>),
         );
-        <span class="macro">debug_assert</span><span class="macro">!</span>(
+        <span class="macro">debug_assert!</span>(
             <span class="ident">r</span>.<span class="ident">is_ok</span>(),
             <span class="string">&quot;setting properties should never fail on our dictionary objects&quot;</span>
         );
@@ -421,10 +421,10 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `AbortSignal`, `RequestInit`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">signal</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">AbortSignal</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
         <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span>
-            ::<span class="ident">js_sys</span>::<span class="ident">Reflect</span>::<span class="ident">set</span>(<span class="self">self</span>.<span class="ident">as_ref</span>(), <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="string">&quot;signal&quot;</span>), <span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from</span>(<span class="ident">val</span>));
-        <span class="macro">debug_assert</span><span class="macro">!</span>(
+            <span class="ident">::js_sys::Reflect::set</span>(<span class="self">self</span>.<span class="ident">as_ref</span>(), <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="string">&quot;signal&quot;</span>), <span class="kw-2">&amp;</span><span class="ident">JsValue::from</span>(<span class="ident">val</span>));
+        <span class="macro">debug_assert!</span>(
             <span class="ident">r</span>.<span class="ident">is_ok</span>(),
             <span class="string">&quot;setting properties should never fail on our dictionary objects&quot;</span>
         );

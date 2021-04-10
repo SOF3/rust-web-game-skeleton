@@ -4262,7 +4262,7 @@
 <span class="doccomment">//! The update function computes the CRC value 16 bytes at a time.</span>
 <span class="doccomment">//! The processing speed is roughly 5× of the one-byte-at-a-time method.</span>
 
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">unreadable_literal</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::unreadable_literal</span>)]</span>
 
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">mut</span> <span class="ident">state</span>: <span class="ident">u64</span>, <span class="ident">bytes</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
     <span class="comment">// Safe.</span>
@@ -4281,28 +4281,28 @@
 
 <span class="doccomment">/// Performs the CRC-64-ECMA update, one byte at a time.</span>
 <span class="kw">fn</span> <span class="ident">update_1</span>(<span class="ident">state</span>: <span class="ident">u64</span>, <span class="ident">b</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
-    (<span class="ident">state</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">8</span>) <span class="op">^</span> <span class="ident">TABLE_0</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span> <span class="op">^</span> (<span class="ident">state</span> <span class="kw">as</span> <span class="ident">u8</span>))]
+    (<span class="ident">state</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">8</span>) <span class="op">^</span> <span class="ident">TABLE_0</span>[<span class="ident">usize::from</span>(<span class="ident">b</span> <span class="op">^</span> (<span class="ident">state</span> <span class="kw">as</span> <span class="ident">u8</span>))]
 }
 
 <span class="doccomment">/// Performs the CRC-64-ECMA update, 16 bytes at a time.</span>
 <span class="kw">fn</span> <span class="ident">update_16</span>(<span class="ident">state</span>: <span class="ident">u64</span>, <span class="ident">b</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>; <span class="number">16</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
     <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">to_le_bytes</span>();
-    <span class="ident">TABLE_0</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">15</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_1</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">14</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_2</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">13</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_3</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">12</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_4</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">11</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_5</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">10</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_6</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">9</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_7</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">8</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_8</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">7</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">7</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_9</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">6</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">6</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_10</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">5</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">5</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_11</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">4</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">4</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_12</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">3</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">3</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_13</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">2</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">2</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_14</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">1</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">1</span>])]
-        <span class="op">^</span> <span class="ident">TABLE_15</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">b</span>[<span class="number">0</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">0</span>])]
+    <span class="ident">TABLE_0</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">15</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_1</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">14</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_2</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">13</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_3</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">12</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_4</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">11</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_5</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">10</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_6</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">9</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_7</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">8</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_8</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">7</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">7</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_9</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">6</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">6</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_10</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">5</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">5</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_11</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">4</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">4</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_12</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">3</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">3</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_13</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">2</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">2</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_14</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">1</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">1</span>])]
+        <span class="op">^</span> <span class="ident">TABLE_15</span>[<span class="ident">usize::from</span>(<span class="ident">b</span>[<span class="number">0</span>] <span class="op">^</span> <span class="ident">s</span>[<span class="number">0</span>])]
 }
 
 <span class="comment">// Constants used in SIMD-based computations.</span>

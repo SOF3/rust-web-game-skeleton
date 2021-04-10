@@ -1080,7 +1080,7 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
 <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">wasm_bindgen::prelude</span>::<span class="kw-2">*</span>;
 <span class="attribute">#[<span class="ident">wasm_bindgen</span>]</span>
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">extends</span> <span class="op">=</span> <span class="ident">EventTarget</span> , <span class="ident">extends</span> <span class="op">=</span> :: <span class="ident">js_sys</span> :: <span class="ident">Object</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">WorkerGlobalScope</span> , <span class="ident">typescript_type</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span>)]
@@ -1120,42 +1120,42 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onerror)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">onerror</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span><span class="op">&gt;</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">onerror</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">::js_sys::Function</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">structural</span> , <span class="ident">method</span> , <span class="ident">setter</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">onerror</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;Setter for the `onerror` field of this object.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onerror)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_onerror</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>, <span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span><span class="op">&gt;</span>);
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_onerror</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>, <span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span><span class="op">&gt;</span>);
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">structural</span> , <span class="ident">method</span> , <span class="ident">getter</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">onoffline</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;Getter for the `onoffline` field of this object.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onoffline)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">onoffline</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span><span class="op">&gt;</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">onoffline</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">::js_sys::Function</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">structural</span> , <span class="ident">method</span> , <span class="ident">setter</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">onoffline</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;Setter for the `onoffline` field of this object.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/onoffline)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_onoffline</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>, <span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span><span class="op">&gt;</span>);
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_onoffline</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>, <span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span><span class="op">&gt;</span>);
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">structural</span> , <span class="ident">method</span> , <span class="ident">getter</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">ononline</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;Getter for the `ononline` field of this object.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/ononline)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ononline</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span><span class="op">&gt;</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ononline</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">::js_sys::Function</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">structural</span> , <span class="ident">method</span> , <span class="ident">setter</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">ononline</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;Setter for the `ononline` field of this object.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/ononline)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_ononline</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>, <span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span><span class="op">&gt;</span>);
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_ononline</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>, <span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span><span class="op">&gt;</span>);
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;Crypto&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">structural</span> , <span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">getter</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">crypto</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;Getter for the `crypto` field of this object.&quot;</span>]</span>
@@ -1200,7 +1200,7 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/importScripts)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">import_scripts</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>, <span class="ident">urls</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Array</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">import_scripts</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>, <span class="ident">urls</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Array</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">importScripts</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `importScripts()` method.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
@@ -1348,7 +1348,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_image_bitmap_with_html_image_element</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">a_image</span>: <span class="kw-2">&amp;</span><span class="ident">HtmlImageElement</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;HtmlVideoElement&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
@@ -1359,7 +1359,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_image_bitmap_with_html_video_element</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">a_image</span>: <span class="kw-2">&amp;</span><span class="ident">HtmlVideoElement</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;HtmlCanvasElement&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
@@ -1370,7 +1370,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_image_bitmap_with_html_canvas_element</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">a_image</span>: <span class="kw-2">&amp;</span><span class="ident">HtmlCanvasElement</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;Blob&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
@@ -1381,7 +1381,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_image_bitmap_with_blob</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">a_image</span>: <span class="kw-2">&amp;</span><span class="ident">Blob</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;ImageData&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
@@ -1392,7 +1392,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_image_bitmap_with_image_data</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">a_image</span>: <span class="kw-2">&amp;</span><span class="ident">ImageData</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;CanvasRenderingContext2d&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
@@ -1403,7 +1403,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_image_bitmap_with_canvas_rendering_context_2d</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">a_image</span>: <span class="kw-2">&amp;</span><span class="ident">CanvasRenderingContext2d</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;ImageBitmap&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
@@ -1414,7 +1414,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_image_bitmap_with_image_bitmap</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">a_image</span>: <span class="kw-2">&amp;</span><span class="ident">ImageBitmap</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
@@ -1423,8 +1423,8 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_image_bitmap_with_buffer_source</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">a_image</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Object</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+        <span class="ident">a_image</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Object</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
@@ -1434,7 +1434,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_image_bitmap_with_u8_array</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">a_image</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>],
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;HtmlImageElement&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
@@ -1449,7 +1449,7 @@
         <span class="ident">a_sy</span>: <span class="ident">i32</span>,
         <span class="ident">a_sw</span>: <span class="ident">i32</span>,
         <span class="ident">a_sh</span>: <span class="ident">i32</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;HtmlVideoElement&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
@@ -1464,7 +1464,7 @@
         <span class="ident">a_sy</span>: <span class="ident">i32</span>,
         <span class="ident">a_sw</span>: <span class="ident">i32</span>,
         <span class="ident">a_sh</span>: <span class="ident">i32</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;HtmlCanvasElement&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
@@ -1479,7 +1479,7 @@
         <span class="ident">a_sy</span>: <span class="ident">i32</span>,
         <span class="ident">a_sw</span>: <span class="ident">i32</span>,
         <span class="ident">a_sh</span>: <span class="ident">i32</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;Blob&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
@@ -1494,7 +1494,7 @@
         <span class="ident">a_sy</span>: <span class="ident">i32</span>,
         <span class="ident">a_sw</span>: <span class="ident">i32</span>,
         <span class="ident">a_sh</span>: <span class="ident">i32</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;ImageData&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
@@ -1509,7 +1509,7 @@
         <span class="ident">a_sy</span>: <span class="ident">i32</span>,
         <span class="ident">a_sw</span>: <span class="ident">i32</span>,
         <span class="ident">a_sh</span>: <span class="ident">i32</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;CanvasRenderingContext2d&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
@@ -1524,7 +1524,7 @@
         <span class="ident">a_sy</span>: <span class="ident">i32</span>,
         <span class="ident">a_sw</span>: <span class="ident">i32</span>,
         <span class="ident">a_sh</span>: <span class="ident">i32</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;ImageBitmap&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
@@ -1539,7 +1539,7 @@
         <span class="ident">a_sy</span>: <span class="ident">i32</span>,
         <span class="ident">a_sw</span>: <span class="ident">i32</span>,
         <span class="ident">a_sh</span>: <span class="ident">i32</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
@@ -1548,12 +1548,12 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_image_bitmap_with_buffer_source_and_a_sx_and_a_sy_and_a_sw_and_a_sh</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">a_image</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Object</span>,
+        <span class="ident">a_image</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Object</span>,
         <span class="ident">a_sx</span>: <span class="ident">i32</span>,
         <span class="ident">a_sy</span>: <span class="ident">i32</span>,
         <span class="ident">a_sw</span>: <span class="ident">i32</span>,
         <span class="ident">a_sh</span>: <span class="ident">i32</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">createImageBitmap</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `createImageBitmap()` method.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
@@ -1567,7 +1567,7 @@
         <span class="ident">a_sy</span>: <span class="ident">i32</span>,
         <span class="ident">a_sw</span>: <span class="ident">i32</span>,
         <span class="ident">a_sh</span>: <span class="ident">i32</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::js_sys::Promise</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;Request&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">fetch</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `fetch()` method.&quot;</span>]</span>
@@ -1575,14 +1575,14 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/fetch)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `Request`, `WorkerGlobalScope`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fetch_with_request</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>, <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">Request</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">js_sys</span>::<span class="ident">Promise</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fetch_with_request</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>, <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">Request</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">::js_sys::Promise</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">fetch</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `fetch()` method.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/fetch)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fetch_with_str</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>, <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">js_sys</span>::<span class="ident">Promise</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fetch_with_str</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>, <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">::js_sys::Promise</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;Request&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;RequestInit&quot;</span>,))]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">fetch</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `fetch()` method.&quot;</span>]</span>
@@ -1594,7 +1594,7 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">Request</span>,
         <span class="ident">init</span>: <span class="kw-2">&amp;</span><span class="ident">RequestInit</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">js_sys</span>::<span class="ident">Promise</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">::js_sys::Promise</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;RequestInit&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">fetch</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `fetch()` method.&quot;</span>]</span>
@@ -1606,7 +1606,7 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">init</span>: <span class="kw-2">&amp;</span><span class="ident">RequestInit</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">js_sys</span>::<span class="ident">Promise</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">::js_sys::Promise</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
@@ -1615,7 +1615,7 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_interval_with_callback</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">variadic</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1625,9 +1625,9 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_interval_with_callback_and_timeout_and_arguments</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Array</span>,
+        <span class="ident">arguments</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Array</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1637,7 +1637,7 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_interval_with_callback_and_timeout_and_arguments_0</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
@@ -1648,9 +1648,9 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_interval_with_callback_and_timeout_and_arguments_1</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1660,10 +1660,10 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_interval_with_callback_and_timeout_and_arguments_2</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1673,11 +1673,11 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_interval_with_callback_and_timeout_and_arguments_3</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1687,12 +1687,12 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_interval_with_callback_and_timeout_and_arguments_4</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1702,13 +1702,13 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_interval_with_callback_and_timeout_and_arguments_5</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_5</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_5</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1718,14 +1718,14 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_interval_with_callback_and_timeout_and_arguments_6</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_5</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_6</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_5</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_6</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1735,15 +1735,15 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_interval_with_callback_and_timeout_and_arguments_7</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_5</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_6</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_7</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_5</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_6</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_7</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1762,7 +1762,7 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Array</span>,
+        <span class="ident">unused</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Array</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1785,7 +1785,7 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1797,8 +1797,8 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1810,9 +1810,9 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1824,10 +1824,10 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1839,11 +1839,11 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_5</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_5</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1855,12 +1855,12 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_5</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_6</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_5</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_6</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setInterval</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setInterval()` method.&quot;</span>]</span>
@@ -1872,13 +1872,13 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_5</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_6</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_7</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_5</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_6</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_7</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -1888,7 +1888,7 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_timeout_with_callback</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">variadic</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -1898,9 +1898,9 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_timeout_with_callback_and_timeout_and_arguments</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Array</span>,
+        <span class="ident">arguments</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Array</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -1910,7 +1910,7 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_timeout_with_callback_and_timeout_and_arguments_0</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
@@ -1921,9 +1921,9 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_timeout_with_callback_and_timeout_and_arguments_1</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -1933,10 +1933,10 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_timeout_with_callback_and_timeout_and_arguments_2</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -1946,11 +1946,11 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_timeout_with_callback_and_timeout_and_arguments_3</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -1960,12 +1960,12 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_timeout_with_callback_and_timeout_and_arguments_4</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -1975,13 +1975,13 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_timeout_with_callback_and_timeout_and_arguments_5</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_5</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_5</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -1991,14 +1991,14 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_timeout_with_callback_and_timeout_and_arguments_6</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_5</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_6</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_5</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_6</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -2008,15 +2008,15 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `WorkerGlobalScope`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_timeout_with_callback_and_timeout_and_arguments_7</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
-        <span class="ident">handler</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_5</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_6</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">arguments_7</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">arguments_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_5</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_6</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">arguments_7</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -2035,7 +2035,7 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Array</span>,
+        <span class="ident">unused</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Array</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -2058,7 +2058,7 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -2070,8 +2070,8 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -2083,9 +2083,9 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -2097,10 +2097,10 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -2112,11 +2112,11 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_5</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_5</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -2128,12 +2128,12 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_5</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_6</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_5</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_6</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;WorkerGlobalScope&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">setTimeout</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `setTimeout()` method.&quot;</span>]</span>
@@ -2145,13 +2145,13 @@
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">WorkerGlobalScope</span>,
         <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
-        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_5</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_6</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-        <span class="ident">unused_7</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">unused_1</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_2</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_3</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_4</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_5</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_6</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+        <span class="ident">unused_7</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
 }
 </pre></div>

@@ -152,13 +152,13 @@
 
 <span class="doccomment">//! Thread-local random number generator</span>
 
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">cell</span>::<span class="ident">UnsafeCell</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">rc</span>::<span class="ident">Rc</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">thread_local</span>;
+<span class="kw">use</span> <span class="ident">core::cell::UnsafeCell</span>;
+<span class="kw">use</span> <span class="ident">std::rc::Rc</span>;
+<span class="kw">use</span> <span class="ident">std::thread_local</span>;
 
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">std</span>::<span class="ident">Core</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">rngs</span>::<span class="ident">adapter</span>::<span class="ident">ReseedingRng</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">rngs</span>::<span class="ident">OsRng</span>;
+<span class="kw">use</span> <span class="kw">super</span><span class="ident">::std::Core</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::rngs::adapter::ReseedingRng</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::rngs::OsRng</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">CryptoRng</span>, <span class="ident">Error</span>, <span class="ident">RngCore</span>, <span class="ident">SeedableRng</span>};
 
 <span class="comment">// Rationale for using `UnsafeCell` in `ThreadRng`:</span>
@@ -207,16 +207,16 @@
     <span class="ident">rng</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">UnsafeCell</span><span class="op">&lt;</span><span class="ident">ReseedingRng</span><span class="op">&lt;</span><span class="ident">Core</span>, <span class="ident">OsRng</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
-<span class="macro">thread_local</span><span class="macro">!</span>(
+<span class="macro">thread_local!</span>(
     <span class="comment">// We require Rc&lt;..&gt; to avoid premature freeing when thread_rng is used</span>
     <span class="comment">// within thread-local destructors. See #968.</span>
     <span class="kw">static</span> <span class="ident">THREAD_RNG_KEY</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">UnsafeCell</span><span class="op">&lt;</span><span class="ident">ReseedingRng</span><span class="op">&lt;</span><span class="ident">Core</span>, <span class="ident">OsRng</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Core</span>::<span class="ident">from_rng</span>(<span class="ident">OsRng</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span>
-                <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;could not initialize thread_rng: {}&quot;</span>, <span class="ident">err</span>));
-        <span class="kw">let</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">ReseedingRng</span>::<span class="ident">new</span>(<span class="ident">r</span>,
+        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Core::from_rng</span>(<span class="ident">OsRng</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span>
+                <span class="macro">panic!</span>(<span class="string">&quot;could not initialize thread_rng: {}&quot;</span>, <span class="ident">err</span>));
+        <span class="kw">let</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">ReseedingRng::new</span>(<span class="ident">r</span>,
                                     <span class="ident">THREAD_RNG_RESEED_THRESHOLD</span>,
                                     <span class="ident">OsRng</span>);
-        <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">UnsafeCell</span>::<span class="ident">new</span>(<span class="ident">rng</span>))
+        <span class="ident">Rc::new</span>(<span class="ident">UnsafeCell::new</span>(<span class="ident">rng</span>))
     }
 );
 
@@ -235,7 +235,7 @@
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">ThreadRng</span> {
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ThreadRng</span> {
-        <span class="kw">crate</span>::<span class="ident">prelude</span>::<span class="ident">thread_rng</span>()
+        <span class="kw">crate</span><span class="ident">::prelude::thread_rng</span>()
     }
 }
 
@@ -278,10 +278,10 @@
 <span class="kw">mod</span> <span class="ident">test</span> {
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_thread_rng</span>() {
-        <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Rng</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> <span class="kw">crate</span>::<span class="ident">thread_rng</span>();
+        <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Rng</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> <span class="kw">crate</span><span class="ident">::thread_rng</span>();
         <span class="ident">r</span>.<span class="ident">gen</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">r</span>.<span class="ident">gen_range</span>(<span class="number">0</span>..<span class="number">1</span>), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">r</span>.<span class="ident">gen_range</span>(<span class="number">0</span>..<span class="number">1</span>), <span class="number">0</span>);
     }
 }
 </pre></div>

@@ -119,17 +119,17 @@
 <span class="kw">mod</span> <span class="ident">pool</span>;
 <span class="kw">mod</span> <span class="ident">worker</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">link</span>::<span class="ident">AgentLink</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">link::AgentLink</span>;
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">link</span>::<span class="kw-2">*</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">local</span>::{<span class="ident">Context</span>, <span class="ident">Job</span>};
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">pool</span>::<span class="kw-2">*</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">pool</span>::{<span class="ident">Dispatched</span>, <span class="ident">Dispatcher</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">worker</span>::{<span class="ident">Private</span>, <span class="ident">Public</span>, <span class="ident">Threaded</span>};
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">callback</span>::<span class="ident">Callback</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::callback::Callback</span>;
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Deref</span>, <span class="ident">DerefMut</span>};
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
+<span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Deref</span>, <span class="ident">DerefMut</span>};
 
 <span class="doccomment">/// Declares the behavior of the agent.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Agent</span>: <span class="ident">Sized</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> {
@@ -146,13 +146,13 @@
     <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">link</span>: <span class="ident">AgentLink</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
 
     <span class="doccomment">/// This method called on every update message.</span>
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="self">Self</span>::<span class="ident">Message</span>);
+    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="self">Self</span><span class="ident">::Message</span>);
 
     <span class="doccomment">/// This method called on when a new bridge created.</span>
     <span class="kw">fn</span> <span class="ident">connected</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">_id</span>: <span class="ident">HandlerId</span>) {}
 
     <span class="doccomment">/// This method called on every incoming message.</span>
-    <span class="kw">fn</span> <span class="ident">handle_input</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="self">Self</span>::<span class="ident">Input</span>, <span class="ident">id</span>: <span class="ident">HandlerId</span>);
+    <span class="kw">fn</span> <span class="ident">handle_input</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="self">Self</span><span class="ident">::Input</span>, <span class="ident">id</span>: <span class="ident">HandlerId</span>);
 
     <span class="doccomment">/// This method called on when a new bridge destroyed.</span>
     <span class="kw">fn</span> <span class="ident">disconnected</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">_id</span>: <span class="ident">HandlerId</span>) {}
@@ -197,29 +197,29 @@
 
     <span class="doccomment">/// Spawns an agent and returns `Bridge` implementation.</span>
     <span class="kw">fn</span> <span class="ident">spawn_or_join</span>(
-        <span class="ident">_callback</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Callback</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Agent</span> <span class="kw">as</span> <span class="ident">Agent</span><span class="op">&gt;</span>::<span class="ident">Output</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Bridge</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Agent</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+        <span class="ident">_callback</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Callback</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Agent</span> <span class="kw">as</span> <span class="ident">Agent</span><span class="op">&gt;</span><span class="ident">::Output</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Bridge</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Agent</span><span class="op">&gt;</span><span class="op">&gt;</span>;
 }
 
 <span class="doccomment">/// Bridge to a specific kind of worker.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Bridge</span><span class="op">&lt;</span><span class="ident">AGN</span>: <span class="ident">Agent</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Send a message to an agent.</span>
-    <span class="kw">fn</span> <span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="ident">AGN</span>::<span class="ident">Input</span>);
+    <span class="kw">fn</span> <span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="ident">AGN::Input</span>);
 }
 
 <span class="doccomment">/// This trait allows registering or getting the address of a worker.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Bridged</span>: <span class="ident">Agent</span> <span class="op">+</span> <span class="ident">Sized</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> {
     <span class="doccomment">/// Creates a messaging bridge between a worker and the component.</span>
-    <span class="kw">fn</span> <span class="ident">bridge</span>(<span class="ident">callback</span>: <span class="ident">Callback</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Output</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Bridge</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">bridge</span>(<span class="ident">callback</span>: <span class="ident">Callback</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Output</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Bridge</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Bridged</span> <span class="kw">for</span> <span class="ident">T</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Agent</span>,
-    <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="ident">Agent</span><span class="op">&gt;</span>::<span class="ident">Reach</span>: <span class="ident">Discoverer</span><span class="op">&lt;</span><span class="ident">Agent</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="ident">Agent</span><span class="op">&gt;</span><span class="ident">::Reach</span>: <span class="ident">Discoverer</span><span class="op">&lt;</span><span class="ident">Agent</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">bridge</span>(<span class="ident">callback</span>: <span class="ident">Callback</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Output</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Bridge</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="self">Self</span>::<span class="ident">Reach</span>::<span class="ident">spawn_or_join</span>(<span class="prelude-val">Some</span>(<span class="ident">callback</span>))
+    <span class="kw">fn</span> <span class="ident">bridge</span>(<span class="ident">callback</span>: <span class="ident">Callback</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Output</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Bridge</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="self">Self</span><span class="ident">::Reach::spawn_or_join</span>(<span class="prelude-val">Some</span>(<span class="ident">callback</span>))
     }
 }
 </pre></div>

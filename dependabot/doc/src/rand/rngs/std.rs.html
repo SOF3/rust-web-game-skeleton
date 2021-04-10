@@ -115,12 +115,12 @@
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">CryptoRng</span>, <span class="ident">Error</span>, <span class="ident">RngCore</span>, <span class="ident">SeedableRng</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">any</span>(<span class="ident">test</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>), <span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;emscripten&quot;</span>)))]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">rand_chacha</span>::<span class="ident">ChaCha12Core</span> <span class="kw">as</span> <span class="ident">Core</span>;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">rand_chacha::ChaCha12Core</span> <span class="kw">as</span> <span class="ident">Core</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">any</span>(<span class="ident">test</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>), <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;emscripten&quot;</span>))]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">rand_hc</span>::<span class="ident">Hc128Core</span> <span class="kw">as</span> <span class="ident">Core</span>;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">rand_hc::Hc128Core</span> <span class="kw">as</span> <span class="ident">Core</span>;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;emscripten&quot;</span>))]</span> <span class="kw">use</span> <span class="ident">rand_chacha</span>::<span class="ident">ChaCha12Rng</span> <span class="kw">as</span> <span class="ident">Rng</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;emscripten&quot;</span>)]</span> <span class="kw">use</span> <span class="ident">rand_hc</span>::<span class="ident">Hc128Rng</span> <span class="kw">as</span> <span class="ident">Rng</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;emscripten&quot;</span>))]</span> <span class="kw">use</span> <span class="ident">rand_chacha::ChaCha12Rng</span> <span class="kw">as</span> <span class="ident">Rng</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;emscripten&quot;</span>)]</span> <span class="kw">use</span> <span class="ident">rand_hc::Hc128Rng</span> <span class="kw">as</span> <span class="ident">Rng</span>;
 
 <span class="doccomment">/// The standard RNG. The PRNG algorithm in `StdRng` is chosen to be efficient</span>
 <span class="doccomment">/// on the current platform, to be statistically strong and unpredictable</span>
@@ -164,16 +164,16 @@
 }
 
 <span class="kw">impl</span> <span class="ident">SeedableRng</span> <span class="kw">for</span> <span class="ident">StdRng</span> {
-    <span class="kw">type</span> <span class="ident">Seed</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Rng</span> <span class="kw">as</span> <span class="ident">SeedableRng</span><span class="op">&gt;</span>::<span class="ident">Seed</span>;
+    <span class="kw">type</span> <span class="ident">Seed</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Rng</span> <span class="kw">as</span> <span class="ident">SeedableRng</span><span class="op">&gt;</span><span class="ident">::Seed</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">from_seed</span>(<span class="ident">seed</span>: <span class="self">Self</span>::<span class="ident">Seed</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="ident">StdRng</span>(<span class="ident">Rng</span>::<span class="ident">from_seed</span>(<span class="ident">seed</span>))
+    <span class="kw">fn</span> <span class="ident">from_seed</span>(<span class="ident">seed</span>: <span class="self">Self</span><span class="ident">::Seed</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">StdRng</span>(<span class="ident">Rng::from_seed</span>(<span class="ident">seed</span>))
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_rng</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">RngCore</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="ident">Rng</span>::<span class="ident">from_rng</span>(<span class="ident">rng</span>).<span class="ident">map</span>(<span class="ident">StdRng</span>)
+        <span class="ident">Rng::from_rng</span>(<span class="ident">rng</span>).<span class="ident">map</span>(<span class="ident">StdRng</span>)
     }
 }
 
@@ -182,26 +182,26 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span> {
-    <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">rngs</span>::<span class="ident">StdRng</span>;
+    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::rngs::StdRng</span>;
     <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">RngCore</span>, <span class="ident">SeedableRng</span>};
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_stdrng_construction</span>() {
         <span class="comment">// Test value-stability of StdRng. This is expected to break any time</span>
         <span class="comment">// the algorithm is changed.</span>
-        <span class="attribute">#[<span class="ident">rustfmt</span>::<span class="ident">skip</span>]</span>
+        <span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
         <span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span> [<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>, <span class="number">23</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>, <span class="number">200</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>, <span class="number">210</span>,<span class="number">30</span>,<span class="number">0</span>,<span class="number">0</span>,
                     <span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>, <span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>, <span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>, <span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>];
 
         <span class="kw">let</span> <span class="ident">target</span> <span class="op">=</span> [<span class="number">10719222850664546238</span>, <span class="number">14064965282130556830</span>];
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng0</span> <span class="op">=</span> <span class="ident">StdRng</span>::<span class="ident">from_seed</span>(<span class="ident">seed</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng0</span> <span class="op">=</span> <span class="ident">StdRng::from_seed</span>(<span class="ident">seed</span>);
         <span class="kw">let</span> <span class="ident">x0</span> <span class="op">=</span> <span class="ident">rng0</span>.<span class="ident">next_u64</span>();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng1</span> <span class="op">=</span> <span class="ident">StdRng</span>::<span class="ident">from_rng</span>(<span class="ident">rng0</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng1</span> <span class="op">=</span> <span class="ident">StdRng::from_rng</span>(<span class="ident">rng0</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">x1</span> <span class="op">=</span> <span class="ident">rng1</span>.<span class="ident">next_u64</span>();
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>([<span class="ident">x0</span>, <span class="ident">x1</span>], <span class="ident">target</span>);
+        <span class="macro">assert_eq!</span>([<span class="ident">x0</span>, <span class="ident">x1</span>], <span class="ident">target</span>);
     }
 }
 </pre></div>

@@ -163,17 +163,17 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Service to register key press event listeners on elements.</span>
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">callback</span>::<span class="ident">Callback</span>;
-<span class="kw">use</span> <span class="ident">cfg_if</span>::<span class="ident">cfg_if</span>;
-<span class="kw">use</span> <span class="ident">cfg_match</span>::<span class="ident">cfg_match</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="macro">cfg_if</span><span class="macro">!</span> {
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::callback::Callback</span>;
+<span class="kw">use</span> <span class="ident">cfg_if::cfg_if</span>;
+<span class="kw">use</span> <span class="ident">cfg_match::cfg_match</span>;
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
+<span class="macro">cfg_if!</span> {
     <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span> {
-        <span class="kw">use</span> <span class="ident">stdweb</span>::<span class="ident">web</span>::<span class="ident">event</span>::{<span class="ident">ConcreteEvent</span>, <span class="ident">KeyDownEvent</span>, <span class="ident">KeyPressEvent</span>, <span class="ident">KeyUpEvent</span>};
-        <span class="kw">use</span> <span class="ident">stdweb</span>::<span class="ident">web</span>::{<span class="ident">EventListenerHandle</span>, <span class="ident">IEventTarget</span>};
+        <span class="kw">use</span> <span class="ident">stdweb::web::event</span>::{<span class="ident">ConcreteEvent</span>, <span class="ident">KeyDownEvent</span>, <span class="ident">KeyPressEvent</span>, <span class="ident">KeyUpEvent</span>};
+        <span class="kw">use</span> <span class="ident">stdweb::web</span>::{<span class="ident">EventListenerHandle</span>, <span class="ident">IEventTarget</span>};
     } <span class="kw">else</span> <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> {
-        <span class="kw">use</span> <span class="ident">gloo</span>::<span class="ident">events</span>::{<span class="ident">EventListener</span>, <span class="ident">EventListenerOptions</span>};
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsCast</span>;
+        <span class="kw">use</span> <span class="ident">gloo::events</span>::{<span class="ident">EventListener</span>, <span class="ident">EventListenerOptions</span>};
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsCast</span>;
         <span class="kw">use</span> <span class="ident">web_sys</span>::{<span class="ident">Event</span>, <span class="ident">EventTarget</span>, <span class="ident">KeyboardEvent</span>};
     }
 }
@@ -198,8 +198,8 @@
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> <span class="ident">EventListener</span>,
 );
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">KeyListenerHandle</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">KeyListenerHandle</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;KeyListenerHandle&quot;</span>)
     }
 }
@@ -221,7 +221,7 @@
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span> <span class="ident">callback</span>: <span class="ident">Callback</span><span class="op">&lt;</span><span class="ident">KeyPressEvent</span><span class="op">&gt;</span>,
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> <span class="ident">callback</span>: <span class="ident">Callback</span><span class="op">&lt;</span><span class="ident">KeyboardEvent</span><span class="op">&gt;</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">KeyListenerHandle</span> {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
+        <span class="macro">cfg_match!</span> {
             <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">register_key_impl</span>(<span class="ident">element</span>, <span class="ident">callback</span>),
             <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">register_key_impl</span>(<span class="ident">element</span>, <span class="ident">callback</span>, <span class="string">&quot;keypress&quot;</span>),
         }
@@ -244,7 +244,7 @@
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span> <span class="ident">callback</span>: <span class="ident">Callback</span><span class="op">&lt;</span><span class="ident">KeyDownEvent</span><span class="op">&gt;</span>,
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> <span class="ident">callback</span>: <span class="ident">Callback</span><span class="op">&lt;</span><span class="ident">KeyboardEvent</span><span class="op">&gt;</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">KeyListenerHandle</span> {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
+        <span class="macro">cfg_match!</span> {
             <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">register_key_impl</span>(<span class="ident">element</span>, <span class="ident">callback</span>),
             <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">register_key_impl</span>(<span class="ident">element</span>, <span class="ident">callback</span>, <span class="string">&quot;keydown&quot;</span>),
         }
@@ -267,7 +267,7 @@
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span> <span class="ident">callback</span>: <span class="ident">Callback</span><span class="op">&lt;</span><span class="ident">KeyUpEvent</span><span class="op">&gt;</span>,
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> <span class="ident">callback</span>: <span class="ident">Callback</span><span class="op">&lt;</span><span class="ident">KeyboardEvent</span><span class="op">&gt;</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">KeyListenerHandle</span> {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
+        <span class="macro">cfg_match!</span> {
             <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">register_key_impl</span>(<span class="ident">element</span>, <span class="ident">callback</span>),
             <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">register_key_impl</span>(<span class="ident">element</span>, <span class="ident">callback</span>, <span class="string">&quot;keyup&quot;</span>),
         }
@@ -282,7 +282,7 @@
     <span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span> <span class="ident">element</span>.<span class="ident">add_event_listener</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">event</span>: <span class="ident">E</span><span class="op">|</span> {
         <span class="ident">callback</span>.<span class="ident">emit</span>(<span class="ident">event</span>);
     });
-    <span class="macro">cfg_match</span><span class="macro">!</span> {
+    <span class="macro">cfg_match!</span> {
         <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">KeyListenerHandle</span>(<span class="prelude-val">Some</span>(<span class="ident">handle</span>)),
         <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">KeyListenerHandle</span>(<span class="ident">handle</span>),
     }
@@ -301,8 +301,8 @@
             .<span class="ident">clone</span>();
         <span class="ident">callback</span>.<span class="ident">emit</span>(<span class="ident">event</span>);
     };
-    <span class="kw">let</span> <span class="ident">options</span> <span class="op">=</span> <span class="ident">EventListenerOptions</span>::<span class="ident">enable_prevent_default</span>();
-    <span class="ident">KeyListenerHandle</span>(<span class="ident">EventListener</span>::<span class="ident">new_with_options</span>(
+    <span class="kw">let</span> <span class="ident">options</span> <span class="op">=</span> <span class="ident">EventListenerOptions::enable_prevent_default</span>();
+    <span class="ident">KeyListenerHandle</span>(<span class="ident">EventListener::new_with_options</span>(
         <span class="ident">element</span>.<span class="ident">as_ref</span>(),
         <span class="ident">event</span>,
         <span class="ident">options</span>,
@@ -316,7 +316,7 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">handle</span>) <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">take</span>() {
             <span class="ident">handle</span>.<span class="ident">remove</span>()
         } <span class="kw">else</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Tried to drop KeyListenerHandle twice&quot;</span>)
+            <span class="macro">panic!</span>(<span class="string">&quot;Tried to drop KeyListenerHandle twice&quot;</span>)
         }
     }
 }

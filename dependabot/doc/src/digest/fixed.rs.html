@@ -75,7 +75,7 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Fixed-size output digest support</span>
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Reset</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Reset</span>;
 <span class="kw">use</span> <span class="ident">generic_array</span>::{<span class="ident">ArrayLength</span>, <span class="ident">GenericArray</span>};
 
 <span class="doccomment">/// Trait for returning digest result with the fixed size</span>
@@ -84,26 +84,26 @@
     <span class="kw">type</span> <span class="ident">OutputSize</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Write result into provided array and consume the hasher instance.</span>
-    <span class="kw">fn</span> <span class="ident">finalize_into</span>(<span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span>::<span class="ident">OutputSize</span><span class="op">&gt;</span>);
+    <span class="kw">fn</span> <span class="ident">finalize_into</span>(<span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span><span class="ident">::OutputSize</span><span class="op">&gt;</span>);
 
     <span class="doccomment">/// Write result into provided array and reset the hasher instance.</span>
-    <span class="kw">fn</span> <span class="ident">finalize_into_reset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span>::<span class="ident">OutputSize</span><span class="op">&gt;</span>);
+    <span class="kw">fn</span> <span class="ident">finalize_into_reset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span><span class="ident">::OutputSize</span><span class="op">&gt;</span>);
 
     <span class="doccomment">/// Retrieve result and consume the hasher instance.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">finalize_fixed</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span>::<span class="ident">OutputSize</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">finalize_fixed</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span><span class="ident">::OutputSize</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="self">Self</span>: <span class="ident">Sized</span>,
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">Default</span>::<span class="ident">default</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">Default::default</span>();
         <span class="self">self</span>.<span class="ident">finalize_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">out</span>);
         <span class="ident">out</span>
     }
 
     <span class="doccomment">/// Retrieve result and reset the hasher instance.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">finalize_fixed_reset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span>::<span class="ident">OutputSize</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">Default</span>::<span class="ident">default</span>();
+    <span class="kw">fn</span> <span class="ident">finalize_fixed_reset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span><span class="ident">::OutputSize</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">Default::default</span>();
         <span class="self">self</span>.<span class="ident">finalize_into_reset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">out</span>);
         <span class="ident">out</span>
     }
@@ -127,19 +127,19 @@
     <span class="doccomment">/// This method is expected to only be called once unless</span>
     <span class="doccomment">/// [`Reset::reset`] is called, after which point it can be</span>
     <span class="doccomment">/// called again and reset again (and so on).</span>
-    <span class="kw">fn</span> <span class="ident">finalize_into_dirty</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span>::<span class="ident">OutputSize</span><span class="op">&gt;</span>);
+    <span class="kw">fn</span> <span class="ident">finalize_into_dirty</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span><span class="ident">::OutputSize</span><span class="op">&gt;</span>);
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D</span>: <span class="ident">FixedOutputDirty</span> <span class="op">+</span> <span class="ident">Reset</span><span class="op">&gt;</span> <span class="ident">FixedOutput</span> <span class="kw">for</span> <span class="ident">D</span> {
-    <span class="kw">type</span> <span class="ident">OutputSize</span> <span class="op">=</span> <span class="ident">D</span>::<span class="ident">OutputSize</span>;
+    <span class="kw">type</span> <span class="ident">OutputSize</span> <span class="op">=</span> <span class="ident">D::OutputSize</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">finalize_into</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span>::<span class="ident">OutputSize</span><span class="op">&gt;</span>) {
+    <span class="kw">fn</span> <span class="ident">finalize_into</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span><span class="ident">::OutputSize</span><span class="op">&gt;</span>) {
         <span class="self">self</span>.<span class="ident">finalize_into_dirty</span>(<span class="ident">out</span>);
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">finalize_into_reset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span>::<span class="ident">OutputSize</span><span class="op">&gt;</span>) {
+    <span class="kw">fn</span> <span class="ident">finalize_into_reset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="self">Self</span><span class="ident">::OutputSize</span><span class="op">&gt;</span>) {
         <span class="self">self</span>.<span class="ident">finalize_into_dirty</span>(<span class="ident">out</span>);
         <span class="self">self</span>.<span class="ident">reset</span>();
     }

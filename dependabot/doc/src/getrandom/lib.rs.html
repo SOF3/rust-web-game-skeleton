@@ -398,12 +398,12 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">error_impls</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">error</span>::<span class="ident">Error</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::error::Error</span>;
 
 <span class="comment">// System-specific implementations.</span>
 <span class="comment">//</span>
 <span class="comment">// These should all provide getrandom_inner with the same signature as getrandom.</span>
-<span class="macro">cfg_if</span><span class="macro">!</span> {
+<span class="macro">cfg_if!</span> {
     <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;dragonfly&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;emscripten&quot;</span>,
                  <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;haiku&quot;</span>,     <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;redox&quot;</span>))]</span> {
         <span class="kw">mod</span> <span class="ident">util_libc</span>;
@@ -448,7 +448,7 @@
     } <span class="kw">else</span> <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;custom&quot;</span>)]</span> {
         <span class="kw">use</span> <span class="ident">custom</span> <span class="kw">as</span> <span class="ident">imp</span>;
     } <span class="kw">else</span> {
-        <span class="macro">compile_error</span><span class="macro">!</span>(<span class="string">&quot;target is not supported, for more information see: \
+        <span class="macro">compile_error!</span>(<span class="string">&quot;target is not supported, for more information see: \
                         https://docs.rs/getrandom/#unsupported-targets&quot;</span>);
     }
 }
@@ -470,7 +470,7 @@
     <span class="kw">if</span> <span class="ident">dest</span>.<span class="ident">is_empty</span>() {
         <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
     }
-    <span class="ident">imp</span>::<span class="ident">getrandom_inner</span>(<span class="ident">dest</span>)
+    <span class="ident">imp::getrandom_inner</span>(<span class="ident">dest</span>)
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="getrandom" data-search-js="../../search-index.js"></div>

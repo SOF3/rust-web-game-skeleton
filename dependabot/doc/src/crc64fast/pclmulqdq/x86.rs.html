@@ -70,20 +70,20 @@
 <span class="doccomment">//! x86/x86_64 implementation of the PCLMULQDQ-based CRC calculation.</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">arch</span>::<span class="ident">x86</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::arch::x86</span>::<span class="kw-2">*</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">arch</span>::<span class="ident">x86_64</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">BitXor</span>;
+<span class="kw">use</span> <span class="ident">std::arch::x86_64</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::ops::BitXor</span>;
 
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Simd</span>(<span class="ident">__m128i</span>);
 
-<span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">SimdExt</span> <span class="kw">for</span> <span class="ident">Simd</span> {
+<span class="kw">impl</span> <span class="kw">super</span><span class="ident">::SimdExt</span> <span class="kw">for</span> <span class="ident">Simd</span> {
     <span class="kw">fn</span> <span class="ident">is_supported</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">is_x86_feature_detected</span><span class="macro">!</span>(<span class="string">&quot;pclmulqdq&quot;</span>) <span class="comment">// _mm_clmulepi64_si128</span>
-            <span class="op">&amp;&amp;</span> <span class="macro">is_x86_feature_detected</span><span class="macro">!</span>(<span class="string">&quot;sse2&quot;</span>) <span class="comment">// (all other _mm_*)</span>
-            <span class="op">&amp;&amp;</span> <span class="macro">is_x86_feature_detected</span><span class="macro">!</span>(<span class="string">&quot;sse4.1&quot;</span>) <span class="comment">// _mm_extract_epi64</span>
+        <span class="macro">is_x86_feature_detected!</span>(<span class="string">&quot;pclmulqdq&quot;</span>) <span class="comment">// _mm_clmulepi64_si128</span>
+            <span class="op">&amp;&amp;</span> <span class="macro">is_x86_feature_detected!</span>(<span class="string">&quot;sse2&quot;</span>) <span class="comment">// (all other _mm_*)</span>
+            <span class="op">&amp;&amp;</span> <span class="macro">is_x86_feature_detected!</span>(<span class="string">&quot;sse4.1&quot;</span>) <span class="comment">// _mm_extract_epi64</span>
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -103,7 +103,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">target_feature</span>(<span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;sse2&quot;</span>, <span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;pclmulqdq&quot;</span>)]</span>
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">fold_8</span>(<span class="self">self</span>, <span class="ident">coeff</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">coeff</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">new</span>(<span class="number">0</span>, <span class="ident">coeff</span>);
+        <span class="kw">let</span> <span class="ident">coeff</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::new</span>(<span class="number">0</span>, <span class="ident">coeff</span>);
         <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="self">Self</span>(<span class="ident">_mm_clmulepi64_si128</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">coeff</span>.<span class="number">0</span>, <span class="number">0x00</span>));
         <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="self">Self</span>(<span class="ident">_mm_srli_si128</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="number">8</span>));
         <span class="ident">h</span> <span class="op">^</span> <span class="ident">l</span>
@@ -112,7 +112,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">target_feature</span>(<span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;sse2&quot;</span>, <span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;sse4.1&quot;</span>, <span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;pclmulqdq&quot;</span>)]</span>
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">barrett</span>(<span class="self">self</span>, <span class="ident">poly</span>: <span class="ident">u64</span>, <span class="ident">mu</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
-        <span class="kw">let</span> <span class="ident">polymu</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">new</span>(<span class="ident">poly</span>, <span class="ident">mu</span>);
+        <span class="kw">let</span> <span class="ident">polymu</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::new</span>(<span class="ident">poly</span>, <span class="ident">mu</span>);
         <span class="kw">let</span> <span class="ident">t1</span> <span class="op">=</span> <span class="ident">_mm_clmulepi64_si128</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">polymu</span>.<span class="number">0</span>, <span class="number">0x00</span>);
         <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="self">Self</span>(<span class="ident">_mm_slli_si128</span>(<span class="ident">t1</span>, <span class="number">8</span>));
         <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="self">Self</span>(<span class="ident">_mm_clmulepi64_si128</span>(<span class="ident">t1</span>, <span class="ident">polymu</span>.<span class="number">0</span>, <span class="number">0x10</span>));

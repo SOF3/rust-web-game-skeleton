@@ -39,7 +39,7 @@
 <span id="36">36</span>
 <span id="37">37</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">de</span>::<span class="ident">read</span>::<span class="ident">SliceReader</span>;
+<span class="kw">use</span> <span class="ident">de::read::SliceReader</span>;
 <span class="kw">use</span> {<span class="ident">ErrorKind</span>, <span class="prelude-ty">Result</span>};
 
 <span class="doccomment">/// A trait for erroring deserialization if not all bytes were read.</span>
@@ -70,7 +70,7 @@
         <span class="kw">if</span> <span class="ident">reader</span>.<span class="ident">is_finished</span>() {
             <span class="prelude-val">Ok</span>(())
         } <span class="kw">else</span> {
-            <span class="prelude-val">Err</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">ErrorKind</span>::<span class="ident">Custom</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">Box::new</span>(<span class="ident">ErrorKind::Custom</span>(
                 <span class="string">&quot;Slice had bytes remaining after deserialization&quot;</span>.<span class="ident">to_string</span>(),
             )))
         }

@@ -231,20 +231,20 @@
 <span class="kw">mod</span> <span class="ident">html_prop</span>;
 <span class="kw">mod</span> <span class="ident">html_tag</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">PeekValue</span>;
-<span class="kw">use</span> <span class="ident">html_block</span>::<span class="ident">HtmlBlock</span>;
-<span class="kw">use</span> <span class="ident">html_component</span>::<span class="ident">HtmlComponent</span>;
-<span class="kw">use</span> <span class="ident">html_dashed_name</span>::<span class="ident">HtmlDashedName</span>;
-<span class="kw">use</span> <span class="ident">html_iterable</span>::<span class="ident">HtmlIterable</span>;
-<span class="kw">use</span> <span class="ident">html_list</span>::<span class="ident">HtmlList</span>;
-<span class="kw">use</span> <span class="ident">html_node</span>::<span class="ident">HtmlNode</span>;
-<span class="kw">use</span> <span class="ident">html_prop</span>::<span class="ident">HtmlProp</span>;
-<span class="kw">use</span> <span class="ident">html_prop</span>::<span class="ident">HtmlPropSuffix</span>;
-<span class="kw">use</span> <span class="ident">html_tag</span>::<span class="ident">HtmlTag</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::PeekValue</span>;
+<span class="kw">use</span> <span class="ident">html_block::HtmlBlock</span>;
+<span class="kw">use</span> <span class="ident">html_component::HtmlComponent</span>;
+<span class="kw">use</span> <span class="ident">html_dashed_name::HtmlDashedName</span>;
+<span class="kw">use</span> <span class="ident">html_iterable::HtmlIterable</span>;
+<span class="kw">use</span> <span class="ident">html_list::HtmlList</span>;
+<span class="kw">use</span> <span class="ident">html_node::HtmlNode</span>;
+<span class="kw">use</span> <span class="ident">html_prop::HtmlProp</span>;
+<span class="kw">use</span> <span class="ident">html_prop::HtmlPropSuffix</span>;
+<span class="kw">use</span> <span class="ident">html_tag::HtmlTag</span>;
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Ident</span>, <span class="ident">Span</span>, <span class="ident">TokenStream</span>};
 <span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">quote</span>, <span class="ident">ToTokens</span>};
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">buffer</span>::<span class="ident">Cursor</span>;
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">parse</span>::{<span class="ident">Parse</span>, <span class="ident">ParseStream</span>, <span class="prelude-ty">Result</span>};
+<span class="kw">use</span> <span class="ident">syn::buffer::Cursor</span>;
+<span class="kw">use</span> <span class="ident">syn::parse</span>::{<span class="ident">Parse</span>, <span class="ident">ParseStream</span>, <span class="prelude-ty">Result</span>};
 
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">HtmlType</span> {
     <span class="ident">Block</span>,
@@ -264,14 +264,14 @@
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">HtmlTree</span> {
     <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">html_type</span> <span class="op">=</span> <span class="ident">HtmlTree</span>::<span class="ident">peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>())
+        <span class="kw">let</span> <span class="ident">html_type</span> <span class="op">=</span> <span class="ident">HtmlTree::peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>())
             .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">input</span>.<span class="ident">error</span>(<span class="string">&quot;expected a valid html element&quot;</span>))<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">html_tree</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">html_type</span> {
-            <span class="ident">HtmlType</span>::<span class="ident">Empty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">HtmlTree</span>::<span class="ident">Empty</span>,
-            <span class="ident">HtmlType</span>::<span class="ident">Component</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">HtmlTree</span>::<span class="ident">Component</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>)),
-            <span class="ident">HtmlType</span>::<span class="ident">Tag</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">HtmlTree</span>::<span class="ident">Tag</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>)),
-            <span class="ident">HtmlType</span>::<span class="ident">Block</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">HtmlTree</span>::<span class="ident">Block</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>)),
-            <span class="ident">HtmlType</span>::<span class="ident">List</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">HtmlTree</span>::<span class="ident">List</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>)),
+            <span class="ident">HtmlType::Empty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">HtmlTree::Empty</span>,
+            <span class="ident">HtmlType::Component</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">HtmlTree::Component</span>(<span class="ident">Box::new</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>)),
+            <span class="ident">HtmlType::Tag</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">HtmlTree::Tag</span>(<span class="ident">Box::new</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>)),
+            <span class="ident">HtmlType::Block</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">HtmlTree::Block</span>(<span class="ident">Box::new</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>)),
+            <span class="ident">HtmlType::List</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">HtmlTree::List</span>(<span class="ident">Box::new</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>)),
         };
         <span class="prelude-val">Ok</span>(<span class="ident">html_tree</span>)
     }
@@ -280,15 +280,15 @@
 <span class="kw">impl</span> <span class="ident">PeekValue</span><span class="op">&lt;</span><span class="ident">HtmlType</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">HtmlTree</span> {
     <span class="kw">fn</span> <span class="ident">peek</span>(<span class="ident">cursor</span>: <span class="ident">Cursor</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">HtmlType</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">cursor</span>.<span class="ident">eof</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">HtmlType</span>::<span class="ident">Empty</span>)
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">HtmlComponent</span>::<span class="ident">peek</span>(<span class="ident">cursor</span>).<span class="ident">is_some</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">HtmlType</span>::<span class="ident">Component</span>)
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">HtmlTag</span>::<span class="ident">peek</span>(<span class="ident">cursor</span>).<span class="ident">is_some</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">HtmlType</span>::<span class="ident">Tag</span>)
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">HtmlBlock</span>::<span class="ident">peek</span>(<span class="ident">cursor</span>).<span class="ident">is_some</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">HtmlType</span>::<span class="ident">Block</span>)
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">HtmlList</span>::<span class="ident">peek</span>(<span class="ident">cursor</span>).<span class="ident">is_some</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">HtmlType</span>::<span class="ident">List</span>)
+            <span class="prelude-val">Some</span>(<span class="ident">HtmlType::Empty</span>)
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">HtmlComponent::peek</span>(<span class="ident">cursor</span>).<span class="ident">is_some</span>() {
+            <span class="prelude-val">Some</span>(<span class="ident">HtmlType::Component</span>)
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">HtmlTag::peek</span>(<span class="ident">cursor</span>).<span class="ident">is_some</span>() {
+            <span class="prelude-val">Some</span>(<span class="ident">HtmlType::Tag</span>)
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">HtmlBlock::peek</span>(<span class="ident">cursor</span>).<span class="ident">is_some</span>() {
+            <span class="prelude-val">Some</span>(<span class="ident">HtmlType::Block</span>)
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">HtmlList::peek</span>(<span class="ident">cursor</span>).<span class="ident">is_some</span>() {
+            <span class="prelude-val">Some</span>(<span class="ident">HtmlType::List</span>)
         } <span class="kw">else</span> {
             <span class="prelude-val">None</span>
         }
@@ -298,11 +298,11 @@
 <span class="kw">impl</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">HtmlTree</span> {
     <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">TokenStream</span>) {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">HtmlTree</span>::<span class="ident">Empty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">HtmlList</span>::<span class="ident">empty</span>().<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
-            <span class="ident">HtmlTree</span>::<span class="ident">Component</span>(<span class="ident">comp</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">comp</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
-            <span class="ident">HtmlTree</span>::<span class="ident">Tag</span>(<span class="ident">tag</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">tag</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
-            <span class="ident">HtmlTree</span>::<span class="ident">List</span>(<span class="ident">list</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">list</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
-            <span class="ident">HtmlTree</span>::<span class="ident">Block</span>(<span class="ident">block</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">block</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
+            <span class="ident">HtmlTree::Empty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">HtmlList::empty</span>().<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
+            <span class="ident">HtmlTree::Component</span>(<span class="ident">comp</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">comp</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
+            <span class="ident">HtmlTree::Tag</span>(<span class="ident">tag</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">tag</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
+            <span class="ident">HtmlTree::List</span>(<span class="ident">list</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">list</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
+            <span class="ident">HtmlTree::Block</span>(<span class="ident">block</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">block</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
         }
     }
 }
@@ -315,17 +315,17 @@
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">HtmlRoot</span> {
     <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">html_root</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">HtmlTree</span>::<span class="ident">peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>()).<span class="ident">is_some</span>() {
-            <span class="self">Self</span>::<span class="ident">Tree</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>)
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">HtmlIterable</span>::<span class="ident">peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>()).<span class="ident">is_some</span>() {
-            <span class="self">Self</span>::<span class="ident">Iterable</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>))
+        <span class="kw">let</span> <span class="ident">html_root</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">HtmlTree::peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>()).<span class="ident">is_some</span>() {
+            <span class="self">Self</span><span class="ident">::Tree</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>)
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">HtmlIterable::peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>()).<span class="ident">is_some</span>() {
+            <span class="self">Self</span><span class="ident">::Iterable</span>(<span class="ident">Box::new</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>))
         } <span class="kw">else</span> {
-            <span class="self">Self</span>::<span class="ident">Node</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>))
+            <span class="self">Self</span><span class="ident">::Node</span>(<span class="ident">Box::new</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>))
         };
 
         <span class="kw">if</span> <span class="op">!</span><span class="ident">input</span>.<span class="ident">is_empty</span>() {
             <span class="kw">let</span> <span class="ident">stream</span>: <span class="ident">TokenStream</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
-            <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">syn::Error::new_spanned</span>(
                 <span class="ident">stream</span>,
                 <span class="string">&quot;only one root html element is allowed (hint: you can wrap multiple html elements in a fragment `&lt;&gt;&lt;/&gt;`)&quot;</span>,
             ))
@@ -338,9 +338,9 @@
 <span class="kw">impl</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">HtmlRoot</span> {
     <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">TokenStream</span>) {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="self">Self</span>::<span class="ident">Tree</span>(<span class="ident">tree</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">tree</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
-            <span class="self">Self</span>::<span class="ident">Node</span>(<span class="ident">node</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">node</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
-            <span class="self">Self</span>::<span class="ident">Iterable</span>(<span class="ident">iterable</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">iterable</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
+            <span class="self">Self</span><span class="ident">::Tree</span>(<span class="ident">tree</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">tree</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
+            <span class="self">Self</span><span class="ident">::Node</span>(<span class="ident">node</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">node</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
+            <span class="self">Self</span><span class="ident">::Iterable</span>(<span class="ident">iterable</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">iterable</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>),
         }
     }
 }
@@ -355,8 +355,8 @@
 <span class="kw">impl</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">HtmlRootVNode</span> {
     <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">TokenStream</span>) {
         <span class="kw">let</span> <span class="ident">new_tokens</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">to_token_stream</span>();
-        <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="macro">quote</span><span class="macro">!</span> {
-            ::<span class="ident">yew</span>::<span class="ident">virtual_dom</span>::<span class="ident">VNode</span>::<span class="ident">from</span>(#<span class="ident">new_tokens</span>)
+        <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="macro">quote!</span> {
+            <span class="ident">::yew::virtual_dom::VNode::from</span>(#<span class="ident">new_tokens</span>)
         });
     }
 }
@@ -372,7 +372,7 @@
 <span class="kw">impl</span> <span class="ident">ToNodeIterator</span> <span class="kw">for</span> <span class="ident">HtmlTree</span> {
     <span class="kw">fn</span> <span class="ident">to_node_iterator_stream</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">HtmlTree</span>::<span class="ident">Block</span>(<span class="ident">block</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">block</span>.<span class="ident">to_node_iterator_stream</span>(),
+            <span class="ident">HtmlTree::Block</span>(<span class="ident">block</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">block</span>.<span class="ident">to_node_iterator_stream</span>(),
             <span class="comment">// everthing else is just a single node.</span>
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
         }
@@ -383,7 +383,7 @@
 
 <span class="kw">impl</span> <span class="ident">HtmlChildrenTree</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">Vec</span>::<span class="ident">new</span>())
+        <span class="self">Self</span>(<span class="ident">Vec::new</span>())
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_child</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">input</span>: <span class="ident">ParseStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
@@ -400,7 +400,7 @@
     <span class="kw">fn</span> <span class="ident">only_single_node_children</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="number">0</span>
             .<span class="ident">iter</span>()
-            .<span class="ident">map</span>(<span class="ident">ToNodeIterator</span>::<span class="ident">to_node_iterator_stream</span>)
+            .<span class="ident">map</span>(<span class="ident">ToNodeIterator::to_node_iterator_stream</span>)
             .<span class="ident">all</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">is_none</span>())
     }
 
@@ -409,27 +409,27 @@
 
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">only_single_node_children</span>() {
             <span class="comment">// optimize for the common case where all children are single nodes (only using literal html).</span>
-            <span class="kw">return</span> <span class="macro">quote</span><span class="macro">!</span> {
-                <span class="macro">vec</span><span class="macro">!</span>[#((#<span class="ident">children</span>).<span class="ident">into</span>()),<span class="kw-2">*</span>]
+            <span class="kw">return</span> <span class="macro">quote!</span> {
+                <span class="macro">vec!</span>[#((#<span class="ident">children</span>).<span class="ident">into</span>()),<span class="kw-2">*</span>]
             };
         }
 
-        <span class="kw">let</span> <span class="ident">vec_ident</span> <span class="op">=</span> <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;__yew_v&quot;</span>, <span class="ident">Span</span>::<span class="ident">call_site</span>());
+        <span class="kw">let</span> <span class="ident">vec_ident</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="string">&quot;__yew_v&quot;</span>, <span class="ident">Span::call_site</span>());
         <span class="kw">let</span> <span class="ident">add_children_streams</span> <span class="op">=</span> <span class="ident">children</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">child</span><span class="op">|</span> {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">node_iterator_stream</span>) <span class="op">=</span> <span class="ident">child</span>.<span class="ident">to_node_iterator_stream</span>() {
-                <span class="macro">quote</span><span class="macro">!</span> {
+                <span class="macro">quote!</span> {
                     #<span class="ident">vec_ident</span>.<span class="ident">extend</span>(#<span class="ident">node_iterator_stream</span>);
                 }
             } <span class="kw">else</span> {
-                <span class="macro">quote</span><span class="macro">!</span> {
+                <span class="macro">quote!</span> {
                     #<span class="ident">vec_ident</span>.<span class="ident">push</span>((#<span class="ident">child</span>).<span class="ident">into</span>());
                 }
             }
         });
 
-        <span class="macro">quote</span><span class="macro">!</span> {
+        <span class="macro">quote!</span> {
             {
-                <span class="kw">let</span> <span class="kw-2">mut</span> #<span class="ident">vec_ident</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">vec</span>::<span class="ident">Vec</span>::<span class="ident">new</span>();
+                <span class="kw">let</span> <span class="kw-2">mut</span> #<span class="ident">vec_ident</span> <span class="op">=</span> <span class="ident">::std::vec::Vec::new</span>();
                 #(#<span class="ident">add_children_streams</span>)<span class="op">*</span>
                 #<span class="ident">vec_ident</span>
             }

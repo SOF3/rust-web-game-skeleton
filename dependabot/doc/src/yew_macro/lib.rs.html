@@ -179,13 +179,13 @@
 <span class="kw">mod</span> <span class="ident">derive_props</span>;
 <span class="kw">mod</span> <span class="ident">html_tree</span>;
 
-<span class="kw">use</span> <span class="ident">derive_props</span>::<span class="ident">DerivePropsInput</span>;
+<span class="kw">use</span> <span class="ident">derive_props::DerivePropsInput</span>;
 <span class="kw">use</span> <span class="ident">html_tree</span>::{<span class="ident">HtmlRoot</span>, <span class="ident">HtmlRootVNode</span>};
-<span class="kw">use</span> <span class="ident">proc_macro</span>::<span class="ident">TokenStream</span>;
-<span class="kw">use</span> <span class="ident">proc_macro_hack</span>::<span class="ident">proc_macro_hack</span>;
+<span class="kw">use</span> <span class="ident">proc_macro::TokenStream</span>;
+<span class="kw">use</span> <span class="ident">proc_macro_hack::proc_macro_hack</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">quote</span>, <span class="ident">ToTokens</span>};
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">buffer</span>::<span class="ident">Cursor</span>;
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">parse_macro_input</span>;
+<span class="kw">use</span> <span class="ident">syn::buffer::Cursor</span>;
+<span class="kw">use</span> <span class="ident">syn::parse_macro_input</span>;
 
 <span class="kw">trait</span> <span class="ident">Peek</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">peek</span>(<span class="ident">cursor</span>: <span class="ident">Cursor</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">T</span>, <span class="ident">Cursor</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>)<span class="op">&gt;</span>;
@@ -207,20 +207,20 @@
 
 <span class="attribute">#[<span class="ident">proc_macro_derive</span>(<span class="ident">Properties</span>, <span class="ident">attributes</span>(<span class="ident">prop_or</span>, <span class="ident">prop_or_else</span>, <span class="ident">prop_or_default</span>))]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">derive_props</span>(<span class="ident">input</span>: <span class="ident">TokenStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
-    <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="macro">parse_macro_input</span><span class="macro">!</span>(<span class="ident">input</span> <span class="kw">as</span> <span class="ident">DerivePropsInput</span>);
-    <span class="ident">TokenStream</span>::<span class="ident">from</span>(<span class="ident">input</span>.<span class="ident">into_token_stream</span>())
+    <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="macro">parse_macro_input!</span>(<span class="ident">input</span> <span class="kw">as</span> <span class="ident">DerivePropsInput</span>);
+    <span class="ident">TokenStream::from</span>(<span class="ident">input</span>.<span class="ident">into_token_stream</span>())
 }
 
 <span class="attribute">#[<span class="ident">proc_macro_hack</span>]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">html_nested</span>(<span class="ident">input</span>: <span class="ident">TokenStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
-    <span class="kw">let</span> <span class="ident">root</span> <span class="op">=</span> <span class="macro">parse_macro_input</span><span class="macro">!</span>(<span class="ident">input</span> <span class="kw">as</span> <span class="ident">HtmlRoot</span>);
-    <span class="ident">TokenStream</span>::<span class="ident">from</span>(<span class="macro">quote</span><span class="macro">!</span> {#<span class="ident">root</span>})
+    <span class="kw">let</span> <span class="ident">root</span> <span class="op">=</span> <span class="macro">parse_macro_input!</span>(<span class="ident">input</span> <span class="kw">as</span> <span class="ident">HtmlRoot</span>);
+    <span class="ident">TokenStream::from</span>(<span class="macro">quote!</span> {#<span class="ident">root</span>})
 }
 
 <span class="attribute">#[<span class="ident">proc_macro_hack</span>]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">html</span>(<span class="ident">input</span>: <span class="ident">TokenStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
-    <span class="kw">let</span> <span class="ident">root</span> <span class="op">=</span> <span class="macro">parse_macro_input</span><span class="macro">!</span>(<span class="ident">input</span> <span class="kw">as</span> <span class="ident">HtmlRootVNode</span>);
-    <span class="ident">TokenStream</span>::<span class="ident">from</span>(<span class="macro">quote</span><span class="macro">!</span> {#<span class="ident">root</span>})
+    <span class="kw">let</span> <span class="ident">root</span> <span class="op">=</span> <span class="macro">parse_macro_input!</span>(<span class="ident">input</span> <span class="kw">as</span> <span class="ident">HtmlRootVNode</span>);
+    <span class="ident">TokenStream::from</span>(<span class="macro">quote!</span> {#<span class="ident">root</span>})
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="yew_macro" data-search-js="../../search-index.js"></div>

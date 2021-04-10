@@ -198,7 +198,7 @@
 <span class="doccomment">//! properties have been set, the builder moves to the final build step which implements the</span>
 <span class="doccomment">//! `build()` method.</span>
 
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">generics</span>::{<span class="ident">to_arguments</span>, <span class="ident">with_param_bounds</span>, <span class="ident">GenericArguments</span>};
+<span class="kw">use</span> <span class="kw">super</span><span class="ident">::generics</span>::{<span class="ident">to_arguments</span>, <span class="ident">with_param_bounds</span>, <span class="ident">GenericArguments</span>};
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">DerivePropsInput</span>, <span class="ident">PropField</span>};
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Ident</span>, <span class="ident">Span</span>};
 <span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">quote</span>, <span class="ident">ToTokens</span>};
@@ -212,7 +212,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">PropsBuilder</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span>) {
+    <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">proc_macro2::TokenStream</span>) {
         <span class="kw">let</span> <span class="self">Self</span> {
             <span class="ident">builder_name</span>,
             <span class="ident">step_trait</span>,
@@ -238,11 +238,11 @@
 
         <span class="comment">// Each builder step implements the `BuilderStep` trait and `step_generics` is used to</span>
         <span class="comment">// enforce that.</span>
-        <span class="kw">let</span> <span class="ident">step_generic_param</span> <span class="op">=</span> <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;YEW_PROPS_BUILDER_STEP&quot;</span>, <span class="ident">Span</span>::<span class="ident">call_site</span>());
+        <span class="kw">let</span> <span class="ident">step_generic_param</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="string">&quot;YEW_PROPS_BUILDER_STEP&quot;</span>, <span class="ident">Span::call_site</span>());
         <span class="kw">let</span> <span class="ident">step_generics</span> <span class="op">=</span>
             <span class="ident">with_param_bounds</span>(<span class="kw-2">&amp;</span><span class="ident">generics</span>, <span class="ident">step_generic_param</span>.<span class="ident">clone</span>(), (<span class="kw-2">*</span><span class="ident">step_trait</span>).<span class="ident">clone</span>());
 
-        <span class="kw">let</span> <span class="ident">builder</span> <span class="op">=</span> <span class="macro">quote</span><span class="macro">!</span> {
+        <span class="kw">let</span> <span class="ident">builder</span> <span class="op">=</span> <span class="macro">quote!</span> {
             #(
                 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
                 #<span class="ident">vis</span> <span class="kw">struct</span> #<span class="ident">step_names</span>;
@@ -257,8 +257,8 @@
             #<span class="ident">vis</span> <span class="kw">struct</span> #<span class="ident">builder_name</span>#<span class="ident">step_generics</span>
                 #<span class="ident">where_clause</span>
             {
-                <span class="ident">wrapped</span>: ::<span class="ident">std</span>::<span class="ident">boxed</span>::<span class="ident">Box</span><span class="op">&lt;</span>#<span class="ident">wrapper_name</span>#<span class="ident">ty_generics</span><span class="op">&gt;</span>,
-                <span class="ident">_marker</span>: ::<span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span><span class="op">&lt;</span>#<span class="ident">step_generic_param</span><span class="op">&gt;</span>,
+                <span class="ident">wrapped</span>: <span class="ident">::std::boxed::Box</span><span class="op">&lt;</span>#<span class="ident">wrapper_name</span>#<span class="ident">ty_generics</span><span class="op">&gt;</span>,
+                <span class="ident">_marker</span>: <span class="ident">::std::marker::PhantomData</span><span class="op">&lt;</span>#<span class="ident">step_generic_param</span><span class="op">&gt;</span>,
             }
 
             #<span class="ident">impl_steps</span>
@@ -287,7 +287,7 @@
         <span class="ident">PropsBuilder</span> {
             <span class="ident">builder_name</span>: <span class="ident">name</span>,
             <span class="ident">step_trait</span>,
-            <span class="ident">step_names</span>: <span class="self">Self</span>::<span class="ident">build_step_names</span>(<span class="ident">step_trait</span>, <span class="kw-2">&amp;</span><span class="ident">props</span>.<span class="ident">prop_fields</span>),
+            <span class="ident">step_names</span>: <span class="self">Self</span><span class="ident">::build_step_names</span>(<span class="ident">step_trait</span>, <span class="kw-2">&amp;</span><span class="ident">props</span>.<span class="ident">prop_fields</span>),
             <span class="ident">props</span>,
             <span class="ident">wrapper_name</span>,
         }
@@ -313,7 +313,7 @@
             .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">pf</span><span class="op">|</span> <span class="ident">pf</span>.<span class="ident">is_required</span>())
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">pf</span><span class="op">|</span> <span class="ident">pf</span>.<span class="ident">to_step_name</span>(<span class="ident">prefix</span>))
             .<span class="ident">collect</span>();
-        <span class="ident">step_names</span>.<span class="ident">push</span>(<span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}_build&quot;</span>, <span class="ident">prefix</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>()));
+        <span class="ident">step_names</span>.<span class="ident">push</span>(<span class="ident">Ident::new</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;{}_build&quot;</span>, <span class="ident">prefix</span>), <span class="ident">Span::call_site</span>()));
         <span class="ident">step_names</span>
     }
 
@@ -321,7 +321,7 @@
         <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">prop_fields</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">pf</span><span class="op">|</span> <span class="ident">pf</span>.<span class="ident">to_field_setter</span>())
     }
 
-    <span class="kw">fn</span> <span class="ident">impl_steps</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> {
+    <span class="kw">fn</span> <span class="ident">impl_steps</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">proc_macro2::TokenStream</span> {
         <span class="kw">let</span> <span class="self">Self</span> {
             <span class="ident">builder_name</span>,
             <span class="ident">props</span>,
@@ -337,10 +337,10 @@
 
         <span class="kw">let</span> (<span class="ident">impl_generics</span>, <span class="kw">_</span>, <span class="ident">where_clause</span>) <span class="op">=</span> <span class="ident">generics</span>.<span class="ident">split_for_impl</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fields_index</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">token_stream</span> <span class="op">=</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">token_stream</span> <span class="op">=</span> <span class="ident">proc_macro2::TokenStream::new</span>();
 
         <span class="kw">for</span> (<span class="ident">step</span>, <span class="ident">step_name</span>) <span class="kw">in</span> <span class="ident">step_names</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">optional_fields</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">optional_fields</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">required_field</span> <span class="op">=</span> <span class="prelude-val">None</span>;
 
             <span class="kw">if</span> <span class="ident">fields_index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">prop_fields</span>.<span class="ident">len</span>() {
@@ -370,7 +370,7 @@
                 <span class="ident">pf</span>.<span class="ident">to_build_step_fn</span>(<span class="ident">builder_name</span>, <span class="kw-2">&amp;</span><span class="ident">next_step_arguments</span>, <span class="ident">vis</span>)
             });
 
-            <span class="ident">token_stream</span>.<span class="ident">extend</span>(<span class="macro">quote</span><span class="macro">!</span> {
+            <span class="ident">token_stream</span>.<span class="ident">extend</span>(<span class="macro">quote!</span> {
                 <span class="kw">impl</span>#<span class="ident">impl_generics</span> #<span class="ident">builder_name</span><span class="op">&lt;</span>#<span class="ident">current_step_arguments</span><span class="op">&gt;</span> #<span class="ident">where_clause</span> {
                     #(#<span class="ident">optional_prop_fn</span>)<span class="op">*</span>
                     #(#<span class="ident">required_prop_fn</span>)<span class="op">*</span>

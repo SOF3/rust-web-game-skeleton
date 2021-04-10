@@ -29,30 +29,30 @@
 <span id="26">26</span>
 <span id="27">27</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">blob</span>::<span class="ident">File</span>;
-<span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::blob::File</span>;
+<span class="kw">use</span> <span class="ident">wasm_bindgen::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="doccomment">/// A list of files, for example from an `&lt;input type=&quot;file&quot;&gt;`.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FileList</span> {
     <span class="ident">inner</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">File</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">web_sys</span>::<span class="ident">FileList</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">FileList</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">raw</span>: <span class="ident">web_sys</span>::<span class="ident">FileList</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">web_sys::FileList</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">FileList</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">raw</span>: <span class="ident">web_sys::FileList</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">length</span> <span class="op">=</span> <span class="ident">raw</span>.<span class="ident">length</span>();
 
         <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> (<span class="number">0</span>..<span class="ident">length</span>)
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="ident">File</span>::<span class="ident">from</span>(<span class="ident">raw</span>.<span class="ident">get</span>(<span class="ident">i</span>).<span class="ident">unwrap_throw</span>()))
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="ident">File::from</span>(<span class="ident">raw</span>.<span class="ident">get</span>(<span class="ident">i</span>).<span class="ident">unwrap_throw</span>()))
             .<span class="ident">collect</span>();
 
         <span class="ident">FileList</span> { <span class="ident">inner</span> }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">FileList</span> {
+<span class="kw">impl</span> <span class="ident">std::ops::Deref</span> <span class="kw">for</span> <span class="ident">FileList</span> {
     <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> [<span class="ident">File</span>];
 
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Target</span> {
+    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span><span class="ident">::Target</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">inner</span>
     }
 }

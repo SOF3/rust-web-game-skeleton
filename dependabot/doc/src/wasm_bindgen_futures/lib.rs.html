@@ -264,21 +264,21 @@
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">target_feature</span> <span class="op">=</span> <span class="string">&quot;atomics&quot;</span>, <span class="ident">feature</span>(<span class="ident">stdsimd</span>))]</span>
 <span class="attribute">#![<span class="ident">deny</span>(<span class="ident">missing_docs</span>)]</span>
 
-<span class="kw">use</span> <span class="ident">js_sys</span>::<span class="ident">Promise</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">RefCell</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">future</span>::<span class="ident">Future</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">pin</span>::<span class="ident">Pin</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">rc</span>::<span class="ident">Rc</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">task</span>::{<span class="ident">Context</span>, <span class="ident">Poll</span>, <span class="ident">Waker</span>};
-<span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">js_sys::Promise</span>;
+<span class="kw">use</span> <span class="ident">std::cell::RefCell</span>;
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
+<span class="kw">use</span> <span class="ident">std::future::Future</span>;
+<span class="kw">use</span> <span class="ident">std::pin::Pin</span>;
+<span class="kw">use</span> <span class="ident">std::rc::Rc</span>;
+<span class="kw">use</span> <span class="ident">std::task</span>::{<span class="ident">Context</span>, <span class="ident">Poll</span>, <span class="ident">Waker</span>};
+<span class="kw">use</span> <span class="ident">wasm_bindgen::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">mod</span> <span class="ident">queue</span>;
 
 <span class="kw">mod</span> <span class="ident">task</span> {
-    <span class="kw">use</span> <span class="ident">cfg_if</span>::<span class="ident">cfg_if</span>;
+    <span class="kw">use</span> <span class="ident">cfg_if::cfg_if</span>;
 
-    <span class="macro">cfg_if</span><span class="macro">!</span> {
+    <span class="macro">cfg_if!</span> {
         <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span> <span class="op">=</span> <span class="string">&quot;atomics&quot;</span>)]</span> {
             <span class="kw">mod</span> <span class="ident">wait_async_polyfill</span>;
             <span class="kw">mod</span> <span class="ident">multithread</span>;
@@ -307,7 +307,7 @@
 <span class="kw">where</span>
     <span class="ident">F</span>: <span class="ident">Future</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> ()<span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
 {
-    <span class="ident">task</span>::<span class="ident">Task</span>::<span class="ident">spawn</span>(<span class="ident">Box</span>::<span class="ident">pin</span>(<span class="ident">future</span>));
+    <span class="ident">task::Task::spawn</span>(<span class="ident">Box::pin</span>(<span class="ident">future</span>));
 }
 
 <span class="kw">struct</span> <span class="ident">Inner</span> {
@@ -328,9 +328,9 @@
     <span class="ident">inner</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">RefCell</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">JsFuture</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;JsFuture {{ ... }}&quot;</span>)
+<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">JsFuture</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;JsFuture {{ ... }}&quot;</span>)
     }
 }
 
@@ -351,7 +351,7 @@
         <span class="comment">// have to be self-contained. Through the `Closure::once` and some</span>
         <span class="comment">// `Rc`-trickery we can arrange for both instances of `Closure`, and the</span>
         <span class="comment">// `Rc`, to all be destroyed once the first one is called.</span>
-        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="ident">Inner</span> {
+        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">Rc::new</span>(<span class="ident">RefCell::new</span>(<span class="ident">Inner</span> {
             <span class="ident">result</span>: <span class="prelude-val">None</span>,
             <span class="ident">task</span>: <span class="prelude-val">None</span>,
             <span class="ident">callbacks</span>: <span class="prelude-val">None</span>,
@@ -360,8 +360,8 @@
         <span class="kw">fn</span> <span class="ident">finish</span>(<span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">RefCell</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span>, <span class="ident">val</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">JsValue</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>) {
             <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">borrow_mut</span>();
-                <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">state</span>.<span class="ident">callbacks</span>.<span class="ident">is_some</span>());
-                <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">state</span>.<span class="ident">result</span>.<span class="ident">is_none</span>());
+                <span class="macro">debug_assert!</span>(<span class="ident">state</span>.<span class="ident">callbacks</span>.<span class="ident">is_some</span>());
+                <span class="macro">debug_assert!</span>(<span class="ident">state</span>.<span class="ident">result</span>.<span class="ident">is_none</span>());
 
                 <span class="comment">// First up drop our closures as they&#39;ll never be invoked again and</span>
                 <span class="comment">// this is our chance to clean up their state.</span>
@@ -381,12 +381,12 @@
 
         <span class="kw">let</span> <span class="ident">resolve</span> <span class="op">=</span> {
             <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">clone</span>();
-            <span class="ident">Closure</span>::<span class="ident">once</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">val</span><span class="op">|</span> <span class="ident">finish</span>(<span class="kw-2">&amp;</span><span class="ident">state</span>, <span class="prelude-val">Ok</span>(<span class="ident">val</span>)))
+            <span class="ident">Closure::once</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">val</span><span class="op">|</span> <span class="ident">finish</span>(<span class="kw-2">&amp;</span><span class="ident">state</span>, <span class="prelude-val">Ok</span>(<span class="ident">val</span>)))
         };
 
         <span class="kw">let</span> <span class="ident">reject</span> <span class="op">=</span> {
             <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">clone</span>();
-            <span class="ident">Closure</span>::<span class="ident">once</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">val</span><span class="op">|</span> <span class="ident">finish</span>(<span class="kw-2">&amp;</span><span class="ident">state</span>, <span class="prelude-val">Err</span>(<span class="ident">val</span>)))
+            <span class="ident">Closure::once</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">val</span><span class="op">|</span> <span class="ident">finish</span>(<span class="kw-2">&amp;</span><span class="ident">state</span>, <span class="prelude-val">Err</span>(<span class="ident">val</span>)))
         };
 
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">js</span>.<span class="ident">then2</span>(<span class="kw-2">&amp;</span><span class="ident">resolve</span>, <span class="kw-2">&amp;</span><span class="ident">reject</span>);
@@ -400,18 +400,18 @@
 <span class="kw">impl</span> <span class="ident">Future</span> <span class="kw">for</span> <span class="ident">JsFuture</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">JsValue</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="self">self</span>: <span class="ident">Pin</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span><span class="op">&gt;</span>, <span class="ident">cx</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Context</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Output</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="self">self</span>: <span class="ident">Pin</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span><span class="op">&gt;</span>, <span class="ident">cx</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Context</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Output</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">inner</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">borrow_mut</span>();
 
         <span class="comment">// If our value has come in then we return it...</span>
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">val</span>) <span class="op">=</span> <span class="ident">inner</span>.<span class="ident">result</span>.<span class="ident">take</span>() {
-            <span class="kw">return</span> <span class="ident">Poll</span>::<span class="ident">Ready</span>(<span class="ident">val</span>);
+            <span class="kw">return</span> <span class="ident">Poll::Ready</span>(<span class="ident">val</span>);
         }
 
         <span class="comment">// ... otherwise we arrange ourselves to get woken up once the value</span>
         <span class="comment">// does come in</span>
         <span class="ident">inner</span>.<span class="ident">task</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">cx</span>.<span class="ident">waker</span>().<span class="ident">clone</span>());
-        <span class="ident">Poll</span>::<span class="ident">Pending</span>
+        <span class="ident">Poll::Pending</span>
     }
 }
 
@@ -441,16 +441,16 @@
 {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">future</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">future</span>);
 
-    <span class="ident">Promise</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">|</span><span class="ident">resolve</span>, <span class="ident">reject</span><span class="op">|</span> {
+    <span class="ident">Promise::new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">|</span><span class="ident">resolve</span>, <span class="ident">reject</span><span class="op">|</span> {
         <span class="kw">let</span> <span class="ident">future</span> <span class="op">=</span> <span class="ident">future</span>.<span class="ident">take</span>().<span class="ident">unwrap_throw</span>();
 
         <span class="ident">spawn_local</span>(<span class="kw">async</span> <span class="kw">move</span> {
             <span class="kw">match</span> <span class="ident">future</span>.<span class="kw">await</span> {
                 <span class="prelude-val">Ok</span>(<span class="ident">val</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="ident">resolve</span>.<span class="ident">call1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">undefined</span>(), <span class="kw-2">&amp;</span><span class="ident">val</span>).<span class="ident">unwrap_throw</span>();
+                    <span class="ident">resolve</span>.<span class="ident">call1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue::undefined</span>(), <span class="kw-2">&amp;</span><span class="ident">val</span>).<span class="ident">unwrap_throw</span>();
                 }
                 <span class="prelude-val">Err</span>(<span class="ident">val</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="ident">reject</span>.<span class="ident">call1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">undefined</span>(), <span class="kw-2">&amp;</span><span class="ident">val</span>).<span class="ident">unwrap_throw</span>();
+                    <span class="ident">reject</span>.<span class="ident">call1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue::undefined</span>(), <span class="kw-2">&amp;</span><span class="ident">val</span>).<span class="ident">unwrap_throw</span>();
                 }
             }
         });

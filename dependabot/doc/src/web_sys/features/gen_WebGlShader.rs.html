@@ -18,7 +18,7 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
 <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">wasm_bindgen::prelude</span>::<span class="kw-2">*</span>;
 <span class="attribute">#[<span class="ident">wasm_bindgen</span>]</span>
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">extends</span> <span class="op">=</span> :: <span class="ident">js_sys</span> :: <span class="ident">Object</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">WebGLShader</span> , <span class="ident">typescript_type</span> <span class="op">=</span> <span class="string">&quot;WebGLShader&quot;</span>)]

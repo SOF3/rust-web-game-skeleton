@@ -63,15 +63,15 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Service to load files using `FileReader`.</span>
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">services</span>::<span class="ident">Task</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="ident">cfg_if</span>::<span class="macro">cfg_if</span><span class="macro">!</span> {
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::services::Task</span>;
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
+<span class="macro">cfg_if::cfg_if!</span> {
     <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span> {
         <span class="kw">mod</span> <span class="ident">std_web</span>;
         <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">std_web</span>::<span class="kw-2">*</span>;
     } <span class="kw">else</span> <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> {
         <span class="kw">mod</span> <span class="ident">web_sys</span>;
-        <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">web_sys</span>::<span class="kw-2">*</span>;
+        <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::web_sys</span>::<span class="kw-2">*</span>;
     }
 }
 
@@ -107,8 +107,8 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ReaderService</span> {}
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">ReaderTask</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">ReaderTask</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;ReaderTask&quot;</span>)
     }
 }

@@ -158,14 +158,14 @@
 <span class="doccomment">//! This module contains the `App` struct, which is used to bootstrap</span>
 <span class="doccomment">//! a component in an isolated scope.</span>
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">html</span>::{<span class="ident">Component</span>, <span class="ident">ComponentLink</span>, <span class="ident">NodeRef</span>, <span class="ident">Scope</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">utils</span>::<span class="ident">document</span>;
-<span class="kw">use</span> <span class="ident">cfg_if</span>::<span class="ident">cfg_if</span>;
-<span class="macro">cfg_if</span><span class="macro">!</span> {
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::html</span>::{<span class="ident">Component</span>, <span class="ident">ComponentLink</span>, <span class="ident">NodeRef</span>, <span class="ident">Scope</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::utils::document</span>;
+<span class="kw">use</span> <span class="ident">cfg_if::cfg_if</span>;
+<span class="macro">cfg_if!</span> {
     <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span> {
-        <span class="kw">use</span> <span class="ident">stdweb</span>::<span class="ident">web</span>::{<span class="ident">Element</span>, <span class="ident">INode</span>, <span class="ident">IParentNode</span>};
+        <span class="kw">use</span> <span class="ident">stdweb::web</span>::{<span class="ident">Element</span>, <span class="ident">INode</span>, <span class="ident">IParentNode</span>};
     } <span class="kw">else</span> <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> {
-        <span class="kw">use</span> <span class="ident">web_sys</span>::<span class="ident">Element</span>;
+        <span class="kw">use</span> <span class="ident">web_sys::Element</span>;
     }
 }
 
@@ -181,14 +181,14 @@
     <span class="ident">COMP</span>: <span class="ident">Component</span>,
 {
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="ident">App</span>::<span class="ident">new</span>()
+        <span class="ident">App::new</span>()
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span> <span class="ident">App</span><span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">COMP</span>: <span class="ident">Component</span>,
-    <span class="ident">COMP</span>::<span class="ident">Properties</span>: <span class="ident">Default</span>,
+    <span class="ident">COMP::Properties</span>: <span class="ident">Default</span>,
 {
     <span class="doccomment">/// The main entry point of a Yew program. It works similarly to the `program`</span>
     <span class="doccomment">/// function in Elm. You should provide an initial model, `update` function</span>
@@ -199,10 +199,10 @@
         <span class="ident">clear_element</span>(<span class="kw-2">&amp;</span><span class="ident">element</span>);
         <span class="self">self</span>.<span class="ident">scope</span>.<span class="ident">mount_in_place</span>(
             <span class="ident">element</span>,
-            <span class="ident">NodeRef</span>::<span class="ident">default</span>(),
+            <span class="ident">NodeRef::default</span>(),
             <span class="prelude-val">None</span>,
-            <span class="ident">NodeRef</span>::<span class="ident">default</span>(),
-            <span class="ident">COMP</span>::<span class="ident">Properties</span>::<span class="ident">default</span>(),
+            <span class="ident">NodeRef::default</span>(),
+            <span class="ident">COMP::Properties::default</span>(),
         )
     }
 
@@ -234,10 +234,10 @@
             .<span class="ident">expect</span>(<span class="string">&quot;can&#39;t remove body child&quot;</span>);
         <span class="self">self</span>.<span class="ident">scope</span>.<span class="ident">mount_in_place</span>(
             <span class="ident">html_element</span>,
-            <span class="ident">NodeRef</span>::<span class="ident">default</span>(),
+            <span class="ident">NodeRef::default</span>(),
             <span class="prelude-val">None</span>,
-            <span class="ident">NodeRef</span>::<span class="ident">default</span>(),
-            <span class="ident">COMP</span>::<span class="ident">Properties</span>::<span class="ident">default</span>(),
+            <span class="ident">NodeRef::default</span>(),
+            <span class="ident">COMP::Properties::default</span>(),
         )
     }
 }
@@ -248,7 +248,7 @@
 {
     <span class="doccomment">/// Creates a new `App` with a component in a context.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">Scope</span>::<span class="ident">new</span>(<span class="prelude-val">None</span>);
+        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">Scope::new</span>(<span class="prelude-val">None</span>);
         <span class="ident">App</span> { <span class="ident">scope</span> }
     }
 
@@ -259,15 +259,15 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mount_with_props</span>(
         <span class="self">self</span>,
         <span class="ident">element</span>: <span class="ident">Element</span>,
-        <span class="ident">props</span>: <span class="ident">COMP</span>::<span class="ident">Properties</span>,
+        <span class="ident">props</span>: <span class="ident">COMP::Properties</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ComponentLink</span><span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span> {
         <span class="ident">clear_element</span>(<span class="kw-2">&amp;</span><span class="ident">element</span>);
         <span class="self">self</span>.<span class="ident">scope</span>
-            .<span class="ident">mount_in_place</span>(<span class="ident">element</span>, <span class="ident">NodeRef</span>::<span class="ident">default</span>(), <span class="prelude-val">None</span>, <span class="ident">NodeRef</span>::<span class="ident">default</span>(), <span class="ident">props</span>)
+            .<span class="ident">mount_in_place</span>(<span class="ident">element</span>, <span class="ident">NodeRef::default</span>(), <span class="prelude-val">None</span>, <span class="ident">NodeRef::default</span>(), <span class="ident">props</span>)
     }
 
     <span class="doccomment">/// Alias to `mount_with_props(&quot;body&quot;, ...)`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mount_to_body_with_props</span>(<span class="self">self</span>, <span class="ident">props</span>: <span class="ident">COMP</span>::<span class="ident">Properties</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ComponentLink</span><span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mount_to_body_with_props</span>(<span class="self">self</span>, <span class="ident">props</span>: <span class="ident">COMP::Properties</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ComponentLink</span><span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span> {
         <span class="comment">// Bootstrap the component for `Window` environment only (not for `Worker`)</span>
         <span class="kw">let</span> <span class="ident">element</span> <span class="op">=</span> <span class="ident">document</span>()
             .<span class="ident">query_selector</span>(<span class="string">&quot;body&quot;</span>)
@@ -280,7 +280,7 @@
     <span class="doccomment">/// has a body element at the root of the HTML generated by its `view` method. Use this method</span>
     <span class="doccomment">/// when you need to manipulate the body element. For example, adding/removing app-wide</span>
     <span class="doccomment">/// CSS classes of the body element.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mount_as_body_with_props</span>(<span class="self">self</span>, <span class="ident">props</span>: <span class="ident">COMP</span>::<span class="ident">Properties</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ComponentLink</span><span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mount_as_body_with_props</span>(<span class="self">self</span>, <span class="ident">props</span>: <span class="ident">COMP::Properties</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ComponentLink</span><span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">html_element</span> <span class="op">=</span> <span class="ident">document</span>()
             .<span class="ident">query_selector</span>(<span class="string">&quot;html&quot;</span>)
             .<span class="ident">expect</span>(<span class="string">&quot;can&#39;t get html node for rendering&quot;</span>)
@@ -294,9 +294,9 @@
             .<span class="ident">expect</span>(<span class="string">&quot;can&#39;t remove body child&quot;</span>);
         <span class="self">self</span>.<span class="ident">scope</span>.<span class="ident">mount_in_place</span>(
             <span class="ident">html_element</span>,
-            <span class="ident">NodeRef</span>::<span class="ident">default</span>(),
+            <span class="ident">NodeRef::default</span>(),
             <span class="prelude-val">None</span>,
-            <span class="ident">NodeRef</span>::<span class="ident">default</span>(),
+            <span class="ident">NodeRef::default</span>(),
             <span class="ident">props</span>,
         )
     }

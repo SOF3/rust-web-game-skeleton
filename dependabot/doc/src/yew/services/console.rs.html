@@ -181,15 +181,15 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! This module contains a service implementation to use browser&#39;s console.</span>
 
-<span class="kw">use</span> <span class="ident">cfg_if</span>::<span class="ident">cfg_if</span>;
-<span class="kw">use</span> <span class="ident">cfg_match</span>::<span class="ident">cfg_match</span>;
-<span class="macro">cfg_if</span><span class="macro">!</span> {
+<span class="kw">use</span> <span class="ident">cfg_if::cfg_if</span>;
+<span class="kw">use</span> <span class="ident">cfg_match::cfg_match</span>;
+<span class="macro">cfg_if!</span> {
     <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span> {
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
         <span class="kw">use</span> <span class="ident">stdweb</span>::{<span class="ident">_js_impl</span>, <span class="ident">js</span>};
     } <span class="kw">else</span> <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> {
-        <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>;
-        <span class="kw">use</span> <span class="ident">web_sys</span>::<span class="ident">console</span>;
+        <span class="kw">use</span> <span class="ident">wasm_bindgen::JsValue</span>;
+        <span class="kw">use</span> <span class="ident">web_sys::console</span>;
     }
 }
 
@@ -203,9 +203,9 @@
     <span class="doccomment">/// method implementation.</span>
     <span class="doccomment">/// This method outputs the provided message to the console.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">log</span>(<span class="ident">message</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">log</span>(@{<span class="ident">message</span>}); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">log_1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from_str</span>(<span class="ident">message</span>)),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">log</span>(@{<span class="ident">message</span>}); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::log_1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue::from_str</span>(<span class="ident">message</span>)),
         };
     }
 
@@ -213,9 +213,9 @@
     <span class="doccomment">/// method implementation.</span>
     <span class="doccomment">/// This method outputs the provided message to the console as a warning.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">warn</span>(<span class="ident">message</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">warn</span>(@{<span class="ident">message</span>}); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">warn_1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from_str</span>(<span class="ident">message</span>)),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">warn</span>(@{<span class="ident">message</span>}); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::warn_1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue::from_str</span>(<span class="ident">message</span>)),
         };
     }
 
@@ -223,9 +223,9 @@
     <span class="doccomment">/// method implementation.</span>
     <span class="doccomment">/// This method outputs the provided message to the console as information.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">info</span>(<span class="ident">message</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">info</span>(@{<span class="ident">message</span>}); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">info_1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from_str</span>(<span class="ident">message</span>)),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">info</span>(@{<span class="ident">message</span>}); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::info_1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue::from_str</span>(<span class="ident">message</span>)),
         };
     }
 
@@ -233,107 +233,107 @@
     <span class="doccomment">/// method implementation.</span>
     <span class="doccomment">/// This method outputs the provided message to the console as an error.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">error</span>(<span class="ident">message</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">error</span>(@{<span class="ident">message</span>}); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">error_1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from_str</span>(<span class="ident">message</span>)),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">error</span>(@{<span class="ident">message</span>}); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::error_1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue::from_str</span>(<span class="ident">message</span>)),
         };
     }
 
     <span class="doccomment">/// [console.debug](https://developer.mozilla.org/en-US/docs/Web/API/Console/debug)</span>
     <span class="doccomment">/// method implementation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">debug</span>(<span class="ident">message</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">debug</span>(@{<span class="ident">message</span>}); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">debug_1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue</span>::<span class="ident">from_str</span>(<span class="ident">message</span>)),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">debug</span>(@{<span class="ident">message</span>}); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::debug_1</span>(<span class="kw-2">&amp;</span><span class="ident">JsValue::from_str</span>(<span class="ident">message</span>)),
         };
     }
 
     <span class="doccomment">/// [console.count_named](https://developer.mozilla.org/en-US/docs/Web/API/Console/count_named)</span>
     <span class="doccomment">/// method implementation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">count_named</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">count</span>(@{<span class="ident">name</span>}); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">count_with_label</span>(<span class="ident">name</span>),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">count</span>(@{<span class="ident">name</span>}); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::count_with_label</span>(<span class="ident">name</span>),
         };
     }
 
     <span class="doccomment">/// [console.count](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)</span>
     <span class="doccomment">/// method implementation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">count</span>() {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">count</span>(); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">count</span>(),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">count</span>(); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::count</span>(),
         };
     }
 
     <span class="doccomment">/// [console.time_named](https://developer.mozilla.org/en-US/docs/Web/API/Console/time_named)</span>
     <span class="doccomment">/// method implementation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">time_named</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">time</span>(@{<span class="ident">name</span>}); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">time_with_label</span>(<span class="ident">name</span>),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">time</span>(@{<span class="ident">name</span>}); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::time_with_label</span>(<span class="ident">name</span>),
         };
     }
 
     <span class="doccomment">/// [console.time_named_end](https://developer.mozilla.org/en-US/docs/Web/API/Console/time_named_end)</span>
     <span class="doccomment">/// method implementation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">time_named_end</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">timeEnd</span>(@{<span class="ident">name</span>}); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">time_end_with_label</span>(<span class="ident">name</span>),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">timeEnd</span>(@{<span class="ident">name</span>}); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::time_end_with_label</span>(<span class="ident">name</span>),
         };
     }
 
     <span class="doccomment">/// [console.time](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)</span>
     <span class="doccomment">/// method implementation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">time</span>() {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">time</span>(); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">time</span>(),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">time</span>(); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::time</span>(),
         };
     }
     <span class="doccomment">/// [console.time_end](https://developer.mozilla.org/en-US/docs/Web/API/Console/time_end)</span>
     <span class="doccomment">/// method implementation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">time_end</span>() {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">timeEnd</span>(); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">time_end</span>(),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">timeEnd</span>(); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::time_end</span>(),
         };
     }
 
     <span class="doccomment">/// [console.clear](https://developer.mozilla.org/en-US/docs/Web/API/Console/clear)</span>
     <span class="doccomment">/// method implementation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clear</span>() {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">clear</span>(); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">clear</span>(),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">clear</span>(); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::clear</span>(),
         };
     }
 
     <span class="doccomment">/// [console.group](https://developer.mozilla.org/en-US/docs/Web/API/Console/group)</span>
     <span class="doccomment">/// method implementation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">group</span>() {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">group</span>(); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">group_0</span>(),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">group</span>(); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::group_0</span>(),
         };
     }
 
     <span class="doccomment">/// [console.group_collapsed](https://developer.mozilla.org/en-US/docs/Web/API/Console/group_collapsed)</span>
     <span class="doccomment">/// method implementation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">group_collapsed</span>() {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">groupCollapsed</span>(); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">group_collapsed_0</span>(),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">groupCollapsed</span>(); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::group_collapsed_0</span>(),
         };
     }
 
     <span class="doccomment">/// [console.group_end](https://developer.mozilla.org/en-US/docs/Web/API/Console/group_end)</span>
     <span class="doccomment">/// method implementation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">group_end</span>() {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">groupEnd</span>(); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">group_end</span>(),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">groupEnd</span>(); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::group_end</span>(),
         };
     }
 
@@ -341,18 +341,18 @@
     <span class="doccomment">/// method implementation.</span>
     <span class="doccomment">/// This method outputs the current stack trace to the console.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">trace</span>() {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">trace</span>(); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">trace_0</span>(),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">trace</span>(); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::trace_0</span>(),
         };
     }
 
     <span class="doccomment">/// [console.assert](https://developer.mozilla.org/en-US/docs/Web/API/Console/assert)</span>
     <span class="doccomment">/// method implementation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">assert</span>(<span class="ident">condition</span>: <span class="ident">bool</span>, <span class="ident">message</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
-        <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">assert</span>(@{<span class="ident">condition</span>}, @{<span class="ident">message</span>}); },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console</span>::<span class="ident">assert_with_condition_and_data_1</span>(<span class="ident">condition</span>, <span class="kw-2">&amp;</span><span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">message</span>).<span class="ident">into</span>()),
+        <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> { @(<span class="ident">no_return</span>) <span class="ident">console</span>.<span class="ident">assert</span>(@{<span class="ident">condition</span>}, @{<span class="ident">message</span>}); },
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">console::assert_with_condition_and_data_1</span>(<span class="ident">condition</span>, <span class="kw-2">&amp;</span><span class="ident">String::from</span>(<span class="ident">message</span>).<span class="ident">into</span>()),
         };
     }
 }

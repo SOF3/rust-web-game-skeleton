@@ -1174,15 +1174,15 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! This module contains fragments implementation.</span>
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Key</span>, <span class="ident">VDiff</span>, <span class="ident">VNode</span>, <span class="ident">VText</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">html</span>::{<span class="ident">AnyScope</span>, <span class="ident">NodeRef</span>};
-<span class="kw">use</span> <span class="ident">cfg_if</span>::<span class="ident">cfg_if</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Deref</span>, <span class="ident">DerefMut</span>};
-<span class="macro">cfg_if</span><span class="macro">!</span> {
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::html</span>::{<span class="ident">AnyScope</span>, <span class="ident">NodeRef</span>};
+<span class="kw">use</span> <span class="ident">cfg_if::cfg_if</span>;
+<span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>};
+<span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Deref</span>, <span class="ident">DerefMut</span>};
+<span class="macro">cfg_if!</span> {
     <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span> {
-        <span class="kw">use</span> <span class="ident">stdweb</span>::<span class="ident">web</span>::<span class="ident">Element</span>;
+        <span class="kw">use</span> <span class="ident">stdweb::web::Element</span>;
     } <span class="kw">else</span> <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> {
-        <span class="kw">use</span> <span class="ident">web_sys</span>::<span class="ident">Element</span>;
+        <span class="kw">use</span> <span class="ident">web_sys::Element</span>;
     }
 }
 
@@ -1197,13 +1197,13 @@
 <span class="kw">impl</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">VList</span> {
     <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">VNode</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Target</span> {
+    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span><span class="ident">::Target</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">children</span>
     }
 }
 
 <span class="kw">impl</span> <span class="ident">DerefMut</span> <span class="kw">for</span> <span class="ident">VList</span> {
-    <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Target</span> {
+    <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span><span class="ident">::Target</span> {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">children</span>
     }
 }
@@ -1211,7 +1211,7 @@
 <span class="kw">impl</span> <span class="ident">VList</span> {
     <span class="doccomment">/// Creates a new empty `VList` instance.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">default</span>()
+        <span class="self">Self</span><span class="ident">::default</span>()
     }
 
     <span class="doccomment">/// Creates a new `VList` instance with children.</span>
@@ -1230,11 +1230,11 @@
     }
 
     <span class="kw">fn</span> <span class="ident">children_keys</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">warn</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">Key</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hash_set</span> <span class="op">=</span> <span class="ident">HashSet</span>::<span class="ident">with_capacity</span>(<span class="self">self</span>.<span class="ident">children</span>.<span class="ident">len</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hash_set</span> <span class="op">=</span> <span class="ident">HashSet::with_capacity</span>(<span class="self">self</span>.<span class="ident">children</span>.<span class="ident">len</span>());
         <span class="kw">for</span> <span class="ident">l</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">children</span>.<span class="ident">iter</span>() {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">k</span>) <span class="op">=</span> <span class="ident">l</span>.<span class="ident">key</span>() {
                 <span class="kw">if</span> <span class="op">!</span><span class="ident">hash_set</span>.<span class="ident">insert</span>(<span class="ident">k</span>.<span class="ident">clone</span>()) <span class="op">&amp;&amp;</span> <span class="ident">warn</span> {
-                    <span class="ident">log</span>::<span class="macro">warn</span><span class="macro">!</span>(<span class="string">&quot;Key &#39;{}&#39; is not unique in list but must be.&quot;</span>, <span class="ident">k</span>);
+                    <span class="macro">log::warn!</span>(<span class="string">&quot;Key &#39;{}&#39; is not unique in list but must be.&quot;</span>, <span class="ident">k</span>);
                 }
             }
         }
@@ -1269,26 +1269,26 @@
             <span class="comment">// Without a placeholder the next element becomes first</span>
             <span class="comment">// and corrupts the order of rendering</span>
             <span class="comment">// We use empty text element to stake out a place</span>
-            <span class="kw">let</span> <span class="ident">placeholder</span> <span class="op">=</span> <span class="ident">VText</span>::<span class="ident">new</span>(<span class="string">&quot;&quot;</span>.<span class="ident">into</span>());
+            <span class="kw">let</span> <span class="ident">placeholder</span> <span class="op">=</span> <span class="ident">VText::new</span>(<span class="string">&quot;&quot;</span>.<span class="ident">into</span>());
             <span class="self">self</span>.<span class="ident">children</span>.<span class="ident">push</span>(<span class="ident">placeholder</span>.<span class="ident">into</span>());
         }
 
         <span class="kw">let</span> <span class="ident">left_keys</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">children_keys</span>(<span class="bool-val">true</span>);
         <span class="kw">let</span> <span class="ident">lefts_keyed</span> <span class="op">=</span> <span class="ident">left_keys</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">children</span>.<span class="ident">len</span>();
 
-        <span class="kw">let</span> <span class="ident">right_keys</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">VNode</span>::<span class="ident">VList</span>(<span class="ident">vlist</span>)) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">ancestor</span> {
+        <span class="kw">let</span> <span class="ident">right_keys</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">VNode::VList</span>(<span class="ident">vlist</span>)) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">ancestor</span> {
             <span class="ident">vlist</span>.<span class="ident">children_keys</span>(<span class="bool-val">false</span>)
         } <span class="kw">else</span> {
-            <span class="ident">HashSet</span>::<span class="ident">new</span>()
+            <span class="ident">HashSet::new</span>()
         };
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">right_children</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ancestor</span> {
             <span class="comment">// If the ancestor is also a VList, then the &quot;right&quot; list is the</span>
             <span class="comment">// previously rendered items.</span>
-            <span class="prelude-val">Some</span>(<span class="ident">VNode</span>::<span class="ident">VList</span>(<span class="ident">vlist</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">vlist</span>.<span class="ident">children</span>,
+            <span class="prelude-val">Some</span>(<span class="ident">VNode::VList</span>(<span class="ident">vlist</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">vlist</span>.<span class="ident">children</span>,
             <span class="comment">// If the ancestor was not a VList, then the &quot;right&quot; list is a single node</span>
-            <span class="prelude-val">Some</span>(<span class="ident">vnode</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="ident">vnode</span>],
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">vec</span><span class="macro">!</span>[],
+            <span class="prelude-val">Some</span>(<span class="ident">vnode</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">vec!</span>[<span class="ident">vnode</span>],
+            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">vec!</span>[],
         };
         <span class="kw">let</span> <span class="ident">rights_keyed</span> <span class="op">=</span> <span class="ident">right_keys</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">right_children</span>.<span class="ident">len</span>();
 
@@ -1313,7 +1313,7 @@
 
             <span class="comment">// Determine which rights are already in correct order and which</span>
             <span class="comment">// rights need to be moved in the DOM before being reused</span>
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rights_to_move</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">with_capacity</span>(<span class="ident">right_children</span>.<span class="ident">len</span>());
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rights_to_move</span> <span class="op">=</span> <span class="ident">HashMap::with_capacity</span>(<span class="ident">right_children</span>.<span class="ident">len</span>());
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">matched_lefts</span> <span class="op">=</span> <span class="self">self</span>
                 .<span class="ident">children</span>
                 .<span class="ident">iter</span>()
@@ -1322,7 +1322,7 @@
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">left</span> <span class="op">=</span> <span class="ident">matched_lefts</span>.<span class="ident">next</span>();
 
             <span class="comment">// Note: `filter_map` is used to move rights into `rights_to_move`</span>
-            <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">unnecessary_filter_map</span>)]</span>
+            <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::unnecessary_filter_map</span>)]</span>
             <span class="kw">let</span> <span class="ident">rights_in_place</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">right_children</span>
                 .<span class="ident">into_iter</span>()
                 .<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">right</span><span class="op">|</span> {
@@ -1341,7 +1341,7 @@
                 .<span class="ident">collect</span>();
 
             <span class="comment">// Move rights into correct order and build `right_children`</span>
-            <span class="ident">right_children</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">matched_keys</span>.<span class="ident">len</span>());
+            <span class="ident">right_children</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">matched_keys</span>.<span class="ident">len</span>());
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">matched_lefts</span> <span class="op">=</span> <span class="self">self</span>
                 .<span class="ident">children</span>
                 .<span class="ident">iter</span>()
@@ -1364,11 +1364,11 @@
                 <span class="ident">right_children</span>.<span class="ident">push</span>(<span class="ident">right_to_move</span>);
             }
 
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">rights_to_move</span>.<span class="ident">is_empty</span>())
+            <span class="macro">assert!</span>(<span class="ident">rights_to_move</span>.<span class="ident">is_empty</span>())
         }
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rights</span> <span class="op">=</span> <span class="ident">right_children</span>.<span class="ident">into_iter</span>().<span class="ident">peekable</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_next_sibling</span> <span class="op">=</span> <span class="ident">NodeRef</span>::<span class="ident">default</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_next_sibling</span> <span class="op">=</span> <span class="ident">NodeRef::default</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">nodes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NodeRef</span><span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>
             .<span class="ident">children</span>
             .<span class="ident">iter_mut</span>()
@@ -1377,7 +1377,7 @@
 
                 <span class="comment">// Create a new `next_sibling` reference which points to the next `right` or</span>
                 <span class="comment">// the outer list&#39;s `next_sibling` if there are no more `rights`.</span>
-                <span class="kw">let</span> <span class="ident">new_next_sibling</span> <span class="op">=</span> <span class="ident">NodeRef</span>::<span class="ident">default</span>();
+                <span class="kw">let</span> <span class="ident">new_next_sibling</span> <span class="op">=</span> <span class="ident">NodeRef::default</span>();
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">next_right</span>) <span class="op">=</span> <span class="ident">rights</span>.<span class="ident">peek</span>() {
                     <span class="ident">new_next_sibling</span>.<span class="ident">set</span>(<span class="prelude-val">Some</span>(<span class="ident">next_right</span>.<span class="ident">first_node</span>()));
                 } <span class="kw">else</span> {
@@ -1404,26 +1404,26 @@
             <span class="ident">right</span>.<span class="ident">detach</span>(<span class="ident">parent</span>);
         }
 
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">nodes</span>.<span class="ident">is_empty</span>(), <span class="string">&quot;VList should have at least one child&quot;</span>);
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">nodes</span>.<span class="ident">is_empty</span>(), <span class="string">&quot;VList should have at least one child&quot;</span>);
         <span class="ident">nodes</span>.<span class="ident">swap_remove</span>(<span class="number">0</span>)
     }
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">test</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>))]</span>
 <span class="kw">mod</span> <span class="ident">layout_tests</span> {
-    <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">virtual_dom</span>::<span class="ident">layout_tests</span>::{<span class="ident">diff_layouts</span>, <span class="ident">TestLayout</span>};
+    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::virtual_dom::layout_tests</span>::{<span class="ident">diff_layouts</span>, <span class="ident">TestLayout</span>};
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasm_test&quot;</span>)]</span>
     <span class="kw">use</span> <span class="ident">wasm_bindgen_test</span>::{<span class="ident">wasm_bindgen_test</span> <span class="kw">as</span> <span class="ident">test</span>, <span class="ident">wasm_bindgen_test_configure</span>};
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasm_test&quot;</span>)]</span>
-    <span class="macro">wasm_bindgen_test_configure</span><span class="macro">!</span>(<span class="ident">run_in_browser</span>);
+    <span class="macro">wasm_bindgen_test_configure!</span>(<span class="ident">run_in_browser</span>);
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">diff</span>() {
         <span class="kw">let</span> <span class="ident">layout1</span> <span class="op">=</span> <span class="ident">TestLayout</span> {
             <span class="ident">name</span>: <span class="string">&quot;1&quot;</span>,
-            <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+            <span class="ident">node</span>: <span class="macro">html!</span> {
                 <span class="op">&lt;</span><span class="op">&gt;</span>
                     {<span class="string">&quot;a&quot;</span>}
                     {<span class="string">&quot;b&quot;</span>}
@@ -1439,7 +1439,7 @@
 
         <span class="kw">let</span> <span class="ident">layout2</span> <span class="op">=</span> <span class="ident">TestLayout</span> {
             <span class="ident">name</span>: <span class="string">&quot;2&quot;</span>,
-            <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+            <span class="ident">node</span>: <span class="macro">html!</span> {
                 <span class="op">&lt;</span><span class="op">&gt;</span>
                     {<span class="string">&quot;a&quot;</span>}
                     {<span class="string">&quot;b&quot;</span>}
@@ -1453,7 +1453,7 @@
 
         <span class="kw">let</span> <span class="ident">layout3</span> <span class="op">=</span> <span class="ident">TestLayout</span> {
             <span class="ident">name</span>: <span class="string">&quot;3&quot;</span>,
-            <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+            <span class="ident">node</span>: <span class="macro">html!</span> {
                 <span class="op">&lt;</span><span class="op">&gt;</span>
                     {<span class="string">&quot;a&quot;</span>}
                     <span class="op">&lt;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="op">&gt;</span>
@@ -1466,7 +1466,7 @@
 
         <span class="kw">let</span> <span class="ident">layout4</span> <span class="op">=</span> <span class="ident">TestLayout</span> {
             <span class="ident">name</span>: <span class="string">&quot;4&quot;</span>,
-            <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+            <span class="ident">node</span>: <span class="macro">html!</span> {
                 <span class="op">&lt;</span><span class="op">&gt;</span>
                     {<span class="string">&quot;a&quot;</span>}
                     <span class="op">&lt;</span><span class="op">&gt;</span>
@@ -1480,22 +1480,22 @@
             <span class="ident">expected</span>: <span class="string">&quot;acdbe&quot;</span>,
         };
 
-        <span class="ident">diff_layouts</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="ident">layout1</span>, <span class="ident">layout2</span>, <span class="ident">layout3</span>, <span class="ident">layout4</span>]);
+        <span class="ident">diff_layouts</span>(<span class="macro">vec!</span>[<span class="ident">layout1</span>, <span class="ident">layout2</span>, <span class="ident">layout3</span>, <span class="ident">layout4</span>]);
     }
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">test</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>))]</span>
 <span class="kw">mod</span> <span class="ident">layout_tests_keys</span> {
-    <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">virtual_dom</span>::<span class="ident">layout_tests</span>::{<span class="ident">diff_layouts</span>, <span class="ident">TestLayout</span>};
-    <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">virtual_dom</span>::<span class="ident">VNode</span>;
+    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::virtual_dom::layout_tests</span>::{<span class="ident">diff_layouts</span>, <span class="ident">TestLayout</span>};
+    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::virtual_dom::VNode</span>;
     <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Children</span>, <span class="ident">Component</span>, <span class="ident">ComponentLink</span>, <span class="ident">Html</span>, <span class="ident">Properties</span>, <span class="ident">ShouldRender</span>};
-    <span class="kw">use</span> <span class="ident">web_sys</span>::<span class="ident">Node</span>;
+    <span class="kw">use</span> <span class="ident">web_sys::Node</span>;
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasm_test&quot;</span>)]</span>
     <span class="kw">use</span> <span class="ident">wasm_bindgen_test</span>::{<span class="ident">wasm_bindgen_test</span> <span class="kw">as</span> <span class="ident">test</span>, <span class="ident">wasm_bindgen_test_configure</span>};
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasm_test&quot;</span>)]</span>
-    <span class="macro">wasm_bindgen_test_configure</span><span class="macro">!</span>(<span class="ident">run_in_browser</span>);
+    <span class="macro">wasm_bindgen_test_configure!</span>(<span class="ident">run_in_browser</span>);
 
     <span class="kw">struct</span> <span class="ident">Comp</span> {
         <span class="ident">id</span>: <span class="ident">usize</span>,
@@ -1513,19 +1513,19 @@
         <span class="kw">type</span> <span class="ident">Message</span> <span class="op">=</span> ();
         <span class="kw">type</span> <span class="ident">Properties</span> <span class="op">=</span> <span class="ident">CountingCompProps</span>;
 
-        <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">props</span>: <span class="self">Self</span>::<span class="ident">Properties</span>, <span class="kw">_</span>: <span class="ident">ComponentLink</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">props</span>: <span class="self">Self</span><span class="ident">::Properties</span>, <span class="kw">_</span>: <span class="ident">ComponentLink</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">Comp</span> {
                 <span class="ident">id</span>: <span class="ident">props</span>.<span class="ident">id</span>,
                 <span class="ident">panic_if_changes</span>: <span class="ident">props</span>.<span class="ident">can_change</span>,
             }
         }
 
-        <span class="kw">fn</span> <span class="ident">change</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">props</span>: <span class="self">Self</span>::<span class="ident">Properties</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShouldRender</span> {
+        <span class="kw">fn</span> <span class="ident">change</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">props</span>: <span class="self">Self</span><span class="ident">::Properties</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShouldRender</span> {
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasm_test&quot;</span>)]</span>
-            <span class="ident">wasm_bindgen_test</span>::<span class="macro">console_log</span><span class="macro">!</span>(<span class="string">&quot;Comp changed: {} -&gt; {}&quot;</span>, <span class="self">self</span>.<span class="ident">id</span>, <span class="ident">props</span>.<span class="ident">id</span>);
+            <span class="macro">wasm_bindgen_test::console_log!</span>(<span class="string">&quot;Comp changed: {} -&gt; {}&quot;</span>, <span class="self">self</span>.<span class="ident">id</span>, <span class="ident">props</span>.<span class="ident">id</span>);
             <span class="kw">let</span> <span class="ident">changed</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">id</span> <span class="op">!</span><span class="op">=</span> <span class="ident">props</span>.<span class="ident">id</span>;
             <span class="kw">if</span> <span class="self">self</span>.<span class="ident">panic_if_changes</span> <span class="op">&amp;&amp;</span> <span class="ident">changed</span> {
-                <span class="macro">panic</span><span class="macro">!</span>(
+                <span class="macro">panic!</span>(
                     <span class="string">&quot;VComp changed but should not have: {} -&gt; {}.&quot;</span>,
                     <span class="self">self</span>.<span class="ident">id</span>, <span class="ident">props</span>.<span class="ident">id</span>
                 );
@@ -1534,12 +1534,12 @@
             <span class="ident">changed</span>
         }
 
-        <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw">_</span>: <span class="self">Self</span>::<span class="ident">Message</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShouldRender</span> {
-            <span class="macro">unimplemented</span><span class="macro">!</span>();
+        <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw">_</span>: <span class="self">Self</span><span class="ident">::Message</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShouldRender</span> {
+            <span class="macro">unimplemented!</span>();
         }
 
         <span class="kw">fn</span> <span class="ident">view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Html</span> {
-            <span class="macro">html</span><span class="macro">!</span> { <span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{ <span class="self">self</span>.<span class="ident">id</span> }<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span> }
+            <span class="macro">html!</span> { <span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{ <span class="self">self</span>.<span class="ident">id</span> }<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span> }
         }
     }
 
@@ -1554,32 +1554,32 @@
         <span class="kw">type</span> <span class="ident">Message</span> <span class="op">=</span> ();
         <span class="kw">type</span> <span class="ident">Properties</span> <span class="op">=</span> <span class="ident">ListProps</span>;
 
-        <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">props</span>: <span class="self">Self</span>::<span class="ident">Properties</span>, <span class="kw">_</span>: <span class="ident">ComponentLink</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">props</span>: <span class="self">Self</span><span class="ident">::Properties</span>, <span class="kw">_</span>: <span class="ident">ComponentLink</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="self">Self</span>(<span class="ident">props</span>)
         }
 
-        <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw">_</span>: <span class="self">Self</span>::<span class="ident">Message</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShouldRender</span> {
-            <span class="macro">unimplemented</span><span class="macro">!</span>();
+        <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw">_</span>: <span class="self">Self</span><span class="ident">::Message</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShouldRender</span> {
+            <span class="macro">unimplemented!</span>();
         }
 
-        <span class="kw">fn</span> <span class="ident">change</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">props</span>: <span class="self">Self</span>::<span class="ident">Properties</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShouldRender</span> {
-            <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">swap</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">props</span>);
+        <span class="kw">fn</span> <span class="ident">change</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">props</span>: <span class="self">Self</span><span class="ident">::Properties</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShouldRender</span> {
+            <span class="ident">std::mem::swap</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">props</span>);
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">children</span> <span class="op">!</span><span class="op">=</span> <span class="ident">props</span>.<span class="ident">children</span>
         }
 
         <span class="kw">fn</span> <span class="ident">view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Html</span> {
-            <span class="macro">html</span><span class="macro">!</span> { <span class="op">&lt;</span><span class="op">&gt;</span>{ <span class="kw">for</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">children</span>.<span class="ident">iter</span>() }<span class="op">&lt;</span><span class="op">/</span><span class="op">&gt;</span> }
+            <span class="macro">html!</span> { <span class="op">&lt;</span><span class="op">&gt;</span>{ <span class="kw">for</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">children</span>.<span class="ident">iter</span>() }<span class="op">&lt;</span><span class="op">/</span><span class="op">&gt;</span> }
         }
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">diff</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">layouts</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">layouts</span> <span class="op">=</span> <span class="macro">vec!</span>[];
 
-        <span class="kw">let</span> <span class="ident">vref_node</span>: <span class="ident">Node</span> <span class="op">=</span> <span class="kw">crate</span>::<span class="ident">utils</span>::<span class="ident">document</span>().<span class="ident">create_element</span>(<span class="string">&quot;i&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">into</span>();
+        <span class="kw">let</span> <span class="ident">vref_node</span>: <span class="ident">Node</span> <span class="op">=</span> <span class="kw">crate</span><span class="ident">::utils::document</span>().<span class="ident">create_element</span>(<span class="string">&quot;i&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">into</span>();
         <span class="ident">layouts</span>.<span class="ident">push</span>(<span class="ident">TestLayout</span> {
             <span class="ident">name</span>: <span class="string">&quot;All VNode types as children&quot;</span>,
-            <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+            <span class="ident">node</span>: <span class="macro">html!</span> {
                 <span class="op">&lt;</span><span class="op">&gt;</span>
                     {<span class="string">&quot;a&quot;</span>}
                     <span class="op">&lt;</span><span class="ident">span</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;vtag&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">span</span><span class="op">&gt;</span>
@@ -1590,16 +1590,16 @@
                         {<span class="string">&quot;foo&quot;</span>}
                         {<span class="string">&quot;bar&quot;</span>}
                     <span class="op">&lt;</span><span class="op">/</span><span class="op">&gt;</span>
-                    {<span class="ident">VNode</span>::<span class="ident">VRef</span>(<span class="ident">vref_node</span>)}
+                    {<span class="ident">VNode::VRef</span>(<span class="ident">vref_node</span>)}
                 <span class="op">&lt;</span><span class="op">/</span><span class="op">&gt;</span>
             },
             <span class="ident">expected</span>: <span class="string">&quot;a&lt;span&gt;&lt;/span&gt;cd&lt;p&gt;0&lt;/p&gt;foobar&lt;i&gt;&lt;/i&gt;&quot;</span>,
         });
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Inserting into VList first child - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">key</span><span class="op">=</span><span class="string">&quot;VList&quot;</span><span class="op">&gt;</span>
                             <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
@@ -1611,7 +1611,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Inserting into VList first child - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">key</span><span class="op">=</span><span class="string">&quot;VList&quot;</span><span class="op">&gt;</span>
                             <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
@@ -1624,10 +1624,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;No matches - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1637,7 +1637,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;No matches - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">a</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;a&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">a</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">p</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;p&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span>
@@ -1647,10 +1647,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Append - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1660,7 +1660,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Append - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1671,10 +1671,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Prepend - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1684,7 +1684,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Prepend - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">p</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;p&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
@@ -1695,10 +1695,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Delete first - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1709,7 +1709,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Delete first - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">p</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;p&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span>
@@ -1719,10 +1719,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Delete last - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1733,7 +1733,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Delete last - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1743,10 +1743,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Delete last and change node type - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1757,7 +1757,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Delete last - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">i</span><span class="op">/</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">e</span><span class="op">/</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
@@ -1768,10 +1768,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Delete middle - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1783,7 +1783,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Delete middle - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1795,10 +1795,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Delete middle and change node type - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1810,7 +1810,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Delete middle and change node type- after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">i</span><span class="op">/</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1822,10 +1822,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Reverse - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1837,7 +1837,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Reverse - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">u</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;u&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">u</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">p</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;p&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span>
@@ -1849,10 +1849,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Reverse and change node type - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;i&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">key</span><span class="op">=</span><span class="string">&quot;i1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="op">&gt;</span>
@@ -1869,7 +1869,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Reverse and change node type - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;u&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">u</span><span class="op">/</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;p&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">p</span><span class="op">/</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
@@ -1881,10 +1881,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Swap 1&amp;2 - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1897,7 +1897,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Swap 1&amp;2 - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
@@ -1910,10 +1910,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Swap 1&amp;2 and change node type - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1926,7 +1926,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Swap 1&amp;2 and change node type - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">e</span><span class="op">/</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">i</span><span class="op">/</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
@@ -1939,10 +1939,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;test - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">key</span><span class="op">=</span><span class="string">&quot;1&quot;</span><span class="op">&gt;</span>
                             <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;e&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1962,7 +1962,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Swap 4&amp;5 - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">key</span><span class="op">=</span><span class="string">&quot;2&quot;</span><span class="op">&gt;</span>
@@ -1975,10 +1975,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Swap 4&amp;5 - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -1991,7 +1991,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Swap 4&amp;5 - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -2004,10 +2004,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Swap 1&amp;5 - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -2020,7 +2020,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Swap 1&amp;5 - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">u</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;5&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">u</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -2033,10 +2033,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Move 2 after 4 - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">e</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">e</span><span class="op">&gt;</span>
@@ -2049,7 +2049,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Move 2 after 4 - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">i</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">p</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;3&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span>
@@ -2062,10 +2062,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Swap lists - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">key</span><span class="op">=</span><span class="string">&quot;1&quot;</span><span class="op">&gt;</span>
                             <span class="op">&lt;</span><span class="ident">i</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
@@ -2081,7 +2081,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Swap lists - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">key</span><span class="op">=</span><span class="string">&quot;2&quot;</span><span class="op">&gt;</span>
                             <span class="op">&lt;</span><span class="ident">a</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">a</span><span class="op">&gt;</span>
@@ -2097,10 +2097,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Swap lists with in-between - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">key</span><span class="op">=</span><span class="string">&quot;1&quot;</span><span class="op">&gt;</span>
                             <span class="op">&lt;</span><span class="ident">i</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">i</span><span class="op">&gt;</span>
@@ -2117,7 +2117,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Swap lists with in-between - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">key</span><span class="op">=</span><span class="string">&quot;2&quot;</span><span class="op">&gt;</span>
                             <span class="op">&lt;</span><span class="ident">a</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">a</span><span class="op">&gt;</span>
@@ -2134,10 +2134,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Insert VComp front - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">u</span> <span class="ident">key</span><span class="op">=</span><span class="number">1</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">u</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">a</span> <span class="ident">key</span><span class="op">=</span><span class="number">2</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">a</span><span class="op">&gt;</span>
@@ -2147,7 +2147,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Insert VComp front - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">Comp</span> <span class="ident">id</span><span class="op">=</span><span class="number">0</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp&quot;</span><span class="op">/</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">u</span> <span class="ident">key</span><span class="op">=</span><span class="number">1</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">u</span><span class="op">&gt;</span>
@@ -2158,10 +2158,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Insert VComp middle - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">u</span> <span class="ident">key</span><span class="op">=</span><span class="number">1</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">u</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">a</span> <span class="ident">key</span><span class="op">=</span><span class="number">2</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">a</span><span class="op">&gt;</span>
@@ -2171,7 +2171,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Insert VComp middle - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">u</span> <span class="ident">key</span><span class="op">=</span><span class="number">1</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">u</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">Comp</span> <span class="ident">id</span><span class="op">=</span><span class="number">0</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp&quot;</span><span class="op">/</span><span class="op">&gt;</span>
@@ -2182,10 +2182,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Insert VComp back - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">u</span> <span class="ident">key</span><span class="op">=</span><span class="number">1</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">u</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">a</span> <span class="ident">key</span><span class="op">=</span><span class="number">2</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">a</span><span class="op">&gt;</span>
@@ -2195,7 +2195,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Insert VComp back - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">u</span> <span class="ident">key</span><span class="op">=</span><span class="number">1</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">u</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">a</span> <span class="ident">key</span><span class="op">=</span><span class="number">2</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">a</span><span class="op">&gt;</span>
@@ -2206,10 +2206,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Reverse VComp children - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">Comp</span> <span class="ident">id</span><span class="op">=</span><span class="number">1</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-1&quot;</span><span class="op">/</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">Comp</span> <span class="ident">id</span><span class="op">=</span><span class="number">2</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-2&quot;</span><span class="op">/</span><span class="op">&gt;</span>
@@ -2220,7 +2220,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Reverse VComp children - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">Comp</span> <span class="ident">id</span><span class="op">=</span><span class="number">3</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-3&quot;</span><span class="op">/</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">Comp</span> <span class="ident">id</span><span class="op">=</span><span class="number">2</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-2&quot;</span><span class="op">/</span><span class="op">&gt;</span>
@@ -2231,10 +2231,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Reverse VComp children with children - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{<span class="string">&quot;11&quot;</span>}<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{<span class="string">&quot;12&quot;</span>}<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{<span class="string">&quot;21&quot;</span>}<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{<span class="string">&quot;22&quot;</span>}<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
@@ -2245,7 +2245,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Reverse VComp children with children - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-3&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{<span class="string">&quot;31&quot;</span>}<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{<span class="string">&quot;32&quot;</span>}<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{<span class="string">&quot;21&quot;</span>}<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{<span class="string">&quot;22&quot;</span>}<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
@@ -2256,10 +2256,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Complex component update - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="ident">List</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">Comp</span> <span class="ident">id</span><span class="op">=</span><span class="number">1</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-1&quot;</span><span class="op">/</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">Comp</span> <span class="ident">id</span><span class="op">=</span><span class="number">2</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-2&quot;</span><span class="op">/</span><span class="op">&gt;</span>
@@ -2269,7 +2269,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Complex component update - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="ident">List</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-1&quot;</span><span class="op">&gt;</span>
                             <span class="op">&lt;</span><span class="ident">Comp</span> <span class="ident">id</span><span class="op">=</span><span class="number">1</span> <span class="op">/</span><span class="op">&gt;</span>
@@ -2283,10 +2283,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Reorder VComp children with children - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{<span class="string">&quot;1&quot;</span>}<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-3&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{<span class="string">&quot;3&quot;</span>}<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
@@ -2300,7 +2300,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Reorder VComp children with children - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">Comp</span> <span class="ident">id</span><span class="op">=</span><span class="number">6</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-6&quot;</span><span class="op">/</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">Comp</span> <span class="ident">id</span><span class="op">=</span><span class="number">5</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-5&quot;</span><span class="op">/</span><span class="op">&gt;</span>
@@ -2314,10 +2314,10 @@
             },
         ]);
 
-        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">layouts</span>.<span class="ident">extend</span>(<span class="macro">vec!</span>[
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Replace and reorder components - before&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="ident">List</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-1&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{<span class="string">&quot;1&quot;</span>}<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">List</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-2&quot;</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{<span class="string">&quot;2&quot;</span>}<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
@@ -2328,7 +2328,7 @@
             },
             <span class="ident">TestLayout</span> {
                 <span class="ident">name</span>: <span class="string">&quot;Replace and reorder components - after&quot;</span>,
-                <span class="ident">node</span>: <span class="macro">html</span><span class="macro">!</span> {
+                <span class="ident">node</span>: <span class="macro">html!</span> {
                     <span class="op">&lt;</span><span class="ident">List</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">Comp</span> <span class="ident">id</span><span class="op">=</span><span class="number">3</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-3&quot;</span> <span class="op">/</span><span class="op">&gt;</span>
                         <span class="op">&lt;</span><span class="ident">Comp</span> <span class="ident">id</span><span class="op">=</span><span class="number">2</span> <span class="ident">key</span><span class="op">=</span><span class="string">&quot;comp-2&quot;</span> <span class="op">/</span><span class="op">&gt;</span>

@@ -160,17 +160,17 @@
 <span class="kw">mod</span> <span class="ident">variable</span>;
 <span class="kw">mod</span> <span class="ident">xof</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">digest</span>::{<span class="ident">Digest</span>, <span class="ident">Output</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">errors</span>::<span class="ident">InvalidOutputSize</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">fixed</span>::{<span class="ident">FixedOutput</span>, <span class="ident">FixedOutputDirty</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">variable</span>::{<span class="ident">VariableOutput</span>, <span class="ident">VariableOutputDirty</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">xof</span>::{<span class="ident">ExtendableOutput</span>, <span class="ident">ExtendableOutputDirty</span>, <span class="ident">XofReader</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">generic_array</span>::{<span class="self">self</span>, <span class="ident">typenum</span>::<span class="ident">consts</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::digest</span>::{<span class="ident">Digest</span>, <span class="ident">Output</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errors::InvalidOutputSize</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::fixed</span>::{<span class="ident">FixedOutput</span>, <span class="ident">FixedOutputDirty</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::variable</span>::{<span class="ident">VariableOutput</span>, <span class="ident">VariableOutputDirty</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::xof</span>::{<span class="ident">ExtendableOutput</span>, <span class="ident">ExtendableOutputDirty</span>, <span class="ident">XofReader</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">generic_array</span>::{<span class="self">self</span>, <span class="ident">typenum::consts</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;alloc&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">dyn_digest</span>::<span class="ident">DynDigest</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">dyn_digest::DynDigest</span>;
 
-<span class="kw">use</span> <span class="ident">generic_array</span>::<span class="ident">ArrayLength</span>;
+<span class="kw">use</span> <span class="ident">generic_array::ArrayLength</span>;
 
 <span class="doccomment">/// Trait for updating digest state with input data.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Update</span> {
@@ -207,16 +207,16 @@
 
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="doccomment">/// Implements `std::io::Write` trait for implementer of [`Update`]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">impl_write</span> {
+<span class="macro">macro_rules!</span> <span class="ident">impl_write</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">hasher</span>:<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-        <span class="kw">impl</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">Write</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">hasher</span> {
-            <span class="kw">fn</span> <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-                <span class="ident">Update</span>::<span class="ident">update</span>(<span class="self">self</span>, <span class="ident">buf</span>);
+        <span class="kw">impl</span> <span class="ident">std::io::Write</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">hasher</span> {
+            <span class="kw">fn</span> <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std::io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+                <span class="ident">Update::update</span>(<span class="self">self</span>, <span class="ident">buf</span>);
                 <span class="prelude-val">Ok</span>(<span class="ident">buf</span>.<span class="ident">len</span>())
             }
 
-            <span class="kw">fn</span> <span class="ident">flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+            <span class="kw">fn</span> <span class="ident">flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std::io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
                 <span class="prelude-val">Ok</span>(())
             }
         }

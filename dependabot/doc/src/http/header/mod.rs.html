@@ -250,15 +250,15 @@
 <span class="kw">mod</span> <span class="ident">name</span>;
 <span class="kw">mod</span> <span class="ident">value</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">map</span>::{
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::map</span>::{
     <span class="ident">AsHeaderName</span>, <span class="ident">Drain</span>, <span class="ident">Entry</span>, <span class="ident">GetAll</span>, <span class="ident">HeaderMap</span>, <span class="ident">IntoHeaderName</span>, <span class="ident">IntoIter</span>, <span class="ident">Iter</span>, <span class="ident">IterMut</span>, <span class="ident">Keys</span>,
     <span class="ident">OccupiedEntry</span>, <span class="ident">VacantEntry</span>, <span class="ident">ValueDrain</span>, <span class="ident">ValueIter</span>, <span class="ident">ValueIterMut</span>, <span class="ident">Values</span>, <span class="ident">ValuesMut</span>,
 };
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">name</span>::{<span class="ident">HeaderName</span>, <span class="ident">InvalidHeaderName</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">value</span>::{<span class="ident">HeaderValue</span>, <span class="ident">InvalidHeaderValue</span>, <span class="ident">ToStrError</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::name</span>::{<span class="ident">HeaderName</span>, <span class="ident">InvalidHeaderName</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::value</span>::{<span class="ident">HeaderValue</span>, <span class="ident">InvalidHeaderValue</span>, <span class="ident">ToStrError</span>};
 
 <span class="comment">// Use header name constants</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">name</span>::{
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::name</span>::{
     <span class="ident">ACCEPT</span>,
     <span class="ident">ACCEPT_CHARSET</span>,
     <span class="ident">ACCEPT_ENCODING</span>,

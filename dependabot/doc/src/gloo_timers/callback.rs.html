@@ -270,13 +270,13 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Callback-style timer APIs.</span>
 
-<span class="kw">use</span> <span class="ident">js_sys</span>::<span class="ident">Function</span>;
-<span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">js_sys::Function</span>;
+<span class="kw">use</span> <span class="ident">wasm_bindgen::prelude</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::{<span class="ident">JsCast</span>, <span class="ident">JsValue</span>};
 <span class="kw">use</span> <span class="ident">web_sys</span>::{<span class="ident">Window</span>, <span class="ident">WorkerGlobalScope</span>};
 
-<span class="macro">thread_local</span><span class="macro">!</span> {
-    <span class="kw">static</span> <span class="ident">GLOBAL</span>: <span class="ident">WindowOrWorker</span> <span class="op">=</span> <span class="ident">WindowOrWorker</span>::<span class="ident">new</span>();
+<span class="macro">thread_local!</span> {
+    <span class="kw">static</span> <span class="ident">GLOBAL</span>: <span class="ident">WindowOrWorker</span> <span class="op">=</span> <span class="ident">WindowOrWorker::new</span>();
 }
 
 <span class="kw">enum</span> <span class="ident">WindowOrWorker</span> {
@@ -297,26 +297,26 @@
             <span class="kw">fn</span> <span class="ident">worker</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">Global</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">JsValue</span>;
         }
 
-        <span class="kw">let</span> <span class="ident">global</span>: <span class="ident">Global</span> <span class="op">=</span> <span class="ident">js_sys</span>::<span class="ident">global</span>().<span class="ident">unchecked_into</span>();
+        <span class="kw">let</span> <span class="ident">global</span>: <span class="ident">Global</span> <span class="op">=</span> <span class="ident">js_sys::global</span>().<span class="ident">unchecked_into</span>();
 
         <span class="kw">if</span> <span class="op">!</span><span class="ident">global</span>.<span class="ident">window</span>().<span class="ident">is_undefined</span>() {
-            <span class="self">Self</span>::<span class="ident">Window</span>(<span class="ident">global</span>.<span class="ident">unchecked_into</span>())
+            <span class="self">Self</span><span class="ident">::Window</span>(<span class="ident">global</span>.<span class="ident">unchecked_into</span>())
         } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">global</span>.<span class="ident">worker</span>().<span class="ident">is_undefined</span>() {
-            <span class="self">Self</span>::<span class="ident">Worker</span>(<span class="ident">global</span>.<span class="ident">unchecked_into</span>())
+            <span class="self">Self</span><span class="ident">::Worker</span>(<span class="ident">global</span>.<span class="ident">unchecked_into</span>())
         } <span class="kw">else</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Only supported in a browser or web worker&quot;</span>);
+            <span class="macro">panic!</span>(<span class="string">&quot;Only supported in a browser or web worker&quot;</span>);
         }
     }
 }
 
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">impl_window_or_worker</span> {
+<span class="macro">macro_rules!</span> <span class="ident">impl_window_or_worker</span> {
     ($(<span class="kw">fn</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">par_name</span>:<span class="ident">ident</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">par_type</span>:<span class="ident">ty</span>),<span class="kw-2">*</span>)$( <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="kw">return</span>:<span class="macro-nonterminal">ty</span>)<span class="question-mark">?</span>;)<span class="op">+</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="kw">impl</span> <span class="ident">WindowOrWorker</span> {
             $(
                 <span class="kw">fn</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">par_name</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">par_type</span>),<span class="kw-2">*</span>)$( <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="kw">return</span>)<span class="question-mark">?</span> {
                     <span class="kw">match</span> <span class="self">self</span> {
-                        <span class="self">Self</span>::<span class="macro-nonterminal">Window</span>(<span class="ident">window</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">window</span>.<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">par_name</span>),<span class="kw-2">*</span>),
-                        <span class="self">Self</span>::<span class="ident">Worker</span>(<span class="ident">worker</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">worker</span>.<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">par_name</span>),<span class="kw-2">*</span>),
+                        <span class="self">Self</span><span class="macro-nonterminal">::Window</span>(<span class="ident">window</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">window</span>.<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">par_name</span>),<span class="kw-2">*</span>),
+                        <span class="self">Self</span><span class="ident">::Worker</span>(<span class="ident">worker</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">worker</span>.<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">par_name</span>),<span class="kw-2">*</span>),
                     }
                 }
             )<span class="op">+</span>
@@ -324,7 +324,7 @@
     };
 }
 
-<span class="macro">impl_window_or_worker</span><span class="macro">!</span> {
+<span class="macro">impl_window_or_worker!</span> {
     <span class="kw">fn</span> <span class="ident">set_timeout_with_callback_and_timeout_and_arguments_0</span>(<span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">Function</span>, <span class="ident">timeout</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="kw">fn</span> <span class="ident">set_interval_with_callback_and_timeout_and_arguments_0</span>(<span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="ident">Function</span>, <span class="ident">timeout</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="kw">fn</span> <span class="ident">clear_timeout_with_handle</span>(<span class="ident">handle</span>: <span class="ident">i32</span>);
@@ -369,12 +369,12 @@
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="lifetime">&#39;static</span> <span class="op">+</span> <span class="ident">FnOnce</span>(),
     {
-        <span class="kw">let</span> <span class="ident">closure</span> <span class="op">=</span> <span class="ident">Closure</span>::<span class="ident">once</span>(<span class="ident">callback</span>);
+        <span class="kw">let</span> <span class="ident">closure</span> <span class="op">=</span> <span class="ident">Closure::once</span>(<span class="ident">callback</span>);
 
         <span class="kw">let</span> <span class="ident">id</span> <span class="op">=</span> <span class="ident">GLOBAL</span>.<span class="ident">with</span>(<span class="op">|</span><span class="ident">global</span><span class="op">|</span> {
             <span class="ident">global</span>
                 .<span class="ident">set_timeout_with_callback_and_timeout_and_arguments_0</span>(
-                    <span class="ident">closure</span>.<span class="ident">as_ref</span>().<span class="ident">unchecked_ref</span>::<span class="op">&lt;</span><span class="ident">js_sys</span>::<span class="ident">Function</span><span class="op">&gt;</span>(),
+                    <span class="ident">closure</span>.<span class="ident">as_ref</span>().<span class="ident">unchecked_ref</span>::<span class="op">&lt;</span><span class="ident">js_sys::Function</span><span class="op">&gt;</span>(),
                     <span class="ident">millis</span> <span class="kw">as</span> <span class="ident">i32</span>,
                 )
                 .<span class="ident">unwrap_throw</span>()
@@ -471,12 +471,12 @@
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="lifetime">&#39;static</span> <span class="op">+</span> <span class="ident">FnMut</span>(),
     {
-        <span class="kw">let</span> <span class="ident">closure</span> <span class="op">=</span> <span class="ident">Closure</span>::<span class="ident">wrap</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">callback</span>) <span class="kw">as</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">FnMut</span>()<span class="op">&gt;</span>);
+        <span class="kw">let</span> <span class="ident">closure</span> <span class="op">=</span> <span class="ident">Closure::wrap</span>(<span class="ident">Box::new</span>(<span class="ident">callback</span>) <span class="kw">as</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">FnMut</span>()<span class="op">&gt;</span>);
 
         <span class="kw">let</span> <span class="ident">id</span> <span class="op">=</span> <span class="ident">GLOBAL</span>.<span class="ident">with</span>(<span class="op">|</span><span class="ident">global</span><span class="op">|</span> {
             <span class="ident">global</span>
                 .<span class="ident">set_interval_with_callback_and_timeout_and_arguments_0</span>(
-                    <span class="ident">closure</span>.<span class="ident">as_ref</span>().<span class="ident">unchecked_ref</span>::<span class="op">&lt;</span><span class="ident">js_sys</span>::<span class="ident">Function</span><span class="op">&gt;</span>(),
+                    <span class="ident">closure</span>.<span class="ident">as_ref</span>().<span class="ident">unchecked_ref</span>::<span class="op">&lt;</span><span class="ident">js_sys::Function</span><span class="op">&gt;</span>(),
                     <span class="ident">millis</span> <span class="kw">as</span> <span class="ident">i32</span>,
                 )
                 .<span class="ident">unwrap_throw</span>()

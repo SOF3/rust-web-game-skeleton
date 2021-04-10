@@ -229,7 +229,7 @@
 <span id="226">226</span>
 <span id="227">227</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">needless_doctest_main</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::needless_doctest_main</span>)]</span>
 <span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_logo_url</span> <span class="op">=</span> <span class="string">&quot;https://static.yew.rs/logo.svg&quot;</span>)]</span>
 
 <span class="doccomment">//! # Yew Framework - API Documentation</span>
@@ -327,20 +327,20 @@
 <span class="attribute">#![<span class="ident">recursion_limit</span> <span class="op">=</span> <span class="string">&quot;512&quot;</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="self">self</span> <span class="kw">as</span> <span class="ident">yew</span>;
 
-<span class="kw">use</span> <span class="ident">proc_macro_hack</span>::<span class="ident">proc_macro_hack</span>;
+<span class="kw">use</span> <span class="ident">proc_macro_hack::proc_macro_hack</span>;
 <span class="doccomment">/// This macro implements JSX-like templates.</span>
 <span class="attribute">#[<span class="ident">proc_macro_hack</span>(<span class="ident">support_nested</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">yew_macro</span>::<span class="ident">html</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">yew_macro::html</span>;
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="attribute">#[<span class="ident">proc_macro_hack</span>(<span class="ident">support_nested</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">yew_macro</span>::<span class="ident">html_nested</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">yew_macro::html_nested</span>;
 
 <span class="doccomment">/// This module contains macros which implements html! macro and JSX-like templates</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">macros</span> {
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">html</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">html_nested</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">yew_macro</span>::<span class="ident">Properties</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::html</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::html_nested</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">yew_macro::Properties</span>;
 }
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">app</span>;
@@ -361,14 +361,14 @@
 
 <span class="doccomment">/// The module that contains all events available in the framework.</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">events</span> {
-    <span class="kw">use</span> <span class="ident">cfg_if</span>::<span class="ident">cfg_if</span>;
+    <span class="kw">use</span> <span class="ident">cfg_if::cfg_if</span>;
 
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">html</span>::{<span class="ident">ChangeData</span>, <span class="ident">InputData</span>};
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::html</span>::{<span class="ident">ChangeData</span>, <span class="ident">InputData</span>};
 
-    <span class="macro">cfg_if</span><span class="macro">!</span> {
+    <span class="macro">cfg_if!</span> {
         <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span> {
             <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>)]</span>
-            <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">stdweb</span>::<span class="ident">web</span>::<span class="ident">event</span>::{
+            <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">stdweb::web::event</span>::{
                 <span class="ident">BlurEvent</span>, <span class="ident">ClickEvent</span>, <span class="ident">ContextMenuEvent</span>, <span class="ident">DoubleClickEvent</span>, <span class="ident">DragDropEvent</span>, <span class="ident">DragEndEvent</span>,
                 <span class="ident">DragEnterEvent</span>, <span class="ident">DragEvent</span>, <span class="ident">DragExitEvent</span>, <span class="ident">DragLeaveEvent</span>, <span class="ident">DragOverEvent</span>, <span class="ident">DragStartEvent</span>,
                 <span class="ident">FocusEvent</span>, <span class="ident">GotPointerCaptureEvent</span>, <span class="ident">IKeyboardEvent</span>, <span class="ident">IMouseEvent</span>, <span class="ident">IPointerEvent</span>,
@@ -388,40 +388,40 @@
     }
 }
 
-<span class="kw">use</span> <span class="ident">cfg_match</span>::<span class="ident">cfg_match</span>;
+<span class="kw">use</span> <span class="ident">cfg_match::cfg_match</span>;
 
 <span class="doccomment">/// Initializes yew framework. It should be called first.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">initialize</span>() {
-    <span class="macro">cfg_match</span><span class="macro">!</span> {
-        <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">stdweb</span>::<span class="ident">initialize</span>(),
-        <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">std</span>::<span class="ident">panic</span>::<span class="ident">set_hook</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">console_error_panic_hook</span>::<span class="ident">hook</span>)),
+    <span class="macro">cfg_match!</span> {
+        <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">stdweb::initialize</span>(),
+        <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">std::panic::set_hook</span>(<span class="ident">Box::new</span>(<span class="ident">console_error_panic_hook::hook</span>)),
     };
 }
 
 <span class="doccomment">/// Starts event loop.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">run_loop</span>() {
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span>
-    <span class="ident">stdweb</span>::<span class="ident">event_loop</span>();
+    <span class="ident">stdweb::event_loop</span>();
 }
 
 <span class="doccomment">/// Starts an app mounted to a body of the document.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start_app</span><span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span>()
 <span class="kw">where</span>
     <span class="ident">COMP</span>: <span class="ident">Component</span>,
-    <span class="ident">COMP</span>::<span class="ident">Properties</span>: <span class="ident">Default</span>,
+    <span class="ident">COMP::Properties</span>: <span class="ident">Default</span>,
 {
     <span class="ident">initialize</span>();
-    <span class="ident">App</span>::<span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span>::<span class="ident">new</span>().<span class="ident">mount_to_body</span>();
+    <span class="ident">App</span>::<span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span><span class="ident">::new</span>().<span class="ident">mount_to_body</span>();
     <span class="ident">run_loop</span>();
 }
 
 <span class="doccomment">/// Starts an app mounted to a body of the document.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start_app_with_props</span><span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span>(<span class="ident">props</span>: <span class="ident">COMP</span>::<span class="ident">Properties</span>)
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start_app_with_props</span><span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span>(<span class="ident">props</span>: <span class="ident">COMP::Properties</span>)
 <span class="kw">where</span>
     <span class="ident">COMP</span>: <span class="ident">Component</span>,
 {
     <span class="ident">initialize</span>();
-    <span class="ident">App</span>::<span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span>::<span class="ident">new</span>().<span class="ident">mount_to_body_with_props</span>(<span class="ident">props</span>);
+    <span class="ident">App</span>::<span class="op">&lt;</span><span class="ident">COMP</span><span class="op">&gt;</span><span class="ident">::new</span>().<span class="ident">mount_to_body_with_props</span>(<span class="ident">props</span>);
     <span class="ident">run_loop</span>();
 }
 
@@ -435,27 +435,27 @@
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">prelude</span> {
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;agent&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">agent</span>::{<span class="ident">Bridge</span>, <span class="ident">Bridged</span>, <span class="ident">Dispatched</span>, <span class="ident">Threaded</span>};
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">app</span>::<span class="ident">App</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">callback</span>::<span class="ident">Callback</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">events</span>::<span class="kw-2">*</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">html</span>::{
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::agent</span>::{<span class="ident">Bridge</span>, <span class="ident">Bridged</span>, <span class="ident">Dispatched</span>, <span class="ident">Threaded</span>};
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::app::App</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::callback::Callback</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::events</span>::<span class="kw-2">*</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::html</span>::{
         <span class="ident">Children</span>, <span class="ident">ChildrenWithProps</span>, <span class="ident">Component</span>, <span class="ident">ComponentLink</span>, <span class="ident">Href</span>, <span class="ident">Html</span>, <span class="ident">NodeRef</span>, <span class="ident">Properties</span>,
         <span class="ident">Renderable</span>, <span class="ident">ShouldRender</span>,
     };
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">macros</span>::<span class="kw-2">*</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">virtual_dom</span>::<span class="ident">Classes</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::macros</span>::<span class="kw-2">*</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::virtual_dom::Classes</span>;
 
     <span class="doccomment">/// Prelude module for creating worker.</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;agent&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">worker</span> {
-        <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">agent</span>::{
+        <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::agent</span>::{
             <span class="ident">Agent</span>, <span class="ident">AgentLink</span>, <span class="ident">Bridge</span>, <span class="ident">Bridged</span>, <span class="ident">Context</span>, <span class="ident">HandlerId</span>, <span class="ident">Job</span>, <span class="ident">Private</span>, <span class="ident">Public</span>,
         };
     }
 }
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::prelude</span>::<span class="kw-2">*</span>;
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="yew" data-search-js="../../search-index.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>

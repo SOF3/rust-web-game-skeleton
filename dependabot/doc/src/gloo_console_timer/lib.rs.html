@@ -154,7 +154,7 @@ let timeout = Timeout::new(1_000, move || {
 
 <span class="attribute">#![<span class="ident">deny</span>(<span class="ident">missing_docs</span>, <span class="ident">missing_debug_implementations</span>)]</span>
 
-<span class="kw">use</span> <span class="ident">web_sys</span>::<span class="ident">console</span>;
+<span class="kw">use</span> <span class="ident">web_sys::console</span>;
 
 <span class="doccomment">/// A console time measurement.</span>
 <span class="doccomment">///</span>
@@ -177,7 +177,7 @@ let timeout = Timeout::new(1_000, move || {
     <span class="doccomment">/// let _timer = ConsoleTimer::new(&quot;foo&quot;);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">label</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ConsoleTimer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="ident">console</span>::<span class="ident">time_with_label</span>(<span class="ident">label</span>);
+        <span class="ident">console::time_with_label</span>(<span class="ident">label</span>);
         <span class="ident">ConsoleTimer</span> { <span class="ident">label</span> }
     }
 
@@ -196,14 +196,14 @@ let timeout = Timeout::new(1_000, move || {
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="ident">FnOnce</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
     {
-        <span class="kw">let</span> <span class="ident">_timer</span> <span class="op">=</span> <span class="ident">ConsoleTimer</span>::<span class="ident">new</span>(<span class="ident">label</span>);
+        <span class="kw">let</span> <span class="ident">_timer</span> <span class="op">=</span> <span class="ident">ConsoleTimer::new</span>(<span class="ident">label</span>);
         <span class="ident">f</span>()
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">ConsoleTimer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-        <span class="ident">console</span>::<span class="ident">time_end_with_label</span>(<span class="self">self</span>.<span class="ident">label</span>);
+        <span class="ident">console::time_end_with_label</span>(<span class="self">self</span>.<span class="ident">label</span>);
     }
 }
 </pre></div>

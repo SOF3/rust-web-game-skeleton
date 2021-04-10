@@ -62,14 +62,14 @@
 <span id="59">59</span>
 <span id="60">60</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">ToNodeIterator</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">PeekValue</span>;
-<span class="kw">use</span> <span class="ident">boolinator</span>::<span class="ident">Boolinator</span>;
-<span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span>;
+<span class="kw">use</span> <span class="kw">super</span><span class="ident">::ToNodeIterator</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::PeekValue</span>;
+<span class="kw">use</span> <span class="ident">boolinator::Boolinator</span>;
+<span class="kw">use</span> <span class="ident">proc_macro2::TokenStream</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">quote_spanned</span>, <span class="ident">ToTokens</span>};
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">buffer</span>::<span class="ident">Cursor</span>;
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">parse</span>::{<span class="ident">Parse</span>, <span class="ident">ParseStream</span>, <span class="prelude-ty">Result</span> <span class="kw">as</span> <span class="ident">ParseResult</span>};
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">spanned</span>::<span class="ident">Spanned</span>;
+<span class="kw">use</span> <span class="ident">syn::buffer::Cursor</span>;
+<span class="kw">use</span> <span class="ident">syn::parse</span>::{<span class="ident">Parse</span>, <span class="ident">ParseStream</span>, <span class="prelude-ty">Result</span> <span class="kw">as</span> <span class="ident">ParseResult</span>};
+<span class="kw">use</span> <span class="ident">syn::spanned::Spanned</span>;
 <span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">Expr</span>, <span class="ident">Token</span>};
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">HtmlIterable</span>(<span class="ident">Expr</span>);
@@ -83,13 +83,13 @@
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">HtmlIterable</span> {
     <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ParseResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">for_token</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="macro">Token</span><span class="macro">!</span>[<span class="kw">for</span>]<span class="op">&gt;</span>()<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">for_token</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="macro">Token!</span>[<span class="kw">for</span>]<span class="op">&gt;</span>()<span class="question-mark">?</span>;
 
         <span class="kw">match</span> <span class="ident">input</span>.<span class="ident">parse</span>() {
             <span class="prelude-val">Ok</span>(<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">HtmlIterable</span>(<span class="ident">expr</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">if</span> <span class="ident">err</span>.<span class="ident">to_string</span>().<span class="ident">starts_with</span>(<span class="string">&quot;unexpected end of input&quot;</span>) {
-                    <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
+                    <span class="prelude-val">Err</span>(<span class="ident">syn::Error::new_spanned</span>(
                         <span class="ident">for_token</span>,
                         <span class="string">&quot;expected an expression after the keyword `for`&quot;</span>,
                     ))
@@ -104,8 +104,8 @@
 <span class="kw">impl</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">HtmlIterable</span> {
     <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">TokenStream</span>) {
         <span class="kw">let</span> <span class="ident">expr</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">new_tokens</span> <span class="op">=</span> <span class="macro">quote_spanned</span><span class="macro">!</span> {<span class="ident">expr</span>.<span class="ident">span</span>()<span class="op">=</span><span class="op">&gt;</span>
-            ::<span class="ident">std</span>::<span class="ident">iter</span>::<span class="ident">Iterator</span>::<span class="ident">collect</span>::<span class="op">&lt;</span>::<span class="ident">yew</span>::<span class="ident">virtual_dom</span>::<span class="ident">VNode</span><span class="op">&gt;</span>(::<span class="ident">std</span>::<span class="ident">iter</span>::<span class="ident">IntoIterator</span>::<span class="ident">into_iter</span>(#<span class="ident">expr</span>))
+        <span class="kw">let</span> <span class="ident">new_tokens</span> <span class="op">=</span> <span class="macro">quote_spanned!</span> {<span class="ident">expr</span>.<span class="ident">span</span>()<span class="op">=</span><span class="op">&gt;</span>
+            <span class="ident">::std::iter::Iterator::collect</span>::<span class="op">&lt;</span><span class="ident">::yew::virtual_dom::VNode</span><span class="op">&gt;</span>(<span class="ident">::std::iter::IntoIterator::into_iter</span>(#<span class="ident">expr</span>))
         };
 
         <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="ident">new_tokens</span>);
@@ -117,8 +117,8 @@
         <span class="kw">let</span> <span class="self">Self</span>(<span class="ident">expr</span>) <span class="op">=</span> <span class="self">self</span>;
         <span class="comment">// #expr can return anything that implements IntoIterator&lt;Item=Into&lt;T&gt;&gt;</span>
         <span class="comment">// so we generate some extra code to turn it into IntoIterator&lt;Item=T&gt;</span>
-        <span class="prelude-val">Some</span>(<span class="macro">quote_spanned</span><span class="macro">!</span> {<span class="ident">expr</span>.<span class="ident">span</span>()<span class="op">=</span><span class="op">&gt;</span>
-            ::<span class="ident">std</span>::<span class="ident">iter</span>::<span class="ident">Iterator</span>::<span class="ident">map</span>(::<span class="ident">std</span>::<span class="ident">iter</span>::<span class="ident">IntoIterator</span>::<span class="ident">into_iter</span>(#<span class="ident">expr</span>), <span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">n</span>.<span class="ident">into</span>())
+        <span class="prelude-val">Some</span>(<span class="macro">quote_spanned!</span> {<span class="ident">expr</span>.<span class="ident">span</span>()<span class="op">=</span><span class="op">&gt;</span>
+            <span class="ident">::std::iter::Iterator::map</span>(<span class="ident">::std::iter::IntoIterator::into_iter</span>(#<span class="ident">expr</span>), <span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">n</span>.<span class="ident">into</span>())
         })
     }
 }

@@ -108,12 +108,12 @@
 <span id="107">107</span>
 <span id="108">108</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">many_single_char_names</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::many_single_char_names</span>)]</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">arch</span>::<span class="ident">x86_64</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">core::arch::x86_64</span>::<span class="kw-2">*</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">arch</span>::<span class="ident">x86</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">core::arch::x86</span>::<span class="kw-2">*</span>;
 
 <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">schedule</span>(<span class="ident">v0</span>: <span class="ident">__m128i</span>, <span class="ident">v1</span>: <span class="ident">__m128i</span>, <span class="ident">v2</span>: <span class="ident">__m128i</span>, <span class="ident">v3</span>: <span class="ident">__m128i</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">__m128i</span> {
     <span class="kw">let</span> <span class="ident">t1</span> <span class="op">=</span> <span class="ident">_mm_sha256msg1_epu32</span>(<span class="ident">v0</span>, <span class="ident">v1</span>);
@@ -122,9 +122,9 @@
     <span class="ident">_mm_sha256msg2_epu32</span>(<span class="ident">t3</span>, <span class="ident">v3</span>)
 }
 
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">rounds4</span> {
+<span class="macro">macro_rules!</span> <span class="ident">rounds4</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">abef</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">cdgh</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">rest</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">i</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {{
-        <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="kw">crate</span>::<span class="ident">consts</span>::<span class="ident">K32X4</span>[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">i</span>];
+        <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="kw">crate</span><span class="ident">::consts::K32X4</span>[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">i</span>];
         <span class="kw">let</span> <span class="ident">kv</span> <span class="op">=</span> <span class="ident">_mm_set_epi32</span>(<span class="ident">k</span>[<span class="number">0</span>] <span class="kw">as</span> <span class="ident">i32</span>, <span class="ident">k</span>[<span class="number">1</span>] <span class="kw">as</span> <span class="ident">i32</span>, <span class="ident">k</span>[<span class="number">2</span>] <span class="kw">as</span> <span class="ident">i32</span>, <span class="ident">k</span>[<span class="number">3</span>] <span class="kw">as</span> <span class="ident">i32</span>);
         <span class="kw">let</span> <span class="ident">t1</span> <span class="op">=</span> <span class="ident">_mm_add_epi32</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">rest</span>, <span class="ident">kv</span>);
         <span class="macro-nonterminal">$</span><span class="macro-nonterminal">cdgh</span> <span class="op">=</span> <span class="ident">_mm_sha256rnds2_epu32</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">cdgh</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">abef</span>, <span class="ident">t1</span>);
@@ -133,19 +133,19 @@
     }};
 }
 
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">schedule_rounds4</span> {
+<span class="macro">macro_rules!</span> <span class="ident">schedule_rounds4</span> {
     (
         <span class="macro-nonterminal">$</span><span class="macro-nonterminal">abef</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">cdgh</span>:<span class="ident">ident</span>,
         <span class="macro-nonterminal">$</span><span class="macro-nonterminal">w0</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">w1</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">w2</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">w3</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">w4</span>:<span class="ident">expr</span>,
         <span class="macro-nonterminal">$</span><span class="macro-nonterminal">i</span>: <span class="ident">expr</span>
     ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="macro-nonterminal">$</span><span class="macro-nonterminal">w4</span> <span class="op">=</span> <span class="ident">schedule</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">w0</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">w1</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">w2</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">w3</span>);
-        <span class="macro">rounds4</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">abef</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">cdgh</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">w4</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">i</span>);
+        <span class="macro">rounds4!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">abef</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">cdgh</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">w4</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">i</span>);
     }};
 }
 
 <span class="comment">// we use unaligned loads with `__m128i` pointers</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">cast_ptr_alignment</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cast_ptr_alignment</span>)]</span>
 <span class="attribute">#[<span class="ident">target_feature</span>(<span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;sha,sse2,ssse3,sse4.1&quot;</span>)]</span>
 <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">digest_blocks</span>(<span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u32</span>; <span class="number">8</span>], <span class="ident">blocks</span>: <span class="kw-2">&amp;</span>[[<span class="ident">u8</span>; <span class="number">64</span>]]) {
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
@@ -174,22 +174,22 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">w3</span> <span class="op">=</span> <span class="ident">_mm_shuffle_epi8</span>( <span class="ident">_mm_loadu_si128</span>(<span class="ident">data_ptr</span>.<span class="ident">add</span>(<span class="number">3</span>)), <span class="ident">MASK</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">w4</span>;
 
-        <span class="macro">rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w0</span>, <span class="number">0</span>);
-        <span class="macro">rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w1</span>, <span class="number">1</span>);
-        <span class="macro">rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w2</span>, <span class="number">2</span>);
-        <span class="macro">rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w3</span>, <span class="number">3</span>);
-        <span class="macro">schedule_rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="number">4</span>);
-        <span class="macro">schedule_rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="number">5</span>);
-        <span class="macro">schedule_rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="number">6</span>);
-        <span class="macro">schedule_rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="number">7</span>);
-        <span class="macro">schedule_rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="number">8</span>);
-        <span class="macro">schedule_rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="number">9</span>);
-        <span class="macro">schedule_rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="number">10</span>);
-        <span class="macro">schedule_rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="number">11</span>);
-        <span class="macro">schedule_rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="number">12</span>);
-        <span class="macro">schedule_rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="number">13</span>);
-        <span class="macro">schedule_rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="number">14</span>);
-        <span class="macro">schedule_rounds4</span><span class="macro">!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="number">15</span>);
+        <span class="macro">rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w0</span>, <span class="number">0</span>);
+        <span class="macro">rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w1</span>, <span class="number">1</span>);
+        <span class="macro">rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w2</span>, <span class="number">2</span>);
+        <span class="macro">rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w3</span>, <span class="number">3</span>);
+        <span class="macro">schedule_rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="number">4</span>);
+        <span class="macro">schedule_rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="number">5</span>);
+        <span class="macro">schedule_rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="number">6</span>);
+        <span class="macro">schedule_rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="number">7</span>);
+        <span class="macro">schedule_rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="number">8</span>);
+        <span class="macro">schedule_rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="number">9</span>);
+        <span class="macro">schedule_rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="number">10</span>);
+        <span class="macro">schedule_rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="number">11</span>);
+        <span class="macro">schedule_rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="number">12</span>);
+        <span class="macro">schedule_rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="number">13</span>);
+        <span class="macro">schedule_rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w0</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="number">14</span>);
+        <span class="macro">schedule_rounds4!</span>(<span class="ident">abef</span>, <span class="ident">cdgh</span>, <span class="ident">w1</span>, <span class="ident">w2</span>, <span class="ident">w3</span>, <span class="ident">w4</span>, <span class="ident">w0</span>, <span class="number">15</span>);
 
         <span class="ident">abef</span> <span class="op">=</span> <span class="ident">_mm_add_epi32</span>(<span class="ident">abef</span>, <span class="ident">abef_save</span>);
         <span class="ident">cdgh</span> <span class="op">=</span> <span class="ident">_mm_add_epi32</span>(<span class="ident">cdgh</span>, <span class="ident">cdgh_save</span>);
@@ -208,12 +208,12 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compress</span>(<span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u32</span>; <span class="number">8</span>], <span class="ident">blocks</span>: <span class="kw-2">&amp;</span>[[<span class="ident">u8</span>; <span class="number">64</span>]]) {
     <span class="comment">// TODO: Replace with https://github.com/rust-lang/rfcs/pull/2725</span>
     <span class="comment">// after stabilization</span>
-    <span class="kw">if</span> <span class="ident">cpuid_bool</span>::<span class="macro">cpuid_bool</span><span class="macro">!</span>(<span class="string">&quot;sha&quot;</span>, <span class="string">&quot;sse2&quot;</span>, <span class="string">&quot;ssse3&quot;</span>, <span class="string">&quot;sse4.1&quot;</span>) {
+    <span class="kw">if</span> <span class="macro">cpuid_bool::cpuid_bool!</span>(<span class="string">&quot;sha&quot;</span>, <span class="string">&quot;sse2&quot;</span>, <span class="string">&quot;ssse3&quot;</span>, <span class="string">&quot;sse4.1&quot;</span>) {
         <span class="kw">unsafe</span> {
             <span class="ident">digest_blocks</span>(<span class="ident">state</span>, <span class="ident">blocks</span>);
         }
     } <span class="kw">else</span> {
-        <span class="kw">super</span>::<span class="ident">soft</span>::<span class="ident">compress</span>(<span class="ident">state</span>, <span class="ident">blocks</span>);
+        <span class="kw">super</span><span class="ident">::soft::compress</span>(<span class="ident">state</span>, <span class="ident">blocks</span>);
     }
 }
 </pre></div>

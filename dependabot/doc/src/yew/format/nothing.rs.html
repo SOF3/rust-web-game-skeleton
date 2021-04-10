@@ -37,7 +37,7 @@
 <span class="doccomment">//! Contains an implementation of empty serialization format (`Nothing`).</span>
 
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Binary</span>, <span class="ident">Text</span>};
-<span class="kw">use</span> <span class="ident">anyhow</span>::<span class="ident">bail</span>;
+<span class="kw">use</span> <span class="ident">anyhow::bail</span>;
 
 <span class="doccomment">/// A representation of an empty data. Nothing stored. Nothing restored.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
@@ -45,7 +45,7 @@
 
 <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Text</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Nothing</span> {
     <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Text</span> {
-        <span class="macro">bail</span><span class="macro">!</span>(<span class="string">&quot;nothing&quot;</span>)
+        <span class="macro">bail!</span>(<span class="string">&quot;nothing&quot;</span>)
     }
 }
 
@@ -57,7 +57,7 @@
 
 <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Binary</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Nothing</span> {
     <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Binary</span> {
-        <span class="macro">bail</span><span class="macro">!</span>(<span class="string">&quot;nothing&quot;</span>)
+        <span class="macro">bail!</span>(<span class="string">&quot;nothing&quot;</span>)
     }
 }
 

@@ -76,7 +76,7 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
 <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">wasm_bindgen::prelude</span>::<span class="kw-2">*</span>;
 <span class="attribute">#[<span class="ident">wasm_bindgen</span>]</span>
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">extends</span> <span class="op">=</span> :: <span class="ident">js_sys</span> :: <span class="ident">Object</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">Headers</span> , <span class="ident">typescript_type</span> <span class="op">=</span> <span class="string">&quot;Headers&quot;</span>)]
@@ -108,7 +108,7 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `Headers`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_with_str_sequence_sequence</span>(
-        <span class="ident">init</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">init</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Headers</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;Headers&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">append</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `append()` method.&quot;</span>]</span>

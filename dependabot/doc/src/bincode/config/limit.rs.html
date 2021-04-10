@@ -79,7 +79,7 @@
             <span class="self">self</span>.<span class="number">0</span> <span class="op">-</span><span class="op">=</span> <span class="ident">n</span>;
             <span class="prelude-val">Ok</span>(())
         } <span class="kw">else</span> {
-            <span class="prelude-val">Err</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">ErrorKind</span>::<span class="ident">SizeLimit</span>))
+            <span class="prelude-val">Err</span>(<span class="ident">Box::new</span>(<span class="ident">ErrorKind::SizeLimit</span>))
         }
     }
 

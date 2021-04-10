@@ -33,19 +33,19 @@
 
 <span class="kw">mod</span> <span class="ident">soft</span>;
 <span class="kw">mod</span> <span class="ident">types</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">types</span>::<span class="kw-2">*</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::types</span>::<span class="kw-2">*</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;no_simd&quot;</span>), <span class="ident">not</span>(<span class="ident">miri</span>)))]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">x86_64</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;no_simd&quot;</span>), <span class="ident">not</span>(<span class="ident">miri</span>)))]</span>
-<span class="kw">use</span> <span class="self">self</span>::<span class="ident">x86_64</span> <span class="kw">as</span> <span class="ident">arch</span>;
+<span class="kw">use</span> <span class="self">self</span><span class="ident">::x86_64</span> <span class="kw">as</span> <span class="ident">arch</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;no_simd&quot;</span>, <span class="ident">miri</span>, <span class="ident">not</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)))]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">generic</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;no_simd&quot;</span>, <span class="ident">miri</span>, <span class="ident">not</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)))]</span>
-<span class="kw">use</span> <span class="self">self</span>::<span class="ident">generic</span> <span class="kw">as</span> <span class="ident">arch</span>;
+<span class="kw">use</span> <span class="self">self</span><span class="ident">::generic</span> <span class="kw">as</span> <span class="ident">arch</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">arch</span>::{<span class="ident">vec128_storage</span>, <span class="ident">vec256_storage</span>, <span class="ident">vec512_storage</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::arch</span>::{<span class="ident">vec128_storage</span>, <span class="ident">vec256_storage</span>, <span class="ident">vec512_storage</span>};
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ppv_lite86" data-search-js="../../search-index.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>

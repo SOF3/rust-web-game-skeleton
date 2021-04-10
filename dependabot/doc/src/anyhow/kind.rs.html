@@ -164,14 +164,14 @@
 <span class="comment">//     let error = $msg;</span>
 <span class="comment">//     (&amp;error).anyhow_kind().new(error)</span>
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Error</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>::{<span class="ident">Debug</span>, <span class="ident">Display</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Error</span>;
+<span class="kw">use</span> <span class="ident">core::fmt</span>::{<span class="ident">Debug</span>, <span class="ident">Display</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">StdError</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::StdError</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">backtrace</span>)]</span>
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">backtrace</span>::<span class="ident">Backtrace</span>;
+<span class="kw">use</span> <span class="ident">std::backtrace::Backtrace</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Adhoc</span>;
 
@@ -189,7 +189,7 @@
     <span class="kw">where</span>
         <span class="ident">M</span>: <span class="ident">Display</span> <span class="op">+</span> <span class="ident">Debug</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
     {
-        <span class="ident">Error</span>::<span class="ident">from_adhoc</span>(<span class="ident">message</span>, <span class="macro">backtrace</span><span class="macro">!</span>())
+        <span class="ident">Error::from_adhoc</span>(<span class="ident">message</span>, <span class="macro">backtrace!</span>())
     }
 }
 
@@ -230,8 +230,8 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">Boxed</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="self">self</span>, <span class="ident">error</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">StdError</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Error</span> {
-        <span class="kw">let</span> <span class="ident">backtrace</span> <span class="op">=</span> <span class="macro">backtrace_if_absent</span><span class="macro">!</span>(<span class="ident">error</span>);
-        <span class="ident">Error</span>::<span class="ident">from_boxed</span>(<span class="ident">error</span>, <span class="ident">backtrace</span>)
+        <span class="kw">let</span> <span class="ident">backtrace</span> <span class="op">=</span> <span class="macro">backtrace_if_absent!</span>(<span class="ident">error</span>);
+        <span class="ident">Error::from_boxed</span>(<span class="ident">error</span>, <span class="ident">backtrace</span>)
     }
 }
 </pre></div>

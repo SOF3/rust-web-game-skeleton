@@ -62,9 +62,9 @@
 <span class="doccomment">/// [MDN Documentation]: https://developer.mozilla.org/en-US/docs/Web/API/Window</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;Window&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">window</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Window</span><span class="op">&gt;</span> {
-    <span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">JsCast</span>;
+    <span class="kw">use</span> <span class="ident">wasm_bindgen::JsCast</span>;
 
-    <span class="ident">js_sys</span>::<span class="ident">global</span>().<span class="ident">dyn_into</span>::<span class="op">&lt;</span><span class="ident">Window</span><span class="op">&gt;</span>().<span class="ident">ok</span>()
+    <span class="ident">js_sys::global</span>().<span class="ident">dyn_into</span>::<span class="op">&lt;</span><span class="ident">Window</span><span class="op">&gt;</span>().<span class="ident">ok</span>()
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="web_sys" data-search-js="../../search-index.js"></div>

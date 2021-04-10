@@ -198,13 +198,13 @@
 <span class="comment">// is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span>
 <span class="comment">// KIND, either express or implied.</span>
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">common</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">f2s_intrinsics</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::common</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::f2s_intrinsics</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FLOAT_MANTISSA_BITS</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">23</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FLOAT_EXPONENT_BITS</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">8</span>;
 <span class="kw">const</span> <span class="ident">FLOAT_BIAS</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">127</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">f2s_intrinsics</span>::{<span class="ident">FLOAT_POW5_BITCOUNT</span>, <span class="ident">FLOAT_POW5_INV_BITCOUNT</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::f2s_intrinsics</span>::{<span class="ident">FLOAT_POW5_BITCOUNT</span>, <span class="ident">FLOAT_POW5_INV_BITCOUNT</span>};
 
 <span class="comment">// A floating decimal representing m * 10^e.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FloatingDecimal32</span> {

@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Yew Framework - API Documentation"><meta name="keywords" content="rust, rustlang, rust-lang, yew"><title>yew - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings"></script><script src="../storage.js"></script><script src="../crates.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../favicon-16x16.png">
 <link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../yew/index.html'><div class='logo-container'><img src='https://static.yew.rs/logo.svg' alt='logo'></div></a><p class="location">Crate yew</p><div class="block version"><p>Version 0.17.4</p></div><div class="sidebar-elems"><a id="all-types" href="all.html"><p>See all yew's items</p></a><div class="block items"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#functions">Functions</a></li></ul></div><p class="location"></p><div id="sidebar-vars" data-name="yew" data-ty="mod" data-relpath="../"></div></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
-                <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Crate <a class="mod" href="">yew</a></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/yew/lib.rs.html#1-227" title="goto source code">[src]</a></span></h1><div class="docblock"><h1 id="yew-framework---api-documentation" class="section-header"><a href="#yew-framework---api-documentation">Yew Framework - API Documentation</a></h1>
+                <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Crate <a class="mod" href="">yew</a><button id="copy-path" onclick="copy_path(this)">⎘</button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/yew/lib.rs.html#1-227" title="goto source code">[src]</a></span></h1><div class="docblock"><h1 id="yew-framework---api-documentation" class="section-header"><a href="#yew-framework---api-documentation">Yew Framework - API Documentation</a></h1>
 <p>Yew is a modern Rust framework for creating multi-threaded front-end web apps using WebAssembly</p>
 <ul>
 <li>Features a macro for declaring interactive HTML with Rust expressions. Developers who have experience using JSX in React should feel quite at home when using Yew.</li>
@@ -19,7 +19,7 @@
 </ul>
 <h2 id="example" class="section-header"><a href="#example">Example</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">yew::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">struct</span> <span class="ident">Model</span> {
     <span class="ident">link</span>: <span class="ident">ComponentLink</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>,
@@ -33,28 +33,28 @@
 <span class="kw">impl</span> <span class="ident">Component</span> <span class="kw">for</span> <span class="ident">Model</span> {
     <span class="kw">type</span> <span class="ident">Message</span> <span class="op">=</span> <span class="ident">Msg</span>;
     <span class="kw">type</span> <span class="ident">Properties</span> <span class="op">=</span> ();
-    <span class="kw">fn</span> <span class="ident">create</span>(<span class="kw">_</span>: <span class="self">Self</span>::<span class="ident">Properties</span>, <span class="ident">link</span>: <span class="ident">ComponentLink</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">create</span>(<span class="kw">_</span>: <span class="self">Self</span><span class="ident">::Properties</span>, <span class="ident">link</span>: <span class="ident">ComponentLink</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">link</span>,
             <span class="ident">value</span>: <span class="number">0</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="self">Self</span>::<span class="ident">Message</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShouldRender</span> {
+    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="self">Self</span><span class="ident">::Message</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShouldRender</span> {
         <span class="kw">match</span> <span class="ident">msg</span> {
-            <span class="ident">Msg</span>::<span class="ident">AddOne</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">value</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>
+            <span class="ident">Msg::AddOne</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">value</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>
         }
         <span class="bool-val">true</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">change</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw">_</span>: <span class="self">Self</span>::<span class="ident">Properties</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShouldRender</span> {
+    <span class="kw">fn</span> <span class="ident">change</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw">_</span>: <span class="self">Self</span><span class="ident">::Properties</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShouldRender</span> {
         <span class="bool-val">false</span>
     }
 
     <span class="kw">fn</span> <span class="ident">view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Html</span> {
-        <span class="macro">html</span><span class="macro">!</span> {
+        <span class="macro">html!</span> {
             <span class="op">&lt;</span><span class="ident">div</span><span class="op">&gt;</span>
-                <span class="op">&lt;</span><span class="ident">button</span> <span class="ident">onclick</span><span class="op">=</span><span class="self">self</span>.<span class="ident">link</span>.<span class="ident">callback</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Msg</span>::<span class="ident">AddOne</span>)<span class="op">&gt;</span>{ <span class="string">&quot;+1&quot;</span> }<span class="op">&lt;</span><span class="op">/</span><span class="ident">button</span><span class="op">&gt;</span>
+                <span class="op">&lt;</span><span class="ident">button</span> <span class="ident">onclick</span><span class="op">=</span><span class="self">self</span>.<span class="ident">link</span>.<span class="ident">callback</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Msg::AddOne</span>)<span class="op">&gt;</span>{ <span class="string">&quot;+1&quot;</span> }<span class="op">&lt;</span><span class="op">/</span><span class="ident">button</span><span class="op">&gt;</span>
                 <span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{ <span class="self">self</span>.<span class="ident">value</span> }<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span>
             <span class="op">&lt;</span><span class="op">/</span><span class="ident">div</span><span class="op">&gt;</span>
         }
@@ -62,8 +62,8 @@
 }
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="ident">yew</span>::<span class="ident">initialize</span>();
-    <span class="ident">App</span>::<span class="op">&lt;</span><span class="ident">Model</span><span class="op">&gt;</span>::<span class="ident">new</span>().<span class="ident">mount_to_body</span>();
+    <span class="ident">yew::initialize</span>();
+    <span class="ident">App</span>::<span class="op">&lt;</span><span class="ident">Model</span><span class="op">&gt;</span><span class="ident">::new</span>().<span class="ident">mount_to_body</span>();
 }</pre></div>
 </div><h2 id="reexports" class="section-header"><a href="#reexports">Re-exports</a></h2>
 <table><tr><td><code>pub use <a class="mod" href="../web_sys/index.html" title="mod web_sys">web_sys</a>;</code></td></tr><tr><td><code>pub use self::<a class="mod" href="../yew/prelude/index.html" title="mod yew::prelude">prelude</a>::*;</code></td></tr></table><h2 id="modules" class="section-header"><a href="#modules">Modules</a></h2>

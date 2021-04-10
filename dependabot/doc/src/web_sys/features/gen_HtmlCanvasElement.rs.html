@@ -132,7 +132,7 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
 <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">wasm_bindgen::prelude</span>::<span class="kw-2">*</span>;
 <span class="attribute">#[<span class="ident">wasm_bindgen</span>]</span>
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">extends</span> <span class="op">=</span> <span class="ident">HtmlElement</span> , <span class="ident">extends</span> <span class="op">=</span> <span class="ident">Element</span> , <span class="ident">extends</span> <span class="op">=</span> <span class="ident">Node</span> , <span class="ident">extends</span> <span class="op">=</span> <span class="ident">EventTarget</span> , <span class="ident">extends</span> <span class="op">=</span> :: <span class="ident">js_sys</span> :: <span class="ident">Object</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">HTMLCanvasElement</span> , <span class="ident">typescript_type</span> <span class="op">=</span> <span class="string">&quot;HTMLCanvasElement&quot;</span>)]
@@ -180,7 +180,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_context</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">HtmlCanvasElement</span>,
         <span class="ident">context_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Object</span><span class="op">&gt;</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">::js_sys::Object</span><span class="op">&gt;</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;HTMLCanvasElement&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">getContext</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `getContext()` method.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
@@ -190,15 +190,15 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_context_with_context_options</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">HtmlCanvasElement</span>,
         <span class="ident">context_id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">context_options</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span>::<span class="ident">js_sys</span>::<span class="ident">Object</span><span class="op">&gt;</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
+        <span class="ident">context_options</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">::js_sys::Object</span><span class="op">&gt;</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;HTMLCanvasElement&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">toBlob</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `toBlob()` method.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `HtmlCanvasElement`*&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_blob</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">HtmlCanvasElement</span>, <span class="ident">callback</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_blob</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">HtmlCanvasElement</span>, <span class="ident">callback</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;HTMLCanvasElement&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">toBlob</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `toBlob()` method.&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>]</span>
@@ -207,7 +207,7 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `HtmlCanvasElement`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_blob_with_type</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">HtmlCanvasElement</span>,
-        <span class="ident">callback</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">callback</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">type_</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;HTMLCanvasElement&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">toBlob</span>)]
@@ -218,9 +218,9 @@
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;*This API requires the following crate features to be activated: `HtmlCanvasElement`*&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_blob_with_type_and_encoder_options</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">HtmlCanvasElement</span>,
-        <span class="ident">callback</span>: <span class="kw-2">&amp;</span>::<span class="ident">js_sys</span>::<span class="ident">Function</span>,
+        <span class="ident">callback</span>: <span class="kw-2">&amp;</span><span class="ident">::js_sys::Function</span>,
         <span class="ident">type_</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">encoder_options</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">encoder_options</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">JsValue</span><span class="op">&gt;</span>;
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;HTMLCanvasElement&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">toDataURL</span>)]
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;The `toDataURL()` method.&quot;</span>]</span>
@@ -245,7 +245,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_data_url_with_type_and_encoder_options</span>(
         <span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="ident">HtmlCanvasElement</span>,
         <span class="ident">type_</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">encoder_options</span>: <span class="kw-2">&amp;</span>::<span class="ident">wasm_bindgen</span>::<span class="ident">JsValue</span>,
+        <span class="ident">encoder_options</span>: <span class="kw-2">&amp;</span><span class="ident">::wasm_bindgen::JsValue</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;OffscreenCanvas&quot;</span>)]</span>
     # [<span class="ident">wasm_bindgen</span> (<span class="ident">catch</span> , <span class="ident">method</span> , <span class="ident">structural</span> , <span class="ident">js_class</span> <span class="op">=</span> <span class="string">&quot;HTMLCanvasElement&quot;</span> , <span class="ident">js_name</span> <span class="op">=</span> <span class="ident">transferControlToOffscreen</span>)]

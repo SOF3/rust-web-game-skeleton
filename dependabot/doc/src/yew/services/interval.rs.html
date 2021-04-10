@@ -90,18 +90,18 @@
 <span class="doccomment">//! periodic sending messages to a loop.</span>
 
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">to_ms</span>, <span class="ident">Task</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">callback</span>::<span class="ident">Callback</span>;
-<span class="kw">use</span> <span class="ident">cfg_if</span>::<span class="ident">cfg_if</span>;
-<span class="kw">use</span> <span class="ident">cfg_match</span>::<span class="ident">cfg_match</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::<span class="ident">Duration</span>;
-<span class="macro">cfg_if</span><span class="macro">!</span> {
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::callback::Callback</span>;
+<span class="kw">use</span> <span class="ident">cfg_if::cfg_if</span>;
+<span class="kw">use</span> <span class="ident">cfg_match::cfg_match</span>;
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
+<span class="kw">use</span> <span class="ident">std::time::Duration</span>;
+<span class="macro">cfg_if!</span> {
     <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span> {
-        <span class="kw">use</span> <span class="ident">stdweb</span>::<span class="ident">Value</span>;
+        <span class="kw">use</span> <span class="ident">stdweb::Value</span>;
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
         <span class="kw">use</span> <span class="ident">stdweb</span>::{<span class="ident">_js_impl</span>, <span class="ident">js</span>};
     } <span class="kw">else</span> <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> {
-        <span class="kw">use</span> <span class="ident">gloo</span>::<span class="ident">timers</span>::<span class="ident">callback</span>::<span class="ident">Interval</span>;
+        <span class="kw">use</span> <span class="ident">gloo::timers::callback::Interval</span>;
     }
 }
 
@@ -113,8 +113,8 @@
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span>)]</span> <span class="ident">Interval</span>,
 );
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">IntervalTask</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">IntervalTask</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;IntervalTask&quot;</span>)
     }
 }
@@ -131,8 +131,8 @@
             <span class="ident">callback</span>.<span class="ident">emit</span>(());
         };
         <span class="kw">let</span> <span class="ident">ms</span> <span class="op">=</span> <span class="ident">to_ms</span>(<span class="ident">duration</span>);
-        <span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span> <span class="macro">cfg_match</span><span class="macro">!</span> {
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js</span><span class="macro">!</span> {
+        <span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span> <span class="macro">cfg_match!</span> {
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">js!</span> {
                 <span class="ident">var</span> <span class="ident">callback</span> <span class="op">=</span> @{<span class="ident">callback</span>};
                 <span class="ident">var</span> <span class="ident">action</span> <span class="op">=</span> <span class="ident">function</span>() {
                     <span class="ident">callback</span>();
@@ -143,7 +143,7 @@
                     <span class="ident">callback</span>: <span class="ident">callback</span>,
                 };
             },
-            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Interval</span>::<span class="ident">new</span>(<span class="ident">ms</span>, <span class="ident">callback</span>),
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;web_sys&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Interval::new</span>(<span class="ident">ms</span>, <span class="ident">callback</span>),
         };
         <span class="ident">IntervalTask</span>(<span class="ident">handle</span>)
     }
@@ -161,7 +161,7 @@
         {
             <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_active</span>() {
                 <span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>;
-                <span class="macro">js</span><span class="macro">!</span> { @(<span class="ident">no_return</span>)
+                <span class="macro">js!</span> { @(<span class="ident">no_return</span>)
                     <span class="ident">var</span> <span class="ident">handle</span> <span class="op">=</span> @{<span class="ident">handle</span>};
                     <span class="ident">clearInterval</span>(<span class="ident">handle</span>.<span class="ident">interval_id</span>);
                     <span class="ident">handle</span>.<span class="ident">callback</span>.<span class="ident">drop</span>();

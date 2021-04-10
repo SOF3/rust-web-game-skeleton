@@ -336,12 +336,12 @@
 <span id="333">333</span>
 <span id="334">334</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">html_tree</span>::<span class="ident">HtmlProp</span> <span class="kw">as</span> <span class="ident">TagAttribute</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">PeekValue</span>;
-<span class="kw">use</span> <span class="ident">lazy_static</span>::<span class="ident">lazy_static</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashSet</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">iter</span>::<span class="ident">FromIterator</span>;
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">parse</span>::{<span class="ident">Parse</span>, <span class="ident">ParseStream</span>, <span class="prelude-ty">Result</span> <span class="kw">as</span> <span class="ident">ParseResult</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::html_tree::HtmlProp</span> <span class="kw">as</span> <span class="ident">TagAttribute</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::PeekValue</span>;
+<span class="kw">use</span> <span class="ident">lazy_static::lazy_static</span>;
+<span class="kw">use</span> <span class="ident">std::collections::HashSet</span>;
+<span class="kw">use</span> <span class="ident">std::iter::FromIterator</span>;
+<span class="kw">use</span> <span class="ident">syn::parse</span>::{<span class="ident">Parse</span>, <span class="ident">ParseStream</span>, <span class="prelude-ty">Result</span> <span class="kw">as</span> <span class="ident">ParseResult</span>};
 <span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">Expr</span>, <span class="ident">ExprTuple</span>};
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TagAttributes</span> {
@@ -362,10 +362,10 @@
     <span class="ident">Single</span>(<span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Expr</span><span class="op">&gt;</span>),
 }
 
-<span class="macro">lazy_static</span><span class="macro">!</span> {
+<span class="macro">lazy_static!</span> {
     <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">BOOLEAN_SET</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> {
-        <span class="ident">HashSet</span>::<span class="ident">from_iter</span>(
-            <span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">HashSet::from_iter</span>(
+            <span class="macro">vec!</span>[
                 <span class="string">&quot;async&quot;</span>,
                 <span class="string">&quot;autofocus&quot;</span>,
                 <span class="string">&quot;controls&quot;</span>,
@@ -388,10 +388,10 @@
     };
 }
 
-<span class="macro">lazy_static</span><span class="macro">!</span> {
+<span class="macro">lazy_static!</span> {
     <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">LISTENER_SET</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> {
-        <span class="ident">HashSet</span>::<span class="ident">from_iter</span>(
-            <span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">HashSet::from_iter</span>(
+            <span class="macro">vec!</span>[
                 <span class="comment">// Living Standard</span>
                 <span class="comment">// From: https://html.spec.whatwg.org/multipage/webappapis.html#globaleventhandlers</span>
                 <span class="string">&quot;onabort&quot;</span>,
@@ -501,10 +501,10 @@
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span>
-<span class="macro">lazy_static</span><span class="macro">!</span> {
+<span class="macro">lazy_static!</span> {
     <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">UNSUPPORTED_LISTENER_SET</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> {
-        <span class="ident">HashSet</span>::<span class="ident">from_iter</span>(
-            <span class="macro">vec</span><span class="macro">!</span>[
+        <span class="ident">HashSet::from_iter</span>(
+            <span class="macro">vec!</span>[
                 <span class="string">&quot;oncancel&quot;</span>,
                 <span class="string">&quot;oncanplay&quot;</span>,
                 <span class="string">&quot;oncanplaythrough&quot;</span>,
@@ -554,7 +554,7 @@
 <span class="kw">impl</span> <span class="ident">TagAttributes</span> {
     <span class="kw">fn</span> <span class="ident">drain_listeners</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TagAttribute</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TagAttribute</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
         <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">attrs</span>.<span class="ident">len</span>() {
             <span class="kw">let</span> <span class="ident">name_str</span> <span class="op">=</span> <span class="ident">attrs</span>[<span class="ident">i</span>].<span class="ident">label</span>.<span class="ident">to_string</span>();
             <span class="kw">if</span> <span class="ident">LISTENER_SET</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">name_str</span>.<span class="ident">as_str</span>()) {
@@ -568,7 +568,7 @@
 
     <span class="kw">fn</span> <span class="ident">drain_boolean</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TagAttribute</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TagAttribute</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
         <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">attrs</span>.<span class="ident">len</span>() {
             <span class="kw">let</span> <span class="ident">name_str</span> <span class="op">=</span> <span class="ident">attrs</span>[<span class="ident">i</span>].<span class="ident">label</span>.<span class="ident">to_string</span>();
             <span class="kw">if</span> <span class="ident">BOOLEAN_SET</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">name_str</span>.<span class="ident">as_str</span>()) {
@@ -594,28 +594,28 @@
 
     <span class="kw">fn</span> <span class="ident">map_classes</span>(<span class="ident">class_expr</span>: <span class="ident">Expr</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ClassesForm</span> {
         <span class="kw">match</span> <span class="ident">class_expr</span> {
-            <span class="ident">Expr</span>::<span class="ident">Tuple</span>(<span class="ident">ExprTuple</span> { <span class="ident">elems</span>, .. }) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ClassesForm</span>::<span class="ident">Tuple</span>(<span class="ident">elems</span>.<span class="ident">into_iter</span>().<span class="ident">collect</span>()),
-            <span class="ident">expr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ClassesForm</span>::<span class="ident">Single</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">expr</span>)),
+            <span class="ident">Expr::Tuple</span>(<span class="ident">ExprTuple</span> { <span class="ident">elems</span>, .. }) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ClassesForm::Tuple</span>(<span class="ident">elems</span>.<span class="ident">into_iter</span>().<span class="ident">collect</span>()),
+            <span class="ident">expr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ClassesForm::Single</span>(<span class="ident">Box::new</span>(<span class="ident">expr</span>)),
         }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">TagAttributes</span> {
     <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ParseResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">attributes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TagAttribute</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
-        <span class="kw">while</span> <span class="ident">TagAttribute</span>::<span class="ident">peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>()).<span class="ident">is_some</span>() {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">attributes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TagAttribute</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+        <span class="kw">while</span> <span class="ident">TagAttribute::peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>()).<span class="ident">is_some</span>() {
             <span class="ident">attributes</span>.<span class="ident">push</span>(<span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">TagAttribute</span><span class="op">&gt;</span>()<span class="question-mark">?</span>);
         }
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">listeners</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
-        <span class="kw">for</span> <span class="ident">listener</span> <span class="kw">in</span> <span class="ident">TagAttributes</span>::<span class="ident">drain_listeners</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>) {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">listeners</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+        <span class="kw">for</span> <span class="ident">listener</span> <span class="kw">in</span> <span class="ident">TagAttributes::drain_listeners</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>) {
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_web&quot;</span>)]</span>
             {
                 <span class="kw">let</span> <span class="ident">label</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">listener</span>.<span class="ident">label</span>;
                 <span class="kw">if</span> <span class="ident">UNSUPPORTED_LISTENER_SET</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">label</span>.<span class="ident">to_string</span>().<span class="ident">as_str</span>()) {
-                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
+                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn::Error::new_spanned</span>(
                         <span class="kw-2">&amp;</span><span class="ident">label</span>,
-                        <span class="macro">format</span><span class="macro">!</span>(
+                        <span class="macro">format!</span>(
                             <span class="string">&quot;the listener `{}` is only available when using web-sys&quot;</span>,
                             <span class="kw-2">&amp;</span><span class="ident">label</span>
                         ),
@@ -637,24 +637,24 @@
         <span class="kw">while</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span> <span class="op">&lt;</span> <span class="ident">attributes</span>.<span class="ident">len</span>() {
             <span class="kw">if</span> <span class="ident">attributes</span>[<span class="ident">i</span>].<span class="ident">label</span>.<span class="ident">to_string</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">attributes</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>].<span class="ident">label</span>.<span class="ident">to_string</span>() {
                 <span class="kw">let</span> <span class="ident">label</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">attributes</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>].<span class="ident">label</span>;
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn::Error::new_spanned</span>(
                     <span class="ident">label</span>,
-                    <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;the attribute `{}` can only be specified once&quot;</span>, <span class="ident">label</span>),
+                    <span class="macro">format!</span>(<span class="string">&quot;the attribute `{}` can only be specified once&quot;</span>, <span class="ident">label</span>),
                 ));
             }
             <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
         }
-        <span class="kw">let</span> <span class="ident">booleans</span> <span class="op">=</span> <span class="ident">TagAttributes</span>::<span class="ident">drain_boolean</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>);
+        <span class="kw">let</span> <span class="ident">booleans</span> <span class="op">=</span> <span class="ident">TagAttributes::drain_boolean</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>);
 
         <span class="kw">let</span> <span class="ident">classes</span> <span class="op">=</span>
-            <span class="ident">TagAttributes</span>::<span class="ident">remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;class&quot;</span>).<span class="ident">map</span>(<span class="ident">TagAttributes</span>::<span class="ident">map_classes</span>);
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">TagAttributes</span>::<span class="ident">remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;value&quot;</span>);
-        <span class="kw">let</span> <span class="ident">kind</span> <span class="op">=</span> <span class="ident">TagAttributes</span>::<span class="ident">remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;type&quot;</span>);
-        <span class="kw">let</span> <span class="ident">checked</span> <span class="op">=</span> <span class="ident">TagAttributes</span>::<span class="ident">remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;checked&quot;</span>);
-        <span class="kw">let</span> <span class="ident">node_ref</span> <span class="op">=</span> <span class="ident">TagAttributes</span>::<span class="ident">remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;ref&quot;</span>);
-        <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">TagAttributes</span>::<span class="ident">remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;key&quot;</span>);
+            <span class="ident">TagAttributes::remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;class&quot;</span>).<span class="ident">map</span>(<span class="ident">TagAttributes::map_classes</span>);
+        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">TagAttributes::remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;value&quot;</span>);
+        <span class="kw">let</span> <span class="ident">kind</span> <span class="op">=</span> <span class="ident">TagAttributes::remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;type&quot;</span>);
+        <span class="kw">let</span> <span class="ident">checked</span> <span class="op">=</span> <span class="ident">TagAttributes::remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;checked&quot;</span>);
+        <span class="kw">let</span> <span class="ident">node_ref</span> <span class="op">=</span> <span class="ident">TagAttributes::remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;ref&quot;</span>);
+        <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">TagAttributes::remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;key&quot;</span>);
 
-        <span class="kw">let</span> <span class="ident">href</span> <span class="op">=</span> <span class="ident">TagAttributes</span>::<span class="ident">remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;href&quot;</span>);
+        <span class="kw">let</span> <span class="ident">href</span> <span class="op">=</span> <span class="ident">TagAttributes::remove_attr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">attributes</span>, <span class="string">&quot;href&quot;</span>);
 
         <span class="prelude-val">Ok</span>(<span class="ident">TagAttributes</span> {
             <span class="ident">attributes</span>,

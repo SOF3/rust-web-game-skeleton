@@ -419,7 +419,7 @@ In general, `true`/`false` map to `Some(_)`/`None` and `Ok(_)`/`Err(_)` respecti
     
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">expect</span>(<span class="self">self</span>, <span class="ident">msg</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
-        <span class="kw">if</span> <span class="self">self</span> { () } <span class="kw">else</span> { <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">msg</span>) }
+        <span class="kw">if</span> <span class="self">self</span> { () } <span class="kw">else</span> { <span class="macro">panic!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">msg</span>) }
     }
 }
 
@@ -428,13 +428,13 @@ Serious code must have serious tests, and Boolinator is serious business!
 */</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">Boolinator</span>; <span class="comment">// as opposed to the original NES version.</span>
+    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::Boolinator</span>; <span class="comment">// as opposed to the original NES version.</span>
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_as_option</span>() {
         <span class="comment">// Very test.</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">true</span>.<span class="ident">as_option</span>(), <span class="prelude-val">Some</span>(()));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">false</span>.<span class="ident">as_option</span>(), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>.<span class="ident">as_option</span>(), <span class="prelude-val">Some</span>(()));
+        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>.<span class="ident">as_option</span>(), <span class="prelude-val">None</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -442,69 +442,69 @@ Serious code must have serious tests, and Boolinator is serious business!
         <span class="comment">// Much serious.</span>
         <span class="kw">let</span> <span class="ident">love</span> <span class="op">=</span> <span class="bool-val">true</span>;
         <span class="kw">let</span> <span class="ident">everybody</span> <span class="op">=</span> <span class="ident">love</span>.<span class="ident">as_some</span>(<span class="string">&quot;body&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;needs&quot;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">everybody</span>, <span class="string">&quot;body&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">everybody</span>, <span class="string">&quot;body&quot;</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>((<span class="op">!</span><span class="ident">love</span>).<span class="ident">as_some</span>(<span class="string">&quot;money can buy&quot;</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>((<span class="op">!</span><span class="ident">love</span>).<span class="ident">as_some</span>(<span class="string">&quot;money can buy&quot;</span>), <span class="prelude-val">None</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_as_some_from</span>() {
         <span class="comment">// Wow.</span>
-        <span class="kw">let</span> <span class="ident">mothers</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="bool-val">true</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>, <span class="bool-val">true</span>, <span class="bool-val">false</span>, <span class="bool-val">true</span>];
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">mothers</span>.<span class="ident">into_iter</span>()
+        <span class="kw">let</span> <span class="ident">mothers</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="bool-val">true</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>, <span class="bool-val">true</span>, <span class="bool-val">false</span>, <span class="bool-val">true</span>];
+        <span class="macro">assert!</span>(<span class="ident">mothers</span>.<span class="ident">into_iter</span>()
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">e</span>.<span class="ident">as_some_from</span>(<span class="op">|</span><span class="op">|</span> <span class="prelude-val">Some</span>(<span class="string">&quot;em&quot;</span>)))
-            .<span class="ident">filter</span>(<span class="prelude-ty">Option</span>::<span class="ident">is_some</span>)
+            .<span class="ident">filter</span>(<span class="ident">Option::is_some</span>)
             .<span class="ident">count</span>() <span class="op">&gt;</span> <span class="number">0</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_and_option</span>() {
         <span class="comment">// Such original.</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">true</span>.<span class="ident">and_option</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;fries with that&quot;</span>)), <span class="prelude-val">Some</span>(<span class="string">&quot;fries with that&quot;</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">false</span>.<span class="ident">and_option</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;fries with that&quot;</span>)), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">true</span>.<span class="ident">and_option</span>(<span class="prelude-val">None</span>), <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">false</span>.<span class="ident">and_option</span>(<span class="prelude-val">None</span>), <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>);
+        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>.<span class="ident">and_option</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;fries with that&quot;</span>)), <span class="prelude-val">Some</span>(<span class="string">&quot;fries with that&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>.<span class="ident">and_option</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;fries with that&quot;</span>)), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>.<span class="ident">and_option</span>(<span class="prelude-val">None</span>), <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>);
+        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>.<span class="ident">and_option</span>(<span class="prelude-val">None</span>), <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_and_option_from</span>() {
         <span class="comment">// Such original.</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">true</span>.<span class="ident">and_option_from</span>(<span class="op">|</span><span class="op">|</span> <span class="prelude-val">Some</span>(<span class="string">&quot;chips too, guv&#39;&quot;</span>)), <span class="prelude-val">Some</span>(<span class="string">&quot;chips too, guv&#39;&quot;</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">false</span>.<span class="ident">and_option_from</span>(<span class="op">|</span><span class="op">|</span> <span class="prelude-val">Some</span>(<span class="string">&quot;chips too, guv&#39;&quot;</span>)), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">true</span>.<span class="ident">and_option_from</span>(<span class="op">|</span><span class="op">|</span> <span class="prelude-val">None</span>), <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">false</span>.<span class="ident">and_option_from</span>(<span class="op">|</span><span class="op">|</span> <span class="prelude-val">None</span>), <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>);
+        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>.<span class="ident">and_option_from</span>(<span class="op">|</span><span class="op">|</span> <span class="prelude-val">Some</span>(<span class="string">&quot;chips too, guv&#39;&quot;</span>)), <span class="prelude-val">Some</span>(<span class="string">&quot;chips too, guv&#39;&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>.<span class="ident">and_option_from</span>(<span class="op">|</span><span class="op">|</span> <span class="prelude-val">Some</span>(<span class="string">&quot;chips too, guv&#39;&quot;</span>)), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>.<span class="ident">and_option_from</span>(<span class="op">|</span><span class="op">|</span> <span class="prelude-val">None</span>), <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>);
+        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>.<span class="ident">and_option_from</span>(<span class="op">|</span><span class="op">|</span> <span class="prelude-val">None</span>), <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_as_result</span>() {
         <span class="comment">// Very result.</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">true</span>.<span class="ident">as_result</span>(<span class="string">&quot;now; &quot;</span>, <span class="string">&quot;, what?&quot;</span>),   <span class="prelude-val">Ok</span>(<span class="string">&quot;now; &quot;</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">false</span>.<span class="ident">as_result</span>(<span class="string">&quot;now; &quot;</span>, <span class="string">&quot;, what?&quot;</span>),  <span class="prelude-val">Err</span>(<span class="string">&quot;, what?&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>.<span class="ident">as_result</span>(<span class="string">&quot;now; &quot;</span>, <span class="string">&quot;, what?&quot;</span>),   <span class="prelude-val">Ok</span>(<span class="string">&quot;now; &quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>.<span class="ident">as_result</span>(<span class="string">&quot;now; &quot;</span>, <span class="string">&quot;, what?&quot;</span>),  <span class="prelude-val">Err</span>(<span class="string">&quot;, what?&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_as_result_from</span>() {
         <span class="comment">// Code good.</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">true</span>.<span class="ident">as_result_from</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;four space indent&quot;</span>, <span class="op">|</span><span class="op">|</span> <span class="string">&quot;anything else&quot;</span>), <span class="prelude-val">Ok</span>(<span class="string">&quot;four space indent&quot;</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">false</span>.<span class="ident">as_result_from</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;four space indent&quot;</span>, <span class="op">|</span><span class="op">|</span> <span class="string">&quot;anything else&quot;</span>), <span class="prelude-val">Err</span>(<span class="string">&quot;anything else&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>.<span class="ident">as_result_from</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;four space indent&quot;</span>, <span class="op">|</span><span class="op">|</span> <span class="string">&quot;anything else&quot;</span>), <span class="prelude-val">Ok</span>(<span class="string">&quot;four space indent&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>.<span class="ident">as_result_from</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;four space indent&quot;</span>, <span class="op">|</span><span class="op">|</span> <span class="string">&quot;anything else&quot;</span>), <span class="prelude-val">Err</span>(<span class="string">&quot;anything else&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_ok_or</span>() {
         <span class="comment">// Ok.</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">annie</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">annie</span>.<span class="ident">ok_or</span>(<span class="string">&quot;hit back&quot;</span>), <span class="prelude-val">Ok</span>(()));
+        <span class="macro">assert_eq!</span>(<span class="ident">annie</span>.<span class="ident">ok_or</span>(<span class="string">&quot;hit back&quot;</span>), <span class="prelude-val">Ok</span>(()));
         <span class="ident">annie</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">annie</span>.<span class="ident">ok_or</span>(<span class="string">&quot;hit back&quot;</span>), <span class="prelude-val">Err</span>(<span class="string">&quot;hit back&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">annie</span>.<span class="ident">ok_or</span>(<span class="string">&quot;hit back&quot;</span>), <span class="prelude-val">Err</span>(<span class="string">&quot;hit back&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_ok_or_else</span>() {
         <span class="comment">// Ok.</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">annie</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">annie</span>.<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;hit back&quot;</span>), <span class="prelude-val">Ok</span>(()));
+        <span class="macro">assert_eq!</span>(<span class="ident">annie</span>.<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;hit back&quot;</span>), <span class="prelude-val">Ok</span>(()));
         <span class="ident">annie</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">annie</span>.<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;hit back&quot;</span>), <span class="prelude-val">Err</span>(<span class="string">&quot;hit back&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">annie</span>.<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;hit back&quot;</span>), <span class="prelude-val">Err</span>(<span class="string">&quot;hit back&quot;</span>));
     }
 
     <span class="kw">const</span> <span class="ident">DREAMS</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;love and financial security&quot;</span>;

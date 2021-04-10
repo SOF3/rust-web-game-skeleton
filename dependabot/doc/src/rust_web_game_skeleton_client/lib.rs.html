@@ -56,10 +56,10 @@
 <span class="attribute">#![<span class="ident">deny</span>(
     <span class="ident">anonymous_parameters</span>,
     <span class="ident">bare_trait_objects</span>,
-    <span class="ident">clippy</span>::<span class="ident">clone_on_ref_ptr</span>,
-    <span class="ident">clippy</span>::<span class="ident">float_cmp_const</span>,
-    <span class="ident">clippy</span>::<span class="ident">if_not_else</span>,
-    <span class="ident">clippy</span>::<span class="ident">unwrap_used</span>
+    <span class="ident">clippy::clone_on_ref_ptr</span>,
+    <span class="ident">clippy::float_cmp_const</span>,
+    <span class="ident">clippy::if_not_else</span>,
+    <span class="ident">clippy::unwrap_used</span>
 )]</span>
 <span class="attribute">#![<span class="ident">cfg_attr</span>(
     <span class="ident">debug_assertions</span>,
@@ -67,40 +67,40 @@
         <span class="ident">dead_code</span>,
         <span class="ident">unused_imports</span>,
         <span class="ident">unused_variables</span>,
-        <span class="ident">clippy</span>::<span class="ident">match_single_binding</span>,
+        <span class="ident">clippy::match_single_binding</span>,
     )
 )]</span>
 <span class="attribute">#![<span class="ident">cfg_attr</span>(
     <span class="ident">not</span>(<span class="ident">debug_assertions</span>),
     <span class="ident">deny</span>(
-        <span class="ident">clippy</span>::<span class="ident">cast_possible_truncation</span>,
-        <span class="ident">clippy</span>::<span class="ident">cast_precision_loss</span>,
-        <span class="ident">clippy</span>::<span class="ident">dbg_macro</span>,
-        <span class="ident">clippy</span>::<span class="ident">indexing_slicing</span>,
+        <span class="ident">clippy::cast_possible_truncation</span>,
+        <span class="ident">clippy::cast_precision_loss</span>,
+        <span class="ident">clippy::dbg_macro</span>,
+        <span class="ident">clippy::indexing_slicing</span>,
     )
 )]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">bool_to_option</span>)]</span>
 
-<span class="kw">use</span> <span class="ident">wasm_bindgen</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">wasm_bindgen::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">yew::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">mod</span> <span class="ident">app</span>;
 <span class="kw">mod</span> <span class="ident">render</span>;
 
 <span class="attribute">#[<span class="ident">wasm_bindgen</span>(<span class="ident">start</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">run_app</span>() {
-    <span class="ident">console_error_panic_hook</span>::<span class="ident">set_once</span>();
+    <span class="ident">console_error_panic_hook::set_once</span>();
 
     {
-        <span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="ident">wasm_logger</span>::<span class="ident">Config</span>::<span class="ident">new</span>(<span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">debug_assertions</span>) {
-            <span class="ident">log</span>::<span class="ident">Level</span>::<span class="ident">Trace</span>
+        <span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="ident">wasm_logger::Config::new</span>(<span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">debug_assertions</span>) {
+            <span class="ident">log::Level::Trace</span>
         } <span class="kw">else</span> {
-            <span class="ident">log</span>::<span class="ident">Level</span>::<span class="ident">Info</span>
+            <span class="ident">log::Level::Info</span>
         });
-        <span class="ident">wasm_logger</span>::<span class="ident">init</span>(<span class="ident">config</span>);
+        <span class="ident">wasm_logger::init</span>(<span class="ident">config</span>);
     }
 
-    <span class="ident">App</span>::<span class="op">&lt;</span><span class="ident">app</span>::<span class="ident">Lifecycle</span><span class="op">&gt;</span>::<span class="ident">new</span>().<span class="ident">mount_to_body</span>();
+    <span class="ident">App</span>::<span class="op">&lt;</span><span class="ident">app::Lifecycle</span><span class="op">&gt;</span><span class="ident">::new</span>().<span class="ident">mount_to_body</span>();
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rust_web_game_skeleton_client" data-search-js="../../search-index.js"></div>

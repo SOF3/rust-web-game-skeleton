@@ -442,19 +442,19 @@
 <span id="439">439</span>
 <span id="440">440</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">HtmlChildrenTree</span>;
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">HtmlProp</span>;
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">HtmlPropSuffix</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">PeekValue</span>;
-<span class="kw">use</span> <span class="ident">boolinator</span>::<span class="ident">Boolinator</span>;
-<span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">Span</span>;
+<span class="kw">use</span> <span class="kw">super</span><span class="ident">::HtmlChildrenTree</span>;
+<span class="kw">use</span> <span class="kw">super</span><span class="ident">::HtmlProp</span>;
+<span class="kw">use</span> <span class="kw">super</span><span class="ident">::HtmlPropSuffix</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::PeekValue</span>;
+<span class="kw">use</span> <span class="ident">boolinator::Boolinator</span>;
+<span class="kw">use</span> <span class="ident">proc_macro2::Span</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">quote</span>, <span class="ident">quote_spanned</span>, <span class="ident">ToTokens</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cmp</span>::<span class="ident">Ordering</span>;
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">buffer</span>::<span class="ident">Cursor</span>;
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">parse</span>;
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">parse</span>::{<span class="ident">Parse</span>, <span class="ident">ParseStream</span>, <span class="prelude-ty">Result</span> <span class="kw">as</span> <span class="ident">ParseResult</span>};
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">punctuated</span>::<span class="ident">Punctuated</span>;
-<span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">spanned</span>::<span class="ident">Spanned</span>;
+<span class="kw">use</span> <span class="ident">std::cmp::Ordering</span>;
+<span class="kw">use</span> <span class="ident">syn::buffer::Cursor</span>;
+<span class="kw">use</span> <span class="ident">syn::parse</span>;
+<span class="kw">use</span> <span class="ident">syn::parse</span>::{<span class="ident">Parse</span>, <span class="ident">ParseStream</span>, <span class="prelude-ty">Result</span> <span class="kw">as</span> <span class="ident">ParseResult</span>};
+<span class="kw">use</span> <span class="ident">syn::punctuated::Punctuated</span>;
+<span class="kw">use</span> <span class="ident">syn::spanned::Spanned</span>;
 <span class="kw">use</span> <span class="ident">syn</span>::{
     <span class="ident">AngleBracketedGenericArguments</span>, <span class="ident">Expr</span>, <span class="ident">GenericArgument</span>, <span class="ident">Ident</span>, <span class="ident">Path</span>, <span class="ident">PathArguments</span>, <span class="ident">PathSegment</span>,
     <span class="ident">Token</span>, <span class="ident">Type</span>, <span class="ident">TypePath</span>,
@@ -468,17 +468,17 @@
 
 <span class="kw">impl</span> <span class="ident">PeekValue</span><span class="op">&lt;</span>()<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">HtmlComponent</span> {
     <span class="kw">fn</span> <span class="ident">peek</span>(<span class="ident">cursor</span>: <span class="ident">Cursor</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="ident">HtmlComponentOpen</span>::<span class="ident">peek</span>(<span class="ident">cursor</span>)
-            .<span class="ident">or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">HtmlComponentClose</span>::<span class="ident">peek</span>(<span class="ident">cursor</span>))
+        <span class="ident">HtmlComponentOpen::peek</span>(<span class="ident">cursor</span>)
+            .<span class="ident">or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">HtmlComponentClose::peek</span>(<span class="ident">cursor</span>))
             .<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> ())
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">HtmlComponent</span> {
     <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ParseResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">HtmlComponentClose</span>::<span class="ident">peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>()).<span class="ident">is_some</span>() {
+        <span class="kw">if</span> <span class="ident">HtmlComponentClose::peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>()).<span class="ident">is_some</span>() {
             <span class="kw">return</span> <span class="kw">match</span> <span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">HtmlComponentClose</span><span class="op">&gt;</span>() {
-                <span class="prelude-val">Ok</span>(<span class="ident">close</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
+                <span class="prelude-val">Ok</span>(<span class="ident">close</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">syn::Error::new_spanned</span>(
                     <span class="ident">close</span>,
                     <span class="string">&quot;this closing tag has no corresponding opening tag&quot;</span>,
                 )),
@@ -492,19 +492,19 @@
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">HtmlComponent</span> {
                 <span class="ident">ty</span>: <span class="ident">open</span>.<span class="ident">ty</span>,
                 <span class="ident">props</span>: <span class="ident">open</span>.<span class="ident">props</span>,
-                <span class="ident">children</span>: <span class="ident">HtmlChildrenTree</span>::<span class="ident">new</span>(),
+                <span class="ident">children</span>: <span class="ident">HtmlChildrenTree::new</span>(),
             });
         }
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">children</span> <span class="op">=</span> <span class="ident">HtmlChildrenTree</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">children</span> <span class="op">=</span> <span class="ident">HtmlChildrenTree::new</span>();
         <span class="kw">loop</span> {
             <span class="kw">if</span> <span class="ident">input</span>.<span class="ident">is_empty</span>() {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn::Error::new_spanned</span>(
                     <span class="ident">open</span>,
                     <span class="string">&quot;this opening tag has no corresponding closing tag&quot;</span>,
                 ));
             }
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ty</span>) <span class="op">=</span> <span class="ident">HtmlComponentClose</span>::<span class="ident">peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>()) {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ty</span>) <span class="op">=</span> <span class="ident">HtmlComponentClose::peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>()) {
                 <span class="kw">if</span> <span class="ident">open</span>.<span class="ident">ty</span> <span class="op">=</span><span class="op">=</span> <span class="ident">ty</span> {
                     <span class="kw">break</span>;
                 }
@@ -524,89 +524,89 @@
 }
 
 <span class="kw">impl</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">HtmlComponent</span> {
-    <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span>) {
+    <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">proc_macro2::TokenStream</span>) {
         <span class="kw">let</span> <span class="self">Self</span> {
             <span class="ident">ty</span>,
             <span class="ident">props</span>,
             <span class="ident">children</span>,
         } <span class="op">=</span> <span class="self">self</span>;
 
-        <span class="kw">let</span> <span class="ident">validate_props</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">PropType</span>::<span class="ident">List</span>(<span class="ident">list_props</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">props</span>.<span class="ident">prop_type</span> {
+        <span class="kw">let</span> <span class="ident">validate_props</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">PropType::List</span>(<span class="ident">list_props</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">props</span>.<span class="ident">prop_type</span> {
             <span class="kw">let</span> <span class="ident">check_props</span> <span class="op">=</span> <span class="ident">list_props</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">HtmlProp</span> { <span class="ident">label</span>, .. }<span class="op">|</span> {
-                <span class="macro">quote</span><span class="macro">!</span> { <span class="ident">props</span>.#<span class="ident">label</span>; }
+                <span class="macro">quote!</span> { <span class="ident">props</span>.#<span class="ident">label</span>; }
             });
 
             <span class="kw">let</span> <span class="ident">check_children</span> <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">children</span>.<span class="ident">is_empty</span>() {
-                <span class="macro">quote</span><span class="macro">!</span> { <span class="ident">props</span>.<span class="ident">children</span>; }
+                <span class="macro">quote!</span> { <span class="ident">props</span>.<span class="ident">children</span>; }
             } <span class="kw">else</span> {
-                <span class="macro">quote</span><span class="macro">!</span> {}
+                <span class="macro">quote!</span> {}
             };
 
-            <span class="macro">quote</span><span class="macro">!</span> {
-                <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="op">|</span><span class="ident">props</span>: <span class="op">&lt;</span>#<span class="ident">ty</span> <span class="kw">as</span> ::<span class="ident">yew</span>::<span class="ident">html</span>::<span class="ident">Component</span><span class="op">&gt;</span>::<span class="ident">Properties</span><span class="op">|</span> {
+            <span class="macro">quote!</span> {
+                <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="op">|</span><span class="ident">props</span>: <span class="op">&lt;</span>#<span class="ident">ty</span> <span class="kw">as</span> <span class="ident">::yew::html::Component</span><span class="op">&gt;</span><span class="ident">::Properties</span><span class="op">|</span> {
                     #<span class="ident">check_children</span>
                     #(#<span class="ident">check_props</span>)<span class="op">*</span>
                 };
             }
         } <span class="kw">else</span> {
-            <span class="macro">quote</span><span class="macro">!</span> {}
+            <span class="macro">quote!</span> {}
         };
 
         <span class="kw">let</span> <span class="ident">set_children</span> <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">children</span>.<span class="ident">is_empty</span>() {
-            <span class="macro">quote</span><span class="macro">!</span> {
-                .<span class="ident">children</span>(::<span class="ident">yew</span>::<span class="ident">html</span>::<span class="ident">ChildrenRenderer</span>::<span class="ident">new</span>(#<span class="ident">children</span>))
+            <span class="macro">quote!</span> {
+                .<span class="ident">children</span>(<span class="ident">::yew::html::ChildrenRenderer::new</span>(#<span class="ident">children</span>))
             }
         } <span class="kw">else</span> {
-            <span class="macro">quote</span><span class="macro">!</span> {}
+            <span class="macro">quote!</span> {}
         };
 
         <span class="kw">let</span> <span class="ident">init_props</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">props</span>.<span class="ident">prop_type</span> {
-            <span class="ident">PropType</span>::<span class="ident">List</span>(<span class="ident">list_props</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">PropType::List</span>(<span class="ident">list_props</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">set_props</span> <span class="op">=</span> <span class="ident">list_props</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">HtmlProp</span> { <span class="ident">label</span>, <span class="ident">value</span> }<span class="op">|</span> {
-                    <span class="macro">quote_spanned</span><span class="macro">!</span> { <span class="ident">value</span>.<span class="ident">span</span>()<span class="op">=</span><span class="op">&gt;</span> .#<span class="ident">label</span>(
-                        <span class="op">&lt;</span>::<span class="ident">yew</span>::<span class="ident">virtual_dom</span>::<span class="ident">VComp</span> <span class="kw">as</span> ::<span class="ident">yew</span>::<span class="ident">virtual_dom</span>::<span class="ident">Transformer</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">transform</span>(
+                    <span class="macro">quote_spanned!</span> { <span class="ident">value</span>.<span class="ident">span</span>()<span class="op">=</span><span class="op">&gt;</span> .#<span class="ident">label</span>(
+                        <span class="op">&lt;</span><span class="ident">::yew::virtual_dom::VComp</span> <span class="kw">as</span> <span class="ident">::yew::virtual_dom::Transformer</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::transform</span>(
                             #<span class="ident">value</span>
                         )
                     )}
                 });
 
-                <span class="macro">quote</span><span class="macro">!</span> {
-                    <span class="op">&lt;</span><span class="op">&lt;</span>#<span class="ident">ty</span> <span class="kw">as</span> ::<span class="ident">yew</span>::<span class="ident">html</span>::<span class="ident">Component</span><span class="op">&gt;</span>::<span class="ident">Properties</span> <span class="kw">as</span> ::<span class="ident">yew</span>::<span class="ident">html</span>::<span class="ident">Properties</span><span class="op">&gt;</span>::<span class="ident">builder</span>()
+                <span class="macro">quote!</span> {
+                    <span class="op">&lt;</span><span class="op">&lt;</span>#<span class="ident">ty</span> <span class="kw">as</span> <span class="ident">::yew::html::Component</span><span class="op">&gt;</span><span class="ident">::Properties</span> <span class="kw">as</span> <span class="ident">::yew::html::Properties</span><span class="op">&gt;</span><span class="ident">::builder</span>()
                         #(#<span class="ident">set_props</span>)<span class="op">*</span>
                         #<span class="ident">set_children</span>
                         .<span class="ident">build</span>()
                 }
             }
-            <span class="ident">PropType</span>::<span class="ident">With</span>(<span class="ident">props</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">quote</span><span class="macro">!</span> { #<span class="ident">props</span> }
+            <span class="ident">PropType::With</span>(<span class="ident">props</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="macro">quote!</span> { #<span class="ident">props</span> }
             }
-            <span class="ident">PropType</span>::<span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote</span><span class="macro">!</span> {
-                <span class="op">&lt;</span><span class="op">&lt;</span>#<span class="ident">ty</span> <span class="kw">as</span> ::<span class="ident">yew</span>::<span class="ident">html</span>::<span class="ident">Component</span><span class="op">&gt;</span>::<span class="ident">Properties</span> <span class="kw">as</span> ::<span class="ident">yew</span>::<span class="ident">html</span>::<span class="ident">Properties</span><span class="op">&gt;</span>::<span class="ident">builder</span>()
+            <span class="ident">PropType::None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span> {
+                <span class="op">&lt;</span><span class="op">&lt;</span>#<span class="ident">ty</span> <span class="kw">as</span> <span class="ident">::yew::html::Component</span><span class="op">&gt;</span><span class="ident">::Properties</span> <span class="kw">as</span> <span class="ident">::yew::html::Properties</span><span class="op">&gt;</span><span class="ident">::builder</span>()
                     #<span class="ident">set_children</span>
                     .<span class="ident">build</span>()
             },
         };
 
         <span class="kw">let</span> <span class="ident">node_ref</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">node_ref</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">props</span>.<span class="ident">node_ref</span> {
-            <span class="macro">quote_spanned</span><span class="macro">!</span> { <span class="ident">node_ref</span>.<span class="ident">span</span>()<span class="op">=</span><span class="op">&gt;</span> #<span class="ident">node_ref</span> }
+            <span class="macro">quote_spanned!</span> { <span class="ident">node_ref</span>.<span class="ident">span</span>()<span class="op">=</span><span class="op">&gt;</span> #<span class="ident">node_ref</span> }
         } <span class="kw">else</span> {
-            <span class="macro">quote</span><span class="macro">!</span> { ::<span class="ident">yew</span>::<span class="ident">html</span>::<span class="ident">NodeRef</span>::<span class="ident">default</span>() }
+            <span class="macro">quote!</span> { <span class="ident">::yew::html::NodeRef::default</span>() }
         };
 
         <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">key</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">props</span>.<span class="ident">key</span> {
-            <span class="macro">quote_spanned</span><span class="macro">!</span> { <span class="ident">key</span>.<span class="ident">span</span>()<span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(::<span class="ident">yew</span>::<span class="ident">virtual_dom</span>::<span class="ident">Key</span>::<span class="ident">from</span>(#<span class="ident">key</span>)) }
+            <span class="macro">quote_spanned!</span> { <span class="ident">key</span>.<span class="ident">span</span>()<span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">::yew::virtual_dom::Key::from</span>(#<span class="ident">key</span>)) }
         } <span class="kw">else</span> {
-            <span class="macro">quote</span><span class="macro">!</span> {<span class="prelude-val">None</span>}
+            <span class="macro">quote!</span> {<span class="prelude-val">None</span>}
         };
 
-        <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="macro">quote</span><span class="macro">!</span> {{
+        <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="macro">quote!</span> {{
             <span class="comment">// These validation checks show a nice error message to the user.</span>
             <span class="comment">// They do not execute at runtime</span>
             <span class="kw">if</span> <span class="bool-val">false</span> {
                 #<span class="ident">validate_props</span>
             }
 
-            ::<span class="ident">yew</span>::<span class="ident">virtual_dom</span>::<span class="ident">VChild</span>::<span class="op">&lt;</span>#<span class="ident">ty</span><span class="op">&gt;</span>::<span class="ident">new</span>(#<span class="ident">init_props</span>, #<span class="ident">node_ref</span>, #<span class="ident">key</span>)
+            <span class="ident">::yew::virtual_dom::VChild</span>::<span class="op">&lt;</span>#<span class="ident">ty</span><span class="op">&gt;</span><span class="ident">::new</span>(#<span class="ident">init_props</span>, #<span class="ident">node_ref</span>, #<span class="ident">key</span>)
         }});
     }
 }
@@ -626,17 +626,17 @@
         <span class="kw">let</span> (<span class="ident">punct</span>, <span class="ident">cursor</span>) <span class="op">=</span> <span class="ident">cursor</span>.<span class="ident">punct</span>()<span class="question-mark">?</span>;
         (<span class="ident">punct</span>.<span class="ident">as_char</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&#39;&lt;&#39;</span>).<span class="ident">as_option</span>()<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> (<span class="ident">ty</span>, <span class="ident">cursor</span>) <span class="op">=</span> <span class="self">Self</span>::<span class="ident">peek_type</span>(<span class="ident">cursor</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> (<span class="ident">ty</span>, <span class="ident">cursor</span>) <span class="op">=</span> <span class="self">Self</span><span class="ident">::peek_type</span>(<span class="ident">cursor</span>)<span class="question-mark">?</span>;
 
         <span class="kw">let</span> (<span class="ident">punct</span>, <span class="ident">cursor</span>) <span class="op">=</span> <span class="ident">cursor</span>.<span class="ident">punct</span>()<span class="question-mark">?</span>;
         (<span class="ident">punct</span>.<span class="ident">as_char</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&#39;&gt;&#39;</span>).<span class="ident">as_option</span>()<span class="question-mark">?</span>;
 
         <span class="prelude-val">Some</span>((
-            <span class="ident">PathArguments</span>::<span class="ident">AngleBracketed</span>(<span class="ident">AngleBracketedGenericArguments</span> {
+            <span class="ident">PathArguments::AngleBracketed</span>(<span class="ident">AngleBracketedGenericArguments</span> {
                 <span class="ident">colon2_token</span>: <span class="prelude-val">None</span>,
-                <span class="ident">lt_token</span>: <span class="macro">Token</span><span class="macro">!</span>[<span class="op">&lt;</span>](<span class="ident">Span</span>::<span class="ident">call_site</span>()),
-                <span class="ident">args</span>: <span class="macro">vec</span><span class="macro">!</span>[<span class="ident">GenericArgument</span>::<span class="ident">Type</span>(<span class="ident">ty</span>)].<span class="ident">into_iter</span>().<span class="ident">collect</span>(),
-                <span class="ident">gt_token</span>: <span class="macro">Token</span><span class="macro">!</span>[<span class="op">&gt;</span>](<span class="ident">Span</span>::<span class="ident">call_site</span>()),
+                <span class="ident">lt_token</span>: <span class="macro">Token!</span>[<span class="op">&lt;</span>](<span class="ident">Span::call_site</span>()),
+                <span class="ident">args</span>: <span class="macro">vec!</span>[<span class="ident">GenericArgument::Type</span>(<span class="ident">ty</span>)].<span class="ident">into_iter</span>().<span class="ident">collect</span>(),
+                <span class="ident">gt_token</span>: <span class="macro">Token!</span>[<span class="op">&gt;</span>](<span class="ident">Span::call_site</span>()),
             }),
             <span class="ident">cursor</span>,
         ))
@@ -646,13 +646,13 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">colons_optional</span> <span class="op">=</span> <span class="bool-val">true</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_ident</span> <span class="op">=</span> <span class="prelude-val">None</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">leading_colon</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">segments</span> <span class="op">=</span> <span class="ident">Punctuated</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">segments</span> <span class="op">=</span> <span class="ident">Punctuated::new</span>();
 
         <span class="kw">loop</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">post_colons_cursor</span> <span class="op">=</span> <span class="ident">cursor</span>;
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="self">Self</span>::<span class="ident">double_colon</span>(<span class="ident">post_colons_cursor</span>) {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="self">Self</span><span class="ident">::double_colon</span>(<span class="ident">post_colons_cursor</span>) {
                 <span class="kw">if</span> <span class="ident">colons_optional</span> {
-                    <span class="ident">leading_colon</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">Token</span><span class="macro">!</span>[::](<span class="ident">Span</span>::<span class="ident">call_site</span>()));
+                    <span class="ident">leading_colon</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">Token!</span>[::](<span class="ident">Span::call_site</span>()));
                 }
                 <span class="ident">post_colons_cursor</span> <span class="op">=</span> <span class="ident">c</span>;
             } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">colons_optional</span> {
@@ -662,11 +662,11 @@
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">ident</span>, <span class="ident">c</span>)) <span class="op">=</span> <span class="ident">post_colons_cursor</span>.<span class="ident">ident</span>() {
                 <span class="ident">cursor</span> <span class="op">=</span> <span class="ident">c</span>;
                 <span class="ident">last_ident</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">ident</span>.<span class="ident">clone</span>());
-                <span class="kw">let</span> <span class="ident">arguments</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">args</span>, <span class="ident">c</span>)) <span class="op">=</span> <span class="self">Self</span>::<span class="ident">path_arguments</span>(<span class="ident">cursor</span>) {
+                <span class="kw">let</span> <span class="ident">arguments</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">args</span>, <span class="ident">c</span>)) <span class="op">=</span> <span class="self">Self</span><span class="ident">::path_arguments</span>(<span class="ident">cursor</span>) {
                     <span class="ident">cursor</span> <span class="op">=</span> <span class="ident">c</span>;
                     <span class="ident">args</span>
                 } <span class="kw">else</span> {
-                    <span class="ident">PathArguments</span>::<span class="prelude-val">None</span>
+                    <span class="ident">PathArguments::None</span>
                 };
 
                 <span class="ident">segments</span>.<span class="ident">push</span>(<span class="ident">PathSegment</span> { <span class="ident">ident</span>, <span class="ident">arguments</span> });
@@ -683,7 +683,7 @@
         <span class="ident">type_str</span>.<span class="ident">bytes</span>().<span class="ident">next</span>()<span class="question-mark">?</span>.<span class="ident">is_ascii_uppercase</span>().<span class="ident">as_option</span>()<span class="question-mark">?</span>;
 
         <span class="prelude-val">Some</span>((
-            <span class="ident">Type</span>::<span class="ident">Path</span>(<span class="ident">TypePath</span> {
+            <span class="ident">Type::Path</span>(<span class="ident">TypePath</span> {
                 <span class="ident">qself</span>: <span class="prelude-val">None</span>,
                 <span class="ident">path</span>: <span class="ident">Path</span> {
                     <span class="ident">leading_colon</span>,
@@ -696,28 +696,28 @@
 }
 
 <span class="kw">struct</span> <span class="ident">HtmlComponentOpen</span> {
-    <span class="ident">lt</span>: <span class="macro">Token</span><span class="macro">!</span>[<span class="op">&lt;</span>],
+    <span class="ident">lt</span>: <span class="macro">Token!</span>[<span class="op">&lt;</span>],
     <span class="ident">ty</span>: <span class="ident">Type</span>,
     <span class="ident">props</span>: <span class="ident">Props</span>,
-    <span class="ident">div</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="macro">Token</span><span class="macro">!</span>[<span class="op">/</span>]<span class="op">&gt;</span>,
-    <span class="ident">gt</span>: <span class="macro">Token</span><span class="macro">!</span>[<span class="op">&gt;</span>],
+    <span class="ident">div</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="macro">Token!</span>[<span class="op">/</span>]<span class="op">&gt;</span>,
+    <span class="ident">gt</span>: <span class="macro">Token!</span>[<span class="op">&gt;</span>],
 }
 
 <span class="kw">impl</span> <span class="ident">PeekValue</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">HtmlComponentOpen</span> {
     <span class="kw">fn</span> <span class="ident">peek</span>(<span class="ident">cursor</span>: <span class="ident">Cursor</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;</span> {
         <span class="kw">let</span> (<span class="ident">punct</span>, <span class="ident">cursor</span>) <span class="op">=</span> <span class="ident">cursor</span>.<span class="ident">punct</span>()<span class="question-mark">?</span>;
         (<span class="ident">punct</span>.<span class="ident">as_char</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&#39;&lt;&#39;</span>).<span class="ident">as_option</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> (<span class="ident">typ</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="ident">HtmlComponent</span>::<span class="ident">peek_type</span>(<span class="ident">cursor</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> (<span class="ident">typ</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="ident">HtmlComponent::peek_type</span>(<span class="ident">cursor</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(<span class="ident">typ</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">HtmlComponentOpen</span> {
     <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ParseResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">lt</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="macro">Token</span><span class="macro">!</span>[<span class="op">&lt;</span>]<span class="op">&gt;</span>()<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">lt</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="macro">Token!</span>[<span class="op">&lt;</span>]<span class="op">&gt;</span>()<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
         <span class="comment">// backwards compat</span>
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="macro">Token</span><span class="macro">!</span>[:]<span class="op">&gt;</span>();
+        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="macro">Token!</span>[:]<span class="op">&gt;</span>();
         <span class="kw">let</span> <span class="ident">HtmlPropSuffix</span> { <span class="ident">stream</span>, <span class="ident">div</span>, <span class="ident">gt</span> } <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">props</span> <span class="op">=</span> <span class="ident">parse</span>(<span class="ident">stream</span>)<span class="question-mark">?</span>;
 
@@ -732,17 +732,17 @@
 }
 
 <span class="kw">impl</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">HtmlComponentOpen</span> {
-    <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span>) {
+    <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">proc_macro2::TokenStream</span>) {
         <span class="kw">let</span> <span class="ident">HtmlComponentOpen</span> { <span class="ident">lt</span>, <span class="ident">gt</span>, .. } <span class="op">=</span> <span class="self">self</span>;
-        <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="macro">quote</span><span class="macro">!</span> {#<span class="ident">lt</span>#<span class="ident">gt</span>});
+        <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="macro">quote!</span> {#<span class="ident">lt</span>#<span class="ident">gt</span>});
     }
 }
 
 <span class="kw">struct</span> <span class="ident">HtmlComponentClose</span> {
-    <span class="ident">lt</span>: <span class="macro">Token</span><span class="macro">!</span>[<span class="op">&lt;</span>],
-    <span class="ident">div</span>: <span class="macro">Token</span><span class="macro">!</span>[<span class="op">/</span>],
+    <span class="ident">lt</span>: <span class="macro">Token!</span>[<span class="op">&lt;</span>],
+    <span class="ident">div</span>: <span class="macro">Token!</span>[<span class="op">/</span>],
     <span class="ident">ty</span>: <span class="ident">Type</span>,
-    <span class="ident">gt</span>: <span class="macro">Token</span><span class="macro">!</span>[<span class="op">&gt;</span>],
+    <span class="ident">gt</span>: <span class="macro">Token!</span>[<span class="op">&gt;</span>],
 }
 
 <span class="kw">impl</span> <span class="ident">PeekValue</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">HtmlComponentClose</span> {
@@ -753,7 +753,7 @@
         <span class="kw">let</span> (<span class="ident">punct</span>, <span class="ident">cursor</span>) <span class="op">=</span> <span class="ident">cursor</span>.<span class="ident">punct</span>()<span class="question-mark">?</span>;
         (<span class="ident">punct</span>.<span class="ident">as_char</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&#39;/&#39;</span>).<span class="ident">as_option</span>()<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> (<span class="ident">typ</span>, <span class="ident">cursor</span>) <span class="op">=</span> <span class="ident">HtmlComponent</span>::<span class="ident">peek_type</span>(<span class="ident">cursor</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> (<span class="ident">typ</span>, <span class="ident">cursor</span>) <span class="op">=</span> <span class="ident">HtmlComponent::peek_type</span>(<span class="ident">cursor</span>)<span class="question-mark">?</span>;
 
         <span class="kw">let</span> (<span class="ident">punct</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="ident">cursor</span>.<span class="ident">punct</span>()<span class="question-mark">?</span>;
         (<span class="ident">punct</span>.<span class="ident">as_char</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&#39;&gt;&#39;</span>).<span class="ident">as_option</span>()<span class="question-mark">?</span>;
@@ -773,9 +773,9 @@
 }
 
 <span class="kw">impl</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">HtmlComponentClose</span> {
-    <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span>) {
+    <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">proc_macro2::TokenStream</span>) {
         <span class="kw">let</span> <span class="ident">HtmlComponentClose</span> { <span class="ident">lt</span>, <span class="ident">div</span>, <span class="ident">ty</span>, <span class="ident">gt</span> } <span class="op">=</span> <span class="self">self</span>;
-        <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="macro">quote</span><span class="macro">!</span> {#<span class="ident">lt</span>#<span class="ident">div</span>#<span class="ident">ty</span>#<span class="ident">gt</span>});
+        <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="macro">quote!</span> {#<span class="ident">lt</span>#<span class="ident">div</span>#<span class="ident">ty</span>#<span class="ident">gt</span>});
     }
 }
 
@@ -798,27 +798,27 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">props</span> <span class="op">=</span> <span class="ident">Props</span> {
             <span class="ident">node_ref</span>: <span class="prelude-val">None</span>,
             <span class="ident">key</span>: <span class="prelude-val">None</span>,
-            <span class="ident">prop_type</span>: <span class="ident">PropType</span>::<span class="prelude-val">None</span>,
+            <span class="ident">prop_type</span>: <span class="ident">PropType::None</span>,
         };
         <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">token</span>, <span class="kw">_</span>)) <span class="op">=</span> <span class="ident">input</span>.<span class="ident">cursor</span>().<span class="ident">ident</span>() {
             <span class="kw">if</span> <span class="ident">token</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;with&quot;</span> {
                 <span class="kw">match</span> <span class="ident">props</span>.<span class="ident">prop_type</span> {
-                    <span class="ident">PropType</span>::<span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(()),
-                    <span class="ident">PropType</span>::<span class="ident">With</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">input</span>.<span class="ident">error</span>(<span class="string">&quot;too many `with` tokens used&quot;</span>)),
-                    <span class="ident">PropType</span>::<span class="ident">List</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">token</span>, <span class="ident">COLLISION_MSG</span>)),
+                    <span class="ident">PropType::None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(()),
+                    <span class="ident">PropType::With</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">input</span>.<span class="ident">error</span>(<span class="string">&quot;too many `with` tokens used&quot;</span>)),
+                    <span class="ident">PropType::List</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">syn::Error::new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">token</span>, <span class="ident">COLLISION_MSG</span>)),
                 }<span class="question-mark">?</span>;
 
                 <span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">Ident</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-                <span class="ident">props</span>.<span class="ident">prop_type</span> <span class="op">=</span> <span class="ident">PropType</span>::<span class="ident">With</span>(<span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">Ident</span><span class="op">&gt;</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> {
-                    <span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">token</span>, <span class="string">&quot;`with` must be followed by an identifier&quot;</span>)
+                <span class="ident">props</span>.<span class="ident">prop_type</span> <span class="op">=</span> <span class="ident">PropType::With</span>(<span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">Ident</span><span class="op">&gt;</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> {
+                    <span class="ident">syn::Error::new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">token</span>, <span class="string">&quot;`with` must be followed by an identifier&quot;</span>)
                 })<span class="question-mark">?</span>);
 
                 <span class="comment">// Handle optional comma</span>
-                <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="macro">Token</span><span class="macro">!</span>[,]<span class="op">&gt;</span>();
+                <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="macro">Token!</span>[,]<span class="op">&gt;</span>();
                 <span class="kw">continue</span>;
             }
 
-            <span class="kw">if</span> (<span class="ident">HtmlProp</span>::<span class="ident">peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>())).<span class="ident">is_none</span>() {
+            <span class="kw">if</span> (<span class="ident">HtmlProp::peek</span>(<span class="ident">input</span>.<span class="ident">cursor</span>())).<span class="ident">is_none</span>() {
                 <span class="kw">break</span>;
             }
 
@@ -826,7 +826,7 @@
             <span class="kw">if</span> <span class="ident">prop</span>.<span class="ident">label</span>.<span class="ident">to_string</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&quot;ref&quot;</span> {
                 <span class="kw">match</span> <span class="ident">props</span>.<span class="ident">node_ref</span> {
                     <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(()),
-                    <span class="prelude-val">Some</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">prop</span>.<span class="ident">label</span>, <span class="string">&quot;too many refs set&quot;</span>)),
+                    <span class="prelude-val">Some</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">syn::Error::new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">prop</span>.<span class="ident">label</span>, <span class="string">&quot;too many refs set&quot;</span>)),
                 }<span class="question-mark">?</span>;
 
                 <span class="ident">props</span>.<span class="ident">node_ref</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">prop</span>.<span class="ident">value</span>);
@@ -835,7 +835,7 @@
             <span class="kw">if</span> <span class="ident">prop</span>.<span class="ident">label</span>.<span class="ident">to_string</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&quot;key&quot;</span> {
                 <span class="kw">match</span> <span class="ident">props</span>.<span class="ident">key</span> {
                     <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(()),
-                    <span class="prelude-val">Some</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">prop</span>.<span class="ident">label</span>, <span class="string">&quot;too many keys set&quot;</span>)),
+                    <span class="prelude-val">Some</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">syn::Error::new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">prop</span>.<span class="ident">label</span>, <span class="string">&quot;too many keys set&quot;</span>)),
                 }<span class="question-mark">?</span>;
 
                 <span class="ident">props</span>.<span class="ident">key</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">prop</span>.<span class="ident">value</span>);
@@ -843,33 +843,33 @@
             }
 
             <span class="kw">if</span> <span class="ident">prop</span>.<span class="ident">label</span>.<span class="ident">to_string</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&quot;type&quot;</span> {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">prop</span>.<span class="ident">label</span>, <span class="string">&quot;expected identifier&quot;</span>));
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn::Error::new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">prop</span>.<span class="ident">label</span>, <span class="string">&quot;expected identifier&quot;</span>));
             }
 
             <span class="kw">if</span> <span class="op">!</span><span class="ident">prop</span>.<span class="ident">label</span>.<span class="ident">extended</span>.<span class="ident">is_empty</span>() {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">prop</span>.<span class="ident">label</span>, <span class="string">&quot;expected identifier&quot;</span>));
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn::Error::new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">prop</span>.<span class="ident">label</span>, <span class="string">&quot;expected identifier&quot;</span>));
             }
 
             <span class="kw">match</span> <span class="ident">props</span>.<span class="ident">prop_type</span> {
-                <span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">prop_type</span> @ <span class="ident">PropType</span>::<span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw-2">*</span><span class="ident">prop_type</span> <span class="op">=</span> <span class="ident">PropType</span>::<span class="ident">List</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="ident">prop</span>]);
+                <span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">prop_type</span> @ <span class="ident">PropType::None</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw-2">*</span><span class="ident">prop_type</span> <span class="op">=</span> <span class="ident">PropType::List</span>(<span class="macro">vec!</span>[<span class="ident">prop</span>]);
                 }
-                <span class="ident">PropType</span>::<span class="ident">With</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">token</span>, <span class="ident">COLLISION_MSG</span>)),
-                <span class="ident">PropType</span>::<span class="ident">List</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">list</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">PropType::With</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn::Error::new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">token</span>, <span class="ident">COLLISION_MSG</span>)),
+                <span class="ident">PropType::List</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">list</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="ident">list</span>.<span class="ident">push</span>(<span class="ident">prop</span>);
                 }
             };
         }
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">PropType</span>::<span class="ident">List</span>(<span class="ident">list</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">props</span>.<span class="ident">prop_type</span> {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">PropType::List</span>(<span class="ident">list</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">props</span>.<span class="ident">prop_type</span> {
             <span class="comment">// sort alphabetically</span>
             <span class="ident">list</span>.<span class="ident">sort_by</span>(<span class="op">|</span><span class="ident">a</span>, <span class="ident">b</span><span class="op">|</span> {
                 <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">label</span> <span class="op">=</span><span class="op">=</span> <span class="ident">b</span>.<span class="ident">label</span> {
-                    <span class="ident">Ordering</span>::<span class="ident">Equal</span>
+                    <span class="ident">Ordering::Equal</span>
                 } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">label</span>.<span class="ident">to_string</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&quot;children&quot;</span> {
-                    <span class="ident">Ordering</span>::<span class="ident">Greater</span>
+                    <span class="ident">Ordering::Greater</span>
                 } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">b</span>.<span class="ident">label</span>.<span class="ident">to_string</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&quot;children&quot;</span> {
-                    <span class="ident">Ordering</span>::<span class="ident">Less</span>
+                    <span class="ident">Ordering::Less</span>
                 } <span class="kw">else</span> {
                     <span class="ident">a</span>.<span class="ident">label</span>
                         .<span class="ident">to_string</span>()

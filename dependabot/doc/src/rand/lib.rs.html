@@ -270,41 +270,41 @@
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>, <span class="ident">feature</span>(<span class="ident">slice_partition_at_index</span>))]</span>
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">doc_cfg</span>, <span class="ident">feature</span>(<span class="ident">doc_cfg</span>))]</span>
 <span class="attribute">#![<span class="ident">allow</span>(
-    <span class="ident">clippy</span>::<span class="ident">float_cmp</span>,
-    <span class="ident">clippy</span>::<span class="ident">neg_cmp_op_on_partial_ord</span>,
+    <span class="ident">clippy::float_cmp</span>,
+    <span class="ident">clippy::neg_cmp_op_on_partial_ord</span>,
 )]</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span> <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">std</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;alloc&quot;</span>)]</span> <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">alloc</span>;
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused</span>)]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">trace</span> { ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> (
+<span class="macro">macro_rules!</span> <span class="ident">trace</span> { ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> (
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;log&quot;</span>)]</span> {
-        <span class="ident">log</span>::<span class="macro">trace</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>)<span class="kw-2">*</span>)
+        <span class="macro">log::trace!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>)<span class="kw-2">*</span>)
     }
 ) }
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused</span>)]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">debug</span> { ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> (
+<span class="macro">macro_rules!</span> <span class="ident">debug</span> { ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> (
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;log&quot;</span>)]</span> {
-        <span class="ident">log</span>::<span class="macro">debug</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>)<span class="kw-2">*</span>)
+        <span class="macro">log::debug!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>)<span class="kw-2">*</span>)
     }
 ) }
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused</span>)]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">info</span> { ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> (
+<span class="macro">macro_rules!</span> <span class="ident">info</span> { ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> (
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;log&quot;</span>)]</span> {
-        <span class="ident">log</span>::<span class="macro">info</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>)<span class="kw-2">*</span>)
+        <span class="macro">log::info!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>)<span class="kw-2">*</span>)
     }
 ) }
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused</span>)]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">warn</span> { ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> (
+<span class="macro">macro_rules!</span> <span class="ident">warn</span> { ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> (
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;log&quot;</span>)]</span> {
-        <span class="ident">log</span>::<span class="macro">warn</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>)<span class="kw-2">*</span>)
+        <span class="macro">log::warn!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>)<span class="kw-2">*</span>)
     }
 ) }
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused</span>)]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">error</span> { ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> (
+<span class="macro">macro_rules!</span> <span class="ident">error</span> { ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> (
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;log&quot;</span>)]</span> {
-        <span class="ident">log</span>::<span class="macro">error</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>)<span class="kw-2">*</span>)
+        <span class="macro">log::error!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>)<span class="kw-2">*</span>)
     }
 ) }
 
@@ -320,11 +320,11 @@
 
 <span class="comment">// Public exports</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_rng&quot;</span>))]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">rngs</span>::<span class="ident">thread</span>::<span class="ident">thread_rng</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::rngs::thread::thread_rng</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">rng</span>::{<span class="ident">Fill</span>, <span class="ident">Rng</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std_rng&quot;</span>))]</span>
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">distributions</span>::{<span class="ident">Distribution</span>, <span class="ident">Standard</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::distributions</span>::{<span class="ident">Distribution</span>, <span class="ident">Standard</span>};
 
 <span class="doccomment">/// Generates a random value using the thread-local random number generator.</span>
 <span class="doccomment">///</span>
@@ -412,7 +412,7 @@
         <span class="comment">// For tests, we want a statistically good, fast, reproducible RNG.</span>
         <span class="comment">// PCG32 will do fine, and will be easy to embed if we ever need to.</span>
         <span class="kw">const</span> <span class="ident">INC</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">11634580027462260723</span>;
-        <span class="ident">rand_pcg</span>::<span class="ident">Pcg32</span>::<span class="ident">new</span>(<span class="ident">seed</span>, <span class="ident">INC</span>)
+        <span class="ident">rand_pcg::Pcg32::new</span>(<span class="ident">seed</span>, <span class="ident">INC</span>)
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>

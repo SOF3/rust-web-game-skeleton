@@ -223,7 +223,7 @@
 <span class="doccomment">/// This trait should not be implemented for anything outside this crate.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Ord</span> {
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">to_ordering</span>() <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">core</span>::<span class="ident">cmp</span>::<span class="ident">Ordering</span>;
+    <span class="kw">fn</span> <span class="ident">to_ordering</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">::core::cmp::Ordering</span>;
 }
 
 <span class="doccomment">/// The **marker trait** for compile time bits.</span>
